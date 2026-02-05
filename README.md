@@ -24,8 +24,8 @@ Time responsável pela construção do projeto:
 | **Thayson Guedes de Medeiros** | [![GitHub](https://img.shields.io/badge/GitHub-ThaysonScript-100000?style=flat&logo=github&logoColor=white)](https://github.com/ThaysonScript) |
 | **Joneilson César Botelho Júnior** | [![GitHub](https://img.shields.io/badge/GitHub-Joneilson-100000?style=flat&logo=github&logoColor=white)](https://github.com/Joneilson) |
 | **Vinícius Mendes de Carvalho** | [![GitHub](https://img.shields.io/badge/GitHub-imvmc-100000?style=flat&logo=github&logoColor=white)](https://github.com/imvmc) |
-| **João Victor Iane Góis Presideu** | [![GitHub](https://img.shields.io/badge/GitHub-JoaoPresideu-100000?style=flat&logo=github&logoColor=white)](https://github.com/JoaoPresideu) |
-| **Maria Luiza Marques da Silva** | [![GitHub](https://img.shields.io/badge/GitHub-Pendente-lightgrey?style=flat&logo=github&logoColor=white)](https://github.com/) |
+| **João Victor Iane Góis** | [![GitHub](https://img.shields.io/badge/GitHub-JoaoPresideu-100000?style=flat&logo=github&logoColor=white)](https://github.com/JoaoPresideu) |
+| **Maria Luiza Marques da Silva** | [![GitHub](https://img.shields.io/badge/GitHub-TheSerian-100000?style=flat&logo=github&logoColor=white)](https://github.com/TheSerian) |
 
 ---
 
@@ -54,4 +54,29 @@ O projeto segue uma arquitetura moderna dividida em dois módulos:
 
 ### 1️⃣ Clonar o Repositório
 ```bash
-git clone [https://github.com/](https://github.com/)[SUA-ORGANIZACAO]/[NOME-DO-REPO].git
+git clone https://github.com/MentoriaAgil/MentoriaAgil.git
+```
+
+### 2️⃣ Executar o Backend
+Abra o terminal na pasta `backend` e execute:
+```bash
+./mvnw spring-boot:run
+# O servidor iniciará na porta 8080 confirmando que a configuração do Spring Boot está correta.
+```
+
+### 3️⃣ Executar o Frontend
+Abra o terminal na pasta `frontend` e execute:
+```bash
+npm install
+ng serve
+# Acesse no navegador: http://localhost:4200 para ver a tela inicial do Angular.
+```
+
+---
+
+## 📅 Organização e Metodologia
+* **Metodologia:** Scrum
+* **Ferramenta:** GitHub Projects (Template "Iterative Development")
+* **Status:** ✅ Configuração Inicial Concluída
+
+---
