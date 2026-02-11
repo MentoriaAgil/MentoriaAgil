@@ -1,4 +1,4 @@
-package com.mentoria.agil.backend.main.exception;
+package com.mentoria.agil.backend.exception;
 
 import java.util.HashMap;
 import java.util.Map;

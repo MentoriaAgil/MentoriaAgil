@@ -1,4 +1,4 @@
-package com.mentoria.agil.backend.main.dto;
+package com.mentoria.agil.backend.dto; 
 
 import com.mentoria.agil.backend.model.Role;
 
@@ -21,5 +21,4 @@ public record UserRegistrationDTO(
 
     @NotNull(message = "O papel (role) é obrigatório")
     Role role
-) {
-}
+) {}
