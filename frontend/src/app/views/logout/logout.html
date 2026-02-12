@@ -1,0 +1,55 @@
+<div class="bg-background-light font-display antialiased min-h-screen flex flex-col items-center justify-between text-slate-800">
+  
+  <div class="w-full h-2 bg-primary"></div>
+
+  <main class="flex-grow flex items-center justify-center w-full px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-xl border border-slate-200 relative overflow-hidden group">
+      
+      <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-700"></div>
+      <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-700"></div>
+
+      <div class="relative z-10 flex flex-col items-center text-center">
+        <div class="mx-auto h-20 w-20 flex items-center justify-center rounded-full bg-primary/10 mb-6">
+          <span class="material-icons-outlined text-primary text-5xl">lock_reset</span>
+        </div>
+
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">
+          Sessão encerrada com sucesso!
+        </h2>
+        
+        <p class="mt-2 text-base text-slate-600 max-w-sm">
+          Obrigado por usar o Portal de Mentoria da UFAPE.
+        </p>
+
+        <div class="mt-10 w-full space-y-4">
+          <a routerLink="/cadastro" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <span class="material-icons-outlined h-5 w-5 text-blue-300 group-hover:text-blue-100 transition-colors">login</span>
+            </span>
+            Faça login novamente
+          </a>
+
+          <a routerLink="/" class="w-full flex items-center justify-center py-3 px-4 border border-slate-200 rounded-lg shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-all duration-200">
+            <span class="material-icons-outlined h-5 w-5 mr-2 text-slate-400">home</span>
+            Retornar para a página inicial
+          </a>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center space-x-2 text-xs text-slate-400">
+          <span class="material-icons-outlined text-sm">timer</span>
+          <span>redirecionando para a página inicial em <span class="font-bold text-primary">{{ contador }}</span> segundos...</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full py-6 text-center">
+    <div class="flex items-center justify-center space-x-2 mb-2">
+      <div class="h-6 w-6 bg-primary rounded flex items-center justify-center text-white font-bold text-xs">M</div>
+      <span class="text-sm font-semibold text-slate-700">Mentoria UFAPE</span>
+    </div>
+    <p class="text-xs text-slate-500">
+      © 2026 UFAPE. All rights reserved.
+    </p>
+  </footer>
+</div>

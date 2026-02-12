@@ -1,0 +1,35 @@
+<nav class="sticky top-0 z-50 bg-white border-b border-primary/10 shadow-sm">
+  <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+        <span class="material-icons-round">school</span>
+      </div>
+      <div>
+        <h1 class="font-bold text-lg text-primary leading-tight">MentoriaAgil</h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="relative">
+        <button (click)="toggleMenu()" class="flex items-center gap-2 p-1 pl-3 bg-slate-100 rounded-full hover:ring-2 ring-primary/20 transition-all border border-slate-200">
+          <span class="text-xs font-medium text-slate-600 hidden sm:block">Usuario User</span>
+          <img alt="Avatar" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" src="https://ui-avatars.com/api/?name=Carlos+Alberto&background=137fec&color=fff"/>
+        </button>
+
+        <div *ngIf="isMenuOpen()" class="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden ring-1 ring-black/5">
+          <div class="p-4 border-b border-slate-100">
+            <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Sua Conta</p>
+            <p class="font-semibold text-slate-800 mt-1">Usuario User</p>
+            <p class="text-xs text-slate-500">usuario.user@ufape.edu.br</p>
+          </div>
+          <div class="p-2 bg-slate-50 border-t border-slate-100">
+            <button (click)="logout()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
+              <span class="material-icons-round text-lg">logout</span>
+              <span class="text-sm font-semibold tracking-wide uppercase">Sair</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

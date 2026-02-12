@@ -1,2 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #137fec;
+  --color-background-light: #f6f7f8;
+  --font-display: "Lexend", sans-serif;
+}
+
+/* Força o fundo claro e remove comportamento de dark mode do sistema */
+:root {
+  color-scheme: light;
+  --background: var(--color-background-light);
+  --foreground: #1e293b; /* slate-800 */
+}
+
+body {
+  background-color: var(--color-background-light);
+  font-family: var(--font-display);
+}
