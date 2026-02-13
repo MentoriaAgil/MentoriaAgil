@@ -1,8 +1,7 @@
 package com.mentoria.agil.backend.config;
 
 import com.mentoria.agil.backend.repository.UserRepository;
-import com.mentoria.agil.backend.service.TokenBlacklistService;
-import com.mentoria.agil.backend.service.TokenService;
+import com.mentoria.agil.backend.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,17 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
-    TokenService tokenService;
-    
-    @Autowired
-    TokenBlacklistService tokenBlacklistService;
+    JwtService jwtService;
     
     @Autowired
     UserRepository userRepository;
@@ -31,16 +26,13 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
+        
         if (token != null) {
-        	if (tokenBlacklistService.isTokenBlacklisted(token)) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return;
-            }
-        	
-            var login = tokenService.validateToken(token);
+            String email = jwtService.validateTokenAndGetSubject(token);
             
-            if (!login.isEmpty()) {
-                UserDetails user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            if (email != null) {
+                UserDetails user = userRepository.findByEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
                 
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -51,7 +43,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
         return authHeader.replace("Bearer ", "");
     }
 }
