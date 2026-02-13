@@ -25,24 +25,4 @@ public class JwtService {
     private Algorithm getAlgorithm() {
         return Algorithm.HMAC256(secret);
     }
-
-    public boolean isValidToken(String token) {
-        try {
-            //Verifica se está na blacklist (pós-logout)
-            if (tokenBlacklistService.isTokenBlacklisted(token)) {
-                return false; // Token invalidado pelo logout
-            }
-            
-            //Verifica assinatura, issuer e expiração
-            JWT.require(getAlgorithm())
-               .withIssuer(issuer)
-               .build()
-               .verify(token);
-            
-            return true;
-            
-        } catch (JWTVerificationException e) {
-            return false; // Token inválido (assinatura, expirado, issuer errado)
-        }
-    }
 }
