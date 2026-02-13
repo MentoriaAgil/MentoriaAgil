@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./cadastro/cadastro').then(m => m.CadastroComponent) 
   },
   { 
+    path: 'login', 
+    loadComponent: () => import('./login/login').then(m => m.LoginComponent)
+  },
+  { 
     path: 'logout', 
     loadComponent: () => import('./views/logout/logout').then(m => m.LogoutView) 
   },

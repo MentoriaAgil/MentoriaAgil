@@ -29,19 +29,20 @@
         <p class="text-gray-500 text-sm mt-1">Participe da comunidade de Mentoria da UFAPE hoje.</p>
       </div>
 
-      <form (ngSubmit)="onSubmit()" class="space-y-5">
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="space-y-5">
+        
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-3 text-left">Eu estou entrando como...</label>
           <div class="grid grid-cols-2 gap-4">
             <label class="cursor-pointer">
-              <input type="radio" name="role" [(ngModel)]="usuario.role" value="USER" class="peer sr-only">
+              <input type="radio" formControlName="role" value="ESTUDANTE" class="peer sr-only">
               <div class="relative rounded-xl border border-gray-200 p-4 flex flex-col items-center justify-center hover:border-blue-400 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:ring-1 peer-checked:ring-blue-600 transition h-28">
                 <svg class="w-8 h-8 mb-2 text-gray-400 peer-checked:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 <span class="font-bold text-gray-800 text-sm">Estudante</span>
               </div>
             </label>
             <label class="cursor-pointer">
-              <input type="radio" name="role" [(ngModel)]="usuario.role" value="ADMIN" class="peer sr-only">
+              <input type="radio" formControlName="role" value="MENTOR" class="peer sr-only">
               <div class="relative rounded-xl border border-gray-200 p-4 flex flex-col items-center justify-center hover:border-blue-400 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:ring-1 peer-checked:ring-blue-600 transition h-28">
                 <svg class="w-8 h-8 mb-2 text-gray-400 peer-checked:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 <span class="font-bold text-gray-800 text-sm">Mentor</span>
@@ -57,37 +58,48 @@
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
               </span>
-              <input type="text" [(ngModel)]="usuario.nome" name="nome" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="Ex: Maria Silva" required>
+              <input type="text" formControlName="nome" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="Ex: Maria Silva">
             </div>
+            <p *ngIf="cadastroForm.get('nome')?.invalid && cadastroForm.get('nome')?.touched" class="text-red-500 text-[10px] mt-1 font-bold">O nome é obrigatório.</p>
           </div>
+
           <div class="text-left">
             <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">E-mail Institucional</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </span>
-              <input type="email" [(ngModel)]="usuario.email" name="email" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="nome@ufape.edu.br" required>
+              <input type="email" formControlName="email" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="nome@ufape.edu.br">
+            </div>
+            <div *ngIf="cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched" class="text-red-500 text-[10px] mt-1 font-bold">
+              <p *ngIf="cadastroForm.get('email')?.errors?.['required']">E-mail é obrigatório.</p>
+              <p *ngIf="cadastroForm.get('email')?.errors?.['pattern']">Use apenas e-mail @ufape.edu.br</p>
             </div>
           </div>
+
           <div class="text-left">
             <label class="block text-xs font-bold text-gray-700 mb-1 uppercase">Senha</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
               </span>
-              <input type="password" [(ngModel)]="usuario.senha" name="senha" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="••••••••" required>
+              <input type="password" formControlName="senha" class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-1 focus:ring-blue-500 outline-none transition" placeholder="••••••••">
             </div>
+            <p *ngIf="cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched" class="text-red-500 text-[10px] mt-1 font-bold">A senha deve ter no mínimo 8 caracteres.</p>
           </div>
         </div>
 
         <div class="flex items-center mt-2 text-left">
             <input id="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer">
             <label for="terms" class="ml-2 block text-sm text-gray-500 cursor-pointer text-left">
-              Eu concordo com os <a href="#" class="text-blue-600 hover:underline">Termos de Serviço</a> e a <a href="#" class="text-blue-600 hover:underline">Política de Privacidade</a>
+              Eu concordo com os <a href="#" class="text-blue-600 hover:underline">Termos de Serviço</a>
             </label>
         </div>
 
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg transition duration-300 shadow-lg">
+        <button type="submit" 
+                [disabled]="cadastroForm.invalid"
+                [class.opacity-50]="cadastroForm.invalid"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg transition duration-300 shadow-lg">
           Criar Conta →
         </button>
       </form>
