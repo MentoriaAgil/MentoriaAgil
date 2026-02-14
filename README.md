@@ -27,7 +27,7 @@ Time responsável pela construção do projeto:
 | **Vinícius Mendes de Carvalho** | [![GitHub](https://img.shields.io/badge/GitHub-imvmc-100000?style=flat&logo=github&logoColor=white)](https://github.com/imvmc) |
 | **João Victor Iane Góis** | [![GitHub](https://img.shields.io/badge/GitHub-JoaoPresideu-100000?style=flat&logo=github&logoColor=white)](https://github.com/JoaoPresideu) |
 | **Maria Luiza Marques da Silva** | [![GitHub](https://img.shields.io/badge/GitHub-TheSerian-100000?style=flat&logo=github&logoColor=white)](https://github.com/TheSerian) |
-| **Augusto Sergio Berlamino Leite** | [![GitHub](https://img.shields.io/badge/GitHub-aaugustoo-100000?style=flat&logo=github&logoColor=white)](https://github.com/aaugustoo) |
+| **Augusto Sérgio Belarmino Leite** | [![GitHub](https://img.shields.io/badge/GitHub-aaugustoo-100000?style=flat&logo=github&logoColor=white)](https://github.com/aaugustoo) |
 
 ---
 

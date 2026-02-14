@@ -46,4 +46,13 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
         return authHeader.replace("Bearer ", "");
     }
+
+    //Não aplicar filtro em rotas públicas
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.equals("/auth/login") || 
+               path.equals("/auth/register") || 
+               path.equals("/auth/logout"); // Logout precisa do token, mas é tratado em outro lugar
+    }
 }

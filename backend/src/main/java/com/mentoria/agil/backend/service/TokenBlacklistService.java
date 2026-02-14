@@ -17,34 +17,42 @@ public class TokenBlacklistService {
     }
     
     public void invalidateToken(String token) {
-        //Extrair data de expiração do token
-        Date expirationDate = tokenService.getExpirationFromToken(token);
-        
-        if (expirationDate != null) {
-            blacklistedTokens.put(token, expirationDate.getTime());
-        } else {
-            // expira em 24h se não conseguir extrair
-            long fallbackExpiration = System.currentTimeMillis() + (24 * 60 * 60 * 1000);
-            blacklistedTokens.put(token, fallbackExpiration);
+        if (token == null || token.isBlank()) {
+            throw new IllegalArgumentException("Token não pode ser vazio");
         }
+
+        //Remove "Bearer " se existir
+        String cleanToken = cleanToken(token);
         
-        //Limpa tokens expirados
+        //Extrai expiração
+        Date expiration = tokenService.getExpirationFromToken(cleanToken);
+        
+        //Armazena sempre sem o prefixo
+        blacklistedTokens.put(cleanToken, expiration.getTime());
         cleanExpiredTokens();
     }
     
     public boolean isTokenBlacklisted(String token) {
-        //Limpa expirados antes de verificar
         cleanExpiredTokens();
-        return blacklistedTokens.containsKey(token);
+        
+        //Sempre limpa o token antes de verificar
+        String cleanToken = cleanToken(token);
+        return blacklistedTokens.containsKey(cleanToken);
+    }
+
+    private String cleanToken(String token) {
+        if (token == null) return null;
+        
+        //Remove "Bearer " se presente (case insensitive)
+        String cleaned = token.replaceFirst("^(?i)Bearer\\s+", "");
+        
+        //Remove espaços extras
+        return cleaned.trim();
     }
     
     private void cleanExpiredTokens() {
-        long now = System.currentTimeMillis();
-        
-        blacklistedTokens.entrySet().removeIf(entry -> {
-            Long expirationTime = entry.getValue();
-            return expirationTime < now; // Token expirado pode ser removido
-        });
+        long now = System.currentTimeMillis();  
+        blacklistedTokens.entrySet().removeIf(entry -> entry.getValue() < now);
     }
     
     public int getBlacklistSize() {
