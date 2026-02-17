@@ -37,6 +37,13 @@ public class User implements UserDetails {
     private Role role;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public User(String name, String email, String password, Role role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
