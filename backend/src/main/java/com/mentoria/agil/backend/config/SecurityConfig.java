@@ -22,38 +22,42 @@ public class SecurityConfig {
 
 	@Autowired
 	SecurityFilter securityFilter;
-	
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	return http
-    			.csrf(csrf -> csrf.disable())
-    			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    			.authorizeHttpRequests(authorize -> authorize
-    					//endpoints publicos
-    					.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-    					.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-    					
-    					//endpoints exclusivos de adm
-    					.requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
-    					
-    					//outras rotas que precisem de autenticaçao
-    					.anyRequest().authenticated()
-    					)
-					//configuração do 401 unauthorized
-                    .exceptionHandling(exception -> exception
-                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                	)
-    			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-    			.build();
-    }
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		return http
+				.csrf(csrf -> csrf.disable())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(authorize -> authorize
+						// Endpoints públicos de autenticação
+						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+						.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+
+						// --- ADICIONE ESTAS LINHAS PARA O SWAGGER ---
+						.requestMatchers("/v3/api-docs/**").permitAll()
+						.requestMatchers("/swagger-ui/**").permitAll()
+						.requestMatchers("/swagger-ui.html").permitAll()
+						// --------------------------------------------
+
+						// Endpoints exclusivos de adm
+						.requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
+
+						// Qualquer outra rota precisa de autenticação
+						.anyRequest().authenticated())
+				.exceptionHandling(exception -> exception
+						.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
+	}
 }
