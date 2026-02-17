@@ -1,37 +1,49 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MentorService } from '../../../services/mentor.service';
+import { CommonModule, AsyncPipe } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MentorService } from '../../../services/mentor/mentor.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-mentor-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './mentor-form.html',
-  styleUrl: './mentor-form.css'
+  imports: [ReactiveFormsModule, CommonModule, AsyncPipe],
+  templateUrl: './mentor-form.html'
 })
 export class MentorFormComponent {
   private fb = inject(FormBuilder);
   private mentorService = inject(MentorService);
+  private router = inject(Router);
+  public authService = inject(AuthService);
+
+  errorMessage: string | null = null;
 
   mentorForm = this.fb.group({
-    specialty: ['', Validators.required],
-    experienceYears: [null, [Validators.required, Validators.min(0)]],
+    specialty: ['', [Validators.required]],
+    experienceYears: [0, [Validators.required, Validators.min(0)]],
     bio: ['', [Validators.required, Validators.maxLength(500)]],
     skills: ['', Validators.required]
   });
 
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
   enviar() {
     if (this.mentorForm.valid) {
-      // Transforma a string de skills em array antes de enviar
-      const rawValue = this.mentorForm.value;
+      const formValue = this.mentorForm.value;
       const payload = {
-        ...rawValue,
-        skills: typeof rawValue.skills === 'string' ? rawValue.skills.split(',') : []
+        ...formValue,
+        skills: typeof formValue.skills === 'string'
+          ? formValue.skills.split(',').map(s => s.trim()).filter(s => s !== "")
+          : []
       };
 
       this.mentorService.createProfile(payload as any).subscribe({
-        next: () => alert('Perfil criado!'),
-        error: (err) => console.error('Erro no cadastro', err)
+        next: () => this.router.navigate(['/dashboard']),
+        error: (err) => this.errorMessage = "Erro ao salvar perfil: " + (err.error?.message || "Servidor offline")
       });
     }
   }

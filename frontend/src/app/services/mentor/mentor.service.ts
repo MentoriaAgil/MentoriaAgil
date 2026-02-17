@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MentorDTO } from '../models/Mentor';
+import { MentorDTO } from '../../models/Mentor';
 
 @Injectable({
   providedIn: 'root'
