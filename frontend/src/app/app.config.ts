@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withInterceptorsFromDi()
+      withInterceptorsFromDi(),
     ),
     {
       provide: HTTP_INTERCEPTORS,
