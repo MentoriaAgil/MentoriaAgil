@@ -7,15 +7,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -37,6 +29,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // --- SEUS CAMPOS (Mantidos para não quebrar sua listagem de mentores) ---
     @Column(name = "especialidade")
     private String especialidade;
 
@@ -45,12 +38,26 @@ public class User implements UserDetails {
 
     @Column(name = "tipo_mentoria")
     private String tipoMentoria;
+
     private boolean ativo = true; 
+
+    // --- CAMPOS DO COLEGA (Mantidos 100% conforme ele adicionou) ---
+    @OneToOne(mappedBy = "user")
+    private PerfilMentor perfilMentor;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    // Construtores
     public User() {}
 
+    // Construtor que o colega definiu (mais limpo)
+    public User(String name, String email, String password){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    // Construtor que você usou (mantido para compatibilidade se necessário)
     public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
@@ -58,21 +65,20 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-   @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    // --- LÓGICA DE AUTHORITIES (Unificada: Admin e Mentor) ---
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
         if (this.role == Role.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         }
         if (this.role == Role.MENTOR) {
-            return List.of(new SimpleGrantedAuthority("ROLE_MENTOR"));
+            return List.of(new SimpleGrantedAuthority("ROLE_MENTOR"), new SimpleGrantedAuthority("ROLE_USER"));
         }
-        // Se não for Admin e nem Mentor, é User (Aluno)
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
+
     @Override
-    public String getUsername() {
-        return email;
-    }
+    public String getUsername() { return email; }
 
     @Override
     public boolean isAccountNonExpired() { return true; }
@@ -83,6 +89,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() { return ativo; }
 
+    // --- GETTERS E SETTERS (Mantendo os seus e os dele) ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -112,4 +119,7 @@ public class User implements UserDetails {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public PerfilMentor getPerfilMentor(){ return perfilMentor; }
+    public void setPerfilMentor(PerfilMentor perfilMentor){ this.perfilMentor = perfilMentor; }
 }
