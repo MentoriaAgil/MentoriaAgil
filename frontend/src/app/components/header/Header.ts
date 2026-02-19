@@ -7,18 +7,28 @@ import { AuthService } from '../../auth/auth.service';
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './header.html'
+  templateUrl: './header.html',
 })
 export class Header {
   isMenuOpen = signal(false);
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   toggleMenu() {
     this.isMenuOpen.set(!this.isMenuOpen());
   }
 
   logout() {
+    this.authService.logoutNoServidor().subscribe({
+      next: () => this.limparERedirecionar(),
+      error: () => this.limparERedirecionar()
+    });
+  }
+
+  private limparERedirecionar() {
     this.authService.logout();
     this.router.navigate(['/logout']);
   }

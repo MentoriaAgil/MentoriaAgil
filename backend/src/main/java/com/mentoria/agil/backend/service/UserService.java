@@ -35,13 +35,14 @@ public class UserService implements UserServiceInterface {
         if (userRepository.existsByEmail(dto.email())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Este e-mail já está cadastrado.");
         }
-        
+
         User user = new User();
         user.setName(dto.name());    
         user.setEmail(dto.email());  
         
         user.setRole(dto.role() != null ? dto.role() : Role.VISITANTE);
-        
+
+        // Criptografia da senha
         user.setPassword(passwordEncoder.encode(dto.password()));
         // Se for um Mentor, salva os dados extras que vieram nulos por enquanto
         return userRepository.save(user);

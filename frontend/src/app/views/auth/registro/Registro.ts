@@ -15,24 +15,18 @@ export class Registro implements OnInit {
   cadastroForm!: FormGroup;
   isLoading = false;
 
+  // Controla visualmente qual card está selecionado no HTML
+  selectedRole: 'ESTUDANTE' | 'MENTOR' = 'ESTUDANTE';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {}
 
-  irLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  irTermos() {
-    this.router.navigate(['/termos']);
-  }
-
   ngOnInit(): void {
     this.cadastroForm = this.fb.group({
       nome: ['', [Validators.required]],
-      // Validação E-mail UFAPE
       email: [
         '',
         [
@@ -41,12 +35,23 @@ export class Registro implements OnInit {
           Validators.pattern(/^[a-z0-9._%+-]+@ufape\.edu\.br$/),
         ],
       ],
-      // Validação Senha 8 caracteres
       senha: ['', [Validators.required, Validators.minLength(8)]],
-      role: ['', [Validators.required]],
+      // Inicia com o valor padrão selecionado
+      role: ['ESTUDANTE', [Validators.required]],
       termos: [false, [Validators.requiredTrue]]
     });
   }
+
+  /**
+   * Atualiza a seleção visual e o valor no formulário reativo
+   */
+  selectRole(role: 'ESTUDANTE' | 'MENTOR') {
+    this.selectedRole = role;
+    this.cadastroForm.patchValue({ role: role });
+  }
+
+  irLogin() { this.router.navigate(['/login']); }
+  irTermos() { this.router.navigate(['/termos']); }
 
   onSubmit() {
     if (this.cadastroForm.invalid) {
@@ -61,21 +66,27 @@ export class Registro implements OnInit {
       name: formValues.nome,
       email: formValues.email,
       password: formValues.senha,
-      role: formValues.role
+      role: formValues.role // Envia 'ESTUDANTE' ou 'MENTOR'
     };
-
     this.authService.register(novoUsuario).subscribe({
-      next: (response: any) => {
+      next: () => {
         this.isLoading = false;
-        alert('Sucesso: Cadastro realizado! Faça login para continuar.');
-        this.router.navigate(['/login']);
+
+        // Lógica de navegação condicional
+        if (this.selectedRole === 'MENTOR') {
+          // Se for mentor, vai para a segunda etapa do cadastro
+          this.router.navigate(['/mentor/cadastro']);
+        } else {
+          // Se for estudante, vai direto para o dashboard ou login
+          alert('Cadastro realizado com sucesso!');
+          this.router.navigate(['/login']);
+        }
       },
       error: (err: any) => {
         this.isLoading = false;
-        const mensagemErro = err.error?.message || 'Falha ao realizar o cadastro. Verifique os dados.';
+        const mensagemErro = err.error?.message || 'Falha ao realizar o cadastro.';
         alert(`Erro: ${mensagemErro}`);
-        console.error(err);
       }
-    });
+    })
   }
 }
