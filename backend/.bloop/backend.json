@@ -1,0 +1,2184 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "backend",
+        "directory": "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend",
+        "workspaceDir": "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend",
+        "sources": [
+            "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\src\\main\\java"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\target\\classes",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-data-jpa\\4.0.2\\spring-boot-starter-data-jpa-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter\\4.0.2\\spring-boot-starter-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-logging\\4.0.2\\spring-boot-starter-logging-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-classic\\1.5.25\\logback-classic-1.5.25.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-core\\1.5.25\\logback-core-1.5.25.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-to-slf4j\\2.25.3\\log4j-to-slf4j-2.25.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-api\\2.25.3\\log4j-api-2.25.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\jul-to-slf4j\\2.0.17\\jul-to-slf4j-2.0.17.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\annotation\\jakarta.annotation-api\\3.0.0\\jakarta.annotation-api-3.0.0.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\yaml\\snakeyaml\\2.5\\snakeyaml-2.5.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jdbc\\4.0.2\\spring-boot-starter-jdbc-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\com\\zaxxer\\HikariCP\\7.0.2\\HikariCP-7.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.17\\slf4j-api-2.0.17.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-jpa\\4.0.2\\spring-boot-data-jpa-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-commons\\4.0.2\\spring-boot-data-commons-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-persistence\\4.0.2\\spring-boot-persistence-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-commons\\4.0.2\\spring-data-commons-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-hibernate\\4.0.2\\spring-boot-hibernate-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jpa\\4.0.2\\spring-boot-jpa-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\persistence\\jakarta.persistence-api\\3.2.0\\jakarta.persistence-api-3.2.0.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\orm\\hibernate-core\\7.2.1.Final\\hibernate-core-7.2.1.Final.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\transaction\\jakarta.transaction-api\\2.0.1\\jakarta.transaction-api-2.0.1.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-orm\\7.0.3\\spring-orm-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-jpa\\4.0.2\\spring-data-jpa-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-tx\\7.0.3\\spring-tx-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.13.2\\antlr4-runtime-4.13.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aspects\\7.0.3\\spring-aspects-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\aspectj\\aspectjweaver\\1.9.25.1\\aspectjweaver-1.9.25.1.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jdbc\\4.0.2\\spring-boot-jdbc-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-sql\\4.0.2\\spring-boot-sql-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-transaction\\4.0.2\\spring-boot-transaction-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-jdbc\\7.0.3\\spring-jdbc-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-security\\4.0.2\\spring-boot-starter-security-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-security\\4.0.2\\spring-boot-security-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-config\\7.0.2\\spring-security-config-7.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-core\\7.0.2\\spring-security-core-7.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-crypto\\7.0.2\\spring-security-crypto-7.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-web\\7.0.2\\spring-security-web-7.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-expression\\7.0.3\\spring-expression-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aop\\7.0.3\\spring-aop-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-beans\\7.0.3\\spring-beans-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-core\\7.0.3\\spring-core-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\commons-logging\\commons-logging\\1.3.5\\commons-logging-1.3.5.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-validation\\4.0.2\\spring-boot-starter-validation-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-validation\\4.0.2\\spring-boot-validation-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-el\\11.0.15\\tomcat-embed-el-11.0.15.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\validator\\hibernate-validator\\9.0.1.Final\\hibernate-validator-9.0.1.Final.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\validation\\jakarta.validation-api\\3.1.1\\jakarta.validation-api-3.1.1.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\jboss\\logging\\jboss-logging\\3.6.1.Final\\jboss-logging-3.6.1.Final.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\classmate\\1.7.3\\classmate-1.7.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-webmvc\\4.0.2\\spring-boot-starter-webmvc-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jackson\\4.0.2\\spring-boot-starter-jackson-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jackson\\4.0.2\\spring-boot-jackson-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-databind\\3.0.4\\jackson-databind-3.0.4.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.20\\jackson-annotations-2.20.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-core\\3.0.4\\jackson-core-3.0.4.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat\\4.0.2\\spring-boot-starter-tomcat-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat-runtime\\4.0.2\\spring-boot-starter-tomcat-runtime-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-core\\11.0.15\\tomcat-embed-core-11.0.15.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-websocket\\11.0.15\\tomcat-embed-websocket-11.0.15.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-tomcat\\4.0.2\\spring-boot-tomcat-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-http-converter\\4.0.2\\spring-boot-http-converter-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-web\\7.0.3\\spring-web-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-observation\\1.16.2\\micrometer-observation-1.16.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-commons\\1.16.2\\micrometer-commons-1.16.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-webmvc\\4.0.2\\spring-boot-webmvc-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-servlet\\4.0.2\\spring-boot-servlet-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-webmvc\\7.0.3\\spring-webmvc-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot\\4.0.2\\spring-boot-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-context\\7.0.3\\spring-context-7.0.3.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-autoconfigure\\4.0.2\\spring-boot-autoconfigure-4.0.2.jar",
+            "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-web-server\\4.0.2\\spring-boot-web-server-4.0.2.jar"
+        ],
+        "out": "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\target",
+        "classesDir": "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\target\\classes",
+        "resources": [
+            "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\src\\main\\resources",
+            "D:\\Meus Documentos\\Downloads\\MentoriaAgil\\backend\\src\\main\\resources"
+        ],
+        "java": {
+            "options": [
+                "-g",
+                "--release",
+                "25",
+                "-encoding",
+                "UTF-8"
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework",
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "utest.runner.Framework"
+                    ]
+                },
+                {
+                    "names": [
+                        "munit.Framework"
+                    ]
+                },
+                {
+                    "names": [
+                        "mill.testng.TestNGFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    {
+                        "args": [
+                            "-v",
+                            "-a"
+                        ],
+                        "framework": {
+                            "names": [
+                                "com.novocode.junit.JUnitFramework"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "C:\\Users\\jvpre\\AppData\\Local\\Programs\\Eclipse Adoptium\\jdk-17.0.8.101-hotspot",
+                "options": [
+                    
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-validation-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-validation-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-validation-test\\4.0.2\\spring-boot-starter-validation-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-validation-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-validation-test\\4.0.2\\spring-boot-starter-validation-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.security",
+                    "name": "spring-security-web",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-security-web",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-web\\7.0.2\\spring-security-web-7.0.2.jar"
+                        },
+                        {
+                            "name": "spring-security-web",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-web\\7.0.2\\spring-security-web-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.inject",
+                    "name": "jakarta.inject-api",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.inject-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\inject\\jakarta.inject-api\\2.0.1\\jakarta.inject-api-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.inject-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\inject\\jakarta.inject-api\\2.0.1\\jakarta.inject-api-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-hibernate",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-hibernate",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-hibernate\\4.0.2\\spring-boot-hibernate-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-hibernate",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-hibernate\\4.0.2\\spring-boot-hibernate-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "jaxb-core",
+                    "version": "4.0.6",
+                    "artifacts": [
+                        {
+                            "name": "jaxb-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\jaxb-core\\4.0.6\\jaxb-core-4.0.6.jar"
+                        },
+                        {
+                            "name": "jaxb-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\jaxb-core\\4.0.6\\jaxb-core-4.0.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-context",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-context",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-context\\7.0.3\\spring-context-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-context",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-context\\7.0.3\\spring-context-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-security",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-security",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-security\\4.0.2\\spring-boot-security-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-security",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-security\\4.0.2\\spring-boot-security-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-jpa",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-jpa",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jpa\\4.0.2\\spring-boot-jpa-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-jpa",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jpa\\4.0.2\\spring-boot-jpa-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.security",
+                    "name": "spring-security-test",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-security-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-test\\7.0.2\\spring-security-test-7.0.2.jar"
+                        },
+                        {
+                            "name": "spring-security-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-test\\7.0.2\\spring-security-test-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-expression",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-expression",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-expression\\7.0.3\\spring-expression-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-expression",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-expression\\7.0.3\\spring-expression-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-web",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-web",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-web\\7.0.3\\spring-web-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-web",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-web\\7.0.3\\spring-web-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.eclipse.angus",
+                    "name": "angus-activation",
+                    "version": "2.0.3",
+                    "artifacts": [
+                        {
+                            "name": "angus-activation",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\eclipse\\angus\\angus-activation\\2.0.3\\angus-activation-2.0.3.jar"
+                        },
+                        {
+                            "name": "angus-activation",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\eclipse\\angus\\angus-activation\\2.0.3\\angus-activation-2.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-jdbc",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-jdbc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jdbc\\4.0.2\\spring-boot-starter-jdbc-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-jdbc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jdbc\\4.0.2\\spring-boot-starter-jdbc-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-logging",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-logging",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-logging\\4.0.2\\spring-boot-starter-logging-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-logging",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-logging\\4.0.2\\spring-boot-starter-logging-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-jdbc-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-jdbc-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jdbc-test\\4.0.2\\spring-boot-jdbc-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-jdbc-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jdbc-test\\4.0.2\\spring-boot-jdbc-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-transaction",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-transaction",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-transaction\\4.0.2\\spring-boot-transaction-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-transaction",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-transaction\\4.0.2\\spring-boot-transaction-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.xmlunit",
+                    "name": "xmlunit-core",
+                    "version": "2.10.4",
+                    "artifacts": [
+                        {
+                            "name": "xmlunit-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\xmlunit\\xmlunit-core\\2.10.4\\xmlunit-core-2.10.4.jar"
+                        },
+                        {
+                            "name": "xmlunit-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\xmlunit\\xmlunit-core\\2.10.4\\xmlunit-core-2.10.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-webmvc",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-webmvc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-webmvc\\7.0.3\\spring-webmvc-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-webmvc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-webmvc\\7.0.3\\spring-webmvc-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-beans",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-beans",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-beans\\7.0.3\\spring-beans-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-beans",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-beans\\7.0.3\\spring-beans-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-jpa-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-jpa-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jpa-test\\4.0.2\\spring-boot-jpa-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-jpa-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jpa-test\\4.0.2\\spring-boot-jpa-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.logging.log4j",
+                    "name": "log4j-to-slf4j",
+                    "version": "2.25.3",
+                    "artifacts": [
+                        {
+                            "name": "log4j-to-slf4j",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-to-slf4j\\2.25.3\\log4j-to-slf4j-2.25.3.jar"
+                        },
+                        {
+                            "name": "log4j-to-slf4j",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-to-slf4j\\2.25.3\\log4j-to-slf4j-2.25.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "jaxb-runtime",
+                    "version": "4.0.6",
+                    "artifacts": [
+                        {
+                            "name": "jaxb-runtime",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\jaxb-runtime\\4.0.6\\jaxb-runtime-4.0.6.jar"
+                        },
+                        {
+                            "name": "jaxb-runtime",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\jaxb-runtime\\4.0.6\\jaxb-runtime-4.0.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-classic",
+                    "version": "1.5.25",
+                    "artifacts": [
+                        {
+                            "name": "logback-classic",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-classic\\1.5.25\\logback-classic-1.5.25.jar"
+                        },
+                        {
+                            "name": "logback-classic",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-classic\\1.5.25\\logback-classic-1.5.25-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.aspectj",
+                    "name": "aspectjweaver",
+                    "version": "1.9.25.1",
+                    "artifacts": [
+                        {
+                            "name": "aspectjweaver",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\aspectj\\aspectjweaver\\1.9.25.1\\aspectjweaver-1.9.25.1.jar"
+                        },
+                        {
+                            "name": "aspectjweaver",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\aspectj\\aspectjweaver\\1.9.25.1\\aspectjweaver-1.9.25.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-core",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-core\\7.0.3\\spring-core-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-core\\7.0.3\\spring-core-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mockito",
+                    "name": "mockito-junit-jupiter",
+                    "version": "5.20.0",
+                    "artifacts": [
+                        {
+                            "name": "mockito-junit-jupiter",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\mockito\\mockito-junit-jupiter\\5.20.0\\mockito-junit-jupiter-5.20.0.jar"
+                        },
+                        {
+                            "name": "mockito-junit-jupiter",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\mockito\\mockito-junit-jupiter\\5.20.0\\mockito-junit-jupiter-5.20.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "tools.jackson.core",
+                    "name": "jackson-databind",
+                    "version": "3.0.4",
+                    "artifacts": [
+                        {
+                            "name": "jackson-databind",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-databind\\3.0.4\\jackson-databind-3.0.4.jar"
+                        },
+                        {
+                            "name": "jackson-databind",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-databind\\3.0.4\\jackson-databind-3.0.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.annotation",
+                    "name": "jakarta.annotation-api",
+                    "version": "3.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.annotation-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\annotation\\jakarta.annotation-api\\3.0.0\\jakarta.annotation-api-3.0.0.jar"
+                        },
+                        {
+                            "name": "jakarta.annotation-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\annotation\\jakarta.annotation-api\\3.0.0\\jakarta.annotation-api-3.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.security",
+                    "name": "spring-security-core",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-security-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-core\\7.0.2\\spring-security-core-7.0.2.jar"
+                        },
+                        {
+                            "name": "spring-security-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-core\\7.0.2\\spring-security-core-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-data-jpa",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-data-jpa",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-data-jpa\\4.0.2\\spring-boot-starter-data-jpa-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-data-jpa",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-data-jpa\\4.0.2\\spring-boot-starter-data-jpa-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.antlr",
+                    "name": "antlr4-runtime",
+                    "version": "4.13.2",
+                    "artifacts": [
+                        {
+                            "name": "antlr4-runtime",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.13.2\\antlr4-runtime-4.13.2.jar"
+                        },
+                        {
+                            "name": "antlr4-runtime",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.13.2\\antlr4-runtime-4.13.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-tomcat-runtime",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-tomcat-runtime",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat-runtime\\4.0.2\\spring-boot-starter-tomcat-runtime-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-tomcat-runtime",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat-runtime\\4.0.2\\spring-boot-starter-tomcat-runtime-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-commons",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-commons",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\6.0.2\\junit-platform-commons-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-platform-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\6.0.2\\junit-platform-commons-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.minidev",
+                    "name": "accessors-smart",
+                    "version": "2.6.0",
+                    "artifacts": [
+                        {
+                            "name": "accessors-smart",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\minidev\\accessors-smart\\2.6.0\\accessors-smart-2.6.0.jar"
+                        },
+                        {
+                            "name": "accessors-smart",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\minidev\\accessors-smart\\2.6.0\\accessors-smart-2.6.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-data-commons",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-data-commons",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-commons\\4.0.2\\spring-boot-data-commons-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-data-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-commons\\4.0.2\\spring-boot-data-commons-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-data-jpa",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-data-jpa",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-jpa\\4.0.2\\spring-boot-data-jpa-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-data-jpa",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-jpa\\4.0.2\\spring-boot-data-jpa-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-security-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-security-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-security-test\\4.0.2\\spring-boot-starter-security-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-security-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-security-test\\4.0.2\\spring-boot-starter-security-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.postgresql",
+                    "name": "postgresql",
+                    "version": "42.7.9",
+                    "artifacts": [
+                        {
+                            "name": "postgresql",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\postgresql\\postgresql\\42.7.9\\postgresql-42.7.9.jar"
+                        },
+                        {
+                            "name": "postgresql",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\postgresql\\postgresql\\42.7.9\\postgresql-42.7.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-test\\4.0.2\\spring-boot-starter-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-test\\4.0.2\\spring-boot-starter-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.tomcat.embed",
+                    "name": "tomcat-embed-el",
+                    "version": "11.0.15",
+                    "artifacts": [
+                        {
+                            "name": "tomcat-embed-el",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-el\\11.0.15\\tomcat-embed-el-11.0.15.jar"
+                        },
+                        {
+                            "name": "tomcat-embed-el",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-el\\11.0.15\\tomcat-embed-el-11.0.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.security",
+                    "name": "spring-security-config",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-security-config",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-config\\7.0.2\\spring-security-config-7.0.2.jar"
+                        },
+                        {
+                            "name": "spring-security-config",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-config\\7.0.2\\spring-security-config-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-engine",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-engine",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\6.0.2\\junit-platform-engine-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-platform-engine",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\6.0.2\\junit-platform-engine-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jboss.logging",
+                    "name": "jboss-logging",
+                    "version": "3.6.1.Final",
+                    "artifacts": [
+                        {
+                            "name": "jboss-logging",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\jboss\\logging\\jboss-logging\\3.6.1.Final\\jboss-logging-3.6.1.Final.jar"
+                        },
+                        {
+                            "name": "jboss-logging",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\jboss\\logging\\jboss-logging\\3.6.1.Final\\jboss-logging-3.6.1.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.sun.istack",
+                    "name": "istack-commons-runtime",
+                    "version": "4.1.2",
+                    "artifacts": [
+                        {
+                            "name": "istack-commons-runtime",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\sun\\istack\\istack-commons-runtime\\4.1.2\\istack-commons-runtime-4.1.2.jar"
+                        },
+                        {
+                            "name": "istack-commons-runtime",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\sun\\istack\\istack-commons-runtime\\4.1.2\\istack-commons-runtime-4.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-aspects",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-aspects",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aspects\\7.0.3\\spring-aspects-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-aspects",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aspects\\7.0.3\\spring-aspects-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-annotations",
+                    "version": "2.20",
+                    "artifacts": [
+                        {
+                            "name": "jackson-annotations",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.20\\jackson-annotations-2.20.jar"
+                        },
+                        {
+                            "name": "jackson-annotations",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.20\\jackson-annotations-2.20-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-data-jpa-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-data-jpa-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-jpa-test\\4.0.2\\spring-boot-data-jpa-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-data-jpa-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-data-jpa-test\\4.0.2\\spring-boot-data-jpa-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "txw2",
+                    "version": "4.0.6",
+                    "artifacts": [
+                        {
+                            "name": "txw2",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\txw2\\4.0.6\\txw2-4.0.6.jar"
+                        },
+                        {
+                            "name": "txw2",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\glassfish\\jaxb\\txw2\\4.0.6\\txw2-4.0.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.tomcat.embed",
+                    "name": "tomcat-embed-websocket",
+                    "version": "11.0.15",
+                    "artifacts": [
+                        {
+                            "name": "tomcat-embed-websocket",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-websocket\\11.0.15\\tomcat-embed-websocket-11.0.15.jar"
+                        },
+                        {
+                            "name": "tomcat-embed-websocket",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-websocket\\11.0.15\\tomcat-embed-websocket-11.0.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-sql",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-sql",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-sql\\4.0.2\\spring-boot-sql-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-sql",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-sql\\4.0.2\\spring-boot-sql-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.skyscreamer",
+                    "name": "jsonassert",
+                    "version": "1.5.3",
+                    "artifacts": [
+                        {
+                            "name": "jsonassert",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\skyscreamer\\jsonassert\\1.5.3\\jsonassert-1.5.3.jar"
+                        },
+                        {
+                            "name": "jsonassert",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\skyscreamer\\jsonassert\\1.5.3\\jsonassert-1.5.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-security",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-security",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-security\\4.0.2\\spring-boot-starter-security-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-security",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-security\\4.0.2\\spring-boot-starter-security-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.vaadin.external.google",
+                    "name": "android-json",
+                    "version": "0.0.20131108.vaadin1",
+                    "artifacts": [
+                        {
+                            "name": "android-json",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\vaadin\\external\\google\\android-json\\0.0.20131108.vaadin1\\android-json-0.0.20131108.vaadin1.jar"
+                        },
+                        {
+                            "name": "android-json",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\vaadin\\external\\google\\android-json\\0.0.20131108.vaadin1\\android-json-0.0.20131108.vaadin1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.validation",
+                    "name": "jakarta.validation-api",
+                    "version": "3.1.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.validation-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\validation\\jakarta.validation-api\\3.1.1\\jakarta.validation-api-3.1.1.jar"
+                        },
+                        {
+                            "name": "jakarta.validation-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\validation\\jakarta.validation-api\\3.1.1\\jakarta.validation-api-3.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-jdbc",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-jdbc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-jdbc\\7.0.3\\spring-jdbc-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-jdbc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-jdbc\\7.0.3\\spring-jdbc-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.xml.bind",
+                    "name": "jakarta.xml.bind-api",
+                    "version": "4.0.4",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.xml.bind-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\4.0.4\\jakarta.xml.bind-api-4.0.4.jar"
+                        },
+                        {
+                            "name": "jakarta.xml.bind-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\4.0.4\\jakarta.xml.bind-api-4.0.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.zaxxer",
+                    "name": "HikariCP",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "HikariCP",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\zaxxer\\HikariCP\\7.0.2\\HikariCP-7.0.2.jar"
+                        },
+                        {
+                            "name": "HikariCP",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\zaxxer\\HikariCP\\7.0.2\\HikariCP-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "jul-to-slf4j",
+                    "version": "2.0.17",
+                    "artifacts": [
+                        {
+                            "name": "jul-to-slf4j",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\jul-to-slf4j\\2.0.17\\jul-to-slf4j-2.0.17.jar"
+                        },
+                        {
+                            "name": "jul-to-slf4j",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\jul-to-slf4j\\2.0.17\\jul-to-slf4j-2.0.17-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-webmvc",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-webmvc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-webmvc\\4.0.2\\spring-boot-webmvc-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-webmvc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-webmvc\\4.0.2\\spring-boot-webmvc-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apiguardian",
+                    "name": "apiguardian-api",
+                    "version": "1.1.2",
+                    "artifacts": [
+                        {
+                            "name": "apiguardian-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar"
+                        },
+                        {
+                            "name": "apiguardian-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-webmvc",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-webmvc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-webmvc\\4.0.2\\spring-boot-starter-webmvc-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-webmvc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-webmvc\\4.0.2\\spring-boot-starter-webmvc-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-autoconfigure",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-autoconfigure",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-autoconfigure\\4.0.2\\spring-boot-autoconfigure-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-autoconfigure",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-autoconfigure\\4.0.2\\spring-boot-autoconfigure-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.bytebuddy",
+                    "name": "byte-buddy-agent",
+                    "version": "1.17.8",
+                    "artifacts": [
+                        {
+                            "name": "byte-buddy-agent",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.17.8\\byte-buddy-agent-1.17.8.jar"
+                        },
+                        {
+                            "name": "byte-buddy-agent",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.17.8\\byte-buddy-agent-1.17.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-jdbc-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-jdbc-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jdbc-test\\4.0.2\\spring-boot-starter-jdbc-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-jdbc-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jdbc-test\\4.0.2\\spring-boot-starter-jdbc-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jspecify",
+                    "name": "jspecify",
+                    "version": "1.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jspecify",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar"
+                        },
+                        {
+                            "name": "jspecify",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-http-converter",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-http-converter",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-http-converter\\4.0.2\\spring-boot-http-converter-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-http-converter",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-http-converter\\4.0.2\\spring-boot-http-converter-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.assertj",
+                    "name": "assertj-core",
+                    "version": "3.27.6",
+                    "artifacts": [
+                        {
+                            "name": "assertj-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\assertj\\assertj-core\\3.27.6\\assertj-core-3.27.6.jar"
+                        },
+                        {
+                            "name": "assertj-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\assertj\\assertj-core\\3.27.6\\assertj-core-3.27.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml",
+                    "name": "classmate",
+                    "version": "1.7.3",
+                    "artifacts": [
+                        {
+                            "name": "classmate",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\classmate\\1.7.3\\classmate-1.7.3.jar"
+                        },
+                        {
+                            "name": "classmate",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\fasterxml\\classmate\\1.7.3\\classmate-1.7.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hamcrest",
+                    "name": "hamcrest",
+                    "version": "3.0",
+                    "artifacts": [
+                        {
+                            "name": "hamcrest",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hamcrest\\hamcrest\\3.0\\hamcrest-3.0.jar"
+                        },
+                        {
+                            "name": "hamcrest",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hamcrest\\hamcrest\\3.0\\hamcrest-3.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.logging.log4j",
+                    "name": "log4j-api",
+                    "version": "2.25.3",
+                    "artifacts": [
+                        {
+                            "name": "log4j-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-api\\2.25.3\\log4j-api-2.25.3.jar"
+                        },
+                        {
+                            "name": "log4j-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\logging\\log4j\\log4j-api\\2.25.3\\log4j-api-2.25.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.ow2.asm",
+                    "name": "asm",
+                    "version": "9.7.1",
+                    "artifacts": [
+                        {
+                            "name": "asm",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.jar"
+                        },
+                        {
+                            "name": "asm",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-orm",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-orm",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-orm\\7.0.3\\spring-orm-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-orm",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-orm\\7.0.3\\spring-orm-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-tomcat",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-tomcat",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-tomcat\\4.0.2\\spring-boot-tomcat-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-tomcat",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-tomcat\\4.0.2\\spring-boot-tomcat-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-test-autoconfigure",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-test-autoconfigure",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-test-autoconfigure\\4.0.2\\spring-boot-test-autoconfigure-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-test-autoconfigure",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-test-autoconfigure\\4.0.2\\spring-boot-test-autoconfigure-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.jayway.jsonpath",
+                    "name": "json-path",
+                    "version": "2.10.0",
+                    "artifacts": [
+                        {
+                            "name": "json-path",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\jayway\\jsonpath\\json-path\\2.10.0\\json-path-2.10.0.jar"
+                        },
+                        {
+                            "name": "json-path",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\com\\jayway\\jsonpath\\json-path\\2.10.0\\json-path-2.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-web-server",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-web-server",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-web-server\\4.0.2\\spring-boot-web-server-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-web-server",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-web-server\\4.0.2\\spring-boot-web-server-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.minidev",
+                    "name": "json-smart",
+                    "version": "2.6.0",
+                    "artifacts": [
+                        {
+                            "name": "json-smart",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\minidev\\json-smart\\2.6.0\\json-smart-2.6.0.jar"
+                        },
+                        {
+                            "name": "json-smart",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\minidev\\json-smart\\2.6.0\\json-smart-2.6.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-jackson",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-jackson",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jackson\\4.0.2\\spring-boot-jackson-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-jackson",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jackson\\4.0.2\\spring-boot-jackson-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.checkerframework",
+                    "name": "checker-qual",
+                    "version": "3.52.0",
+                    "artifacts": [
+                        {
+                            "name": "checker-qual",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.52.0\\checker-qual-3.52.0.jar"
+                        },
+                        {
+                            "name": "checker-qual",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.52.0\\checker-qual-3.52.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-jackson",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-jackson",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jackson\\4.0.2\\spring-boot-starter-jackson-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-jackson",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jackson\\4.0.2\\spring-boot-starter-jackson-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-validation",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-validation",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-validation\\4.0.2\\spring-boot-starter-validation-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-validation",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-validation\\4.0.2\\spring-boot-starter-validation-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-aop",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-aop",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aop\\7.0.3\\spring-aop-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-aop",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-aop\\7.0.3\\spring-aop-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.yaml",
+                    "name": "snakeyaml",
+                    "version": "2.5",
+                    "artifacts": [
+                        {
+                            "name": "snakeyaml",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\yaml\\snakeyaml\\2.5\\snakeyaml-2.5.jar"
+                        },
+                        {
+                            "name": "snakeyaml",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\yaml\\snakeyaml\\2.5\\snakeyaml-2.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter\\4.0.2\\spring-boot-starter-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter\\4.0.2\\spring-boot-starter-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mockito",
+                    "name": "mockito-core",
+                    "version": "5.20.0",
+                    "artifacts": [
+                        {
+                            "name": "mockito-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\mockito\\mockito-core\\5.20.0\\mockito-core-5.20.0.jar"
+                        },
+                        {
+                            "name": "mockito-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\mockito\\mockito-core\\5.20.0\\mockito-core-5.20.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hibernate.models",
+                    "name": "hibernate-models",
+                    "version": "1.0.1",
+                    "artifacts": [
+                        {
+                            "name": "hibernate-models",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\models\\hibernate-models\\1.0.1\\hibernate-models-1.0.1.jar"
+                        },
+                        {
+                            "name": "hibernate-models",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\models\\hibernate-models\\1.0.1\\hibernate-models-1.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.tomcat.embed",
+                    "name": "tomcat-embed-core",
+                    "version": "11.0.15",
+                    "artifacts": [
+                        {
+                            "name": "tomcat-embed-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-core\\11.0.15\\tomcat-embed-core-11.0.15.jar"
+                        },
+                        {
+                            "name": "tomcat-embed-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\apache\\tomcat\\embed\\tomcat-embed-core\\11.0.15\\tomcat-embed-core-11.0.15-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-persistence",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-persistence",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-persistence\\4.0.2\\spring-boot-persistence-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-persistence",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-persistence\\4.0.2\\spring-boot-persistence-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-tx",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-tx",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-tx\\7.0.3\\spring-tx-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-tx",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-tx\\7.0.3\\spring-tx-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.data",
+                    "name": "spring-data-jpa",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-data-jpa",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-jpa\\4.0.2\\spring-data-jpa-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-data-jpa",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-jpa\\4.0.2\\spring-data-jpa-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-data-jpa-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-data-jpa-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-data-jpa-test\\4.0.2\\spring-boot-starter-data-jpa-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-data-jpa-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-data-jpa-test\\4.0.2\\spring-boot-starter-data-jpa-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-security-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-security-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-security-test\\4.0.2\\spring-boot-security-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-security-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-security-test\\4.0.2\\spring-boot-security-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.persistence",
+                    "name": "jakarta.persistence-api",
+                    "version": "3.2.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.persistence-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\persistence\\jakarta.persistence-api\\3.2.0\\jakarta.persistence-api-3.2.0.jar"
+                        },
+                        {
+                            "name": "jakarta.persistence-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\persistence\\jakarta.persistence-api\\3.2.0\\jakarta.persistence-api-3.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.micrometer",
+                    "name": "micrometer-observation",
+                    "version": "1.16.2",
+                    "artifacts": [
+                        {
+                            "name": "micrometer-observation",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-observation\\1.16.2\\micrometer-observation-1.16.2.jar"
+                        },
+                        {
+                            "name": "micrometer-observation",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-observation\\1.16.2\\micrometer-observation-1.16.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-servlet",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-servlet",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-servlet\\4.0.2\\spring-boot-servlet-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-servlet",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-servlet\\4.0.2\\spring-boot-servlet-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.activation",
+                    "name": "jakarta.activation-api",
+                    "version": "2.1.4",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.activation-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\2.1.4\\jakarta.activation-api-2.1.4.jar"
+                        },
+                        {
+                            "name": "jakarta.activation-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\2.1.4\\jakarta.activation-api-2.1.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-params",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-params",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\6.0.2\\junit-jupiter-params-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-params",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\6.0.2\\junit-jupiter-params-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "commons-logging",
+                    "name": "commons-logging",
+                    "version": "1.3.5",
+                    "artifacts": [
+                        {
+                            "name": "commons-logging",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\commons-logging\\commons-logging\\1.3.5\\commons-logging-1.3.5.jar"
+                        },
+                        {
+                            "name": "commons-logging",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\commons-logging\\commons-logging\\1.3.5\\commons-logging-1.3.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-test\\4.0.2\\spring-boot-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-test\\4.0.2\\spring-boot-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.security",
+                    "name": "spring-security-crypto",
+                    "version": "7.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-security-crypto",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-crypto\\7.0.2\\spring-security-crypto-7.0.2.jar"
+                        },
+                        {
+                            "name": "spring-security-crypto",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\security\\spring-security-crypto\\7.0.2\\spring-security-crypto-7.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework",
+                    "name": "spring-test",
+                    "version": "7.0.3",
+                    "artifacts": [
+                        {
+                            "name": "spring-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-test\\7.0.3\\spring-test-7.0.3.jar"
+                        },
+                        {
+                            "name": "spring-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\spring-test\\7.0.3\\spring-test-7.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "tools.jackson.core",
+                    "name": "jackson-core",
+                    "version": "3.0.4",
+                    "artifacts": [
+                        {
+                            "name": "jackson-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-core\\3.0.4\\jackson-core-3.0.4.jar"
+                        },
+                        {
+                            "name": "jackson-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\tools\\jackson\\core\\jackson-core\\3.0.4\\jackson-core-3.0.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-engine",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-engine",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\6.0.2\\junit-jupiter-engine-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-engine",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\6.0.2\\junit-jupiter-engine-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hibernate.orm",
+                    "name": "hibernate-core",
+                    "version": "7.2.1.Final",
+                    "artifacts": [
+                        {
+                            "name": "hibernate-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\orm\\hibernate-core\\7.2.1.Final\\hibernate-core-7.2.1.Final.jar"
+                        },
+                        {
+                            "name": "hibernate-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\orm\\hibernate-core\\7.2.1.Final\\hibernate-core-7.2.1.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.bytebuddy",
+                    "name": "byte-buddy",
+                    "version": "1.17.8",
+                    "artifacts": [
+                        {
+                            "name": "byte-buddy",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\bytebuddy\\byte-buddy\\1.17.8\\byte-buddy-1.17.8.jar"
+                        },
+                        {
+                            "name": "byte-buddy",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\net\\bytebuddy\\byte-buddy\\1.17.8\\byte-buddy-1.17.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-devtools",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-devtools",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-devtools\\4.0.2\\spring-boot-devtools-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-devtools",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-devtools\\4.0.2\\spring-boot-devtools-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-tomcat",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-tomcat",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat\\4.0.2\\spring-boot-starter-tomcat-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-tomcat",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-tomcat\\4.0.2\\spring-boot-starter-tomcat-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.data",
+                    "name": "spring-data-commons",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-data-commons",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-commons\\4.0.2\\spring-data-commons-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-data-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\data\\spring-data-commons\\4.0.2\\spring-data-commons-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-jdbc",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-jdbc",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jdbc\\4.0.2\\spring-boot-jdbc-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-jdbc",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-jdbc\\4.0.2\\spring-boot-jdbc-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-core",
+                    "version": "1.5.25",
+                    "artifacts": [
+                        {
+                            "name": "logback-core",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-core\\1.5.25\\logback-core-1.5.25.jar"
+                        },
+                        {
+                            "name": "logback-core",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\ch\\qos\\logback\\logback-core\\1.5.25\\logback-core-1.5.25-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\6.0.2\\junit-jupiter-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-jupiter",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\6.0.2\\junit-jupiter-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.objenesis",
+                    "name": "objenesis",
+                    "version": "3.3",
+                    "artifacts": [
+                        {
+                            "name": "objenesis",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\objenesis\\objenesis\\3.3\\objenesis-3.3.jar"
+                        },
+                        {
+                            "name": "objenesis",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\objenesis\\objenesis\\3.3\\objenesis-3.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.transaction",
+                    "name": "jakarta.transaction-api",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.transaction-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\transaction\\jakarta.transaction-api\\2.0.1\\jakarta.transaction-api-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.transaction-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\jakarta\\transaction\\jakarta.transaction-api\\2.0.1\\jakarta.transaction-api-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-api",
+                    "version": "6.0.2",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\6.0.2\\junit-jupiter-api-6.0.2.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\6.0.2\\junit-jupiter-api-6.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-jackson-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-jackson-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jackson-test\\4.0.2\\spring-boot-starter-jackson-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-jackson-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-jackson-test\\4.0.2\\spring-boot-starter-jackson-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-api",
+                    "version": "2.0.17",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-api",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.17\\slf4j-api-2.0.17.jar"
+                        },
+                        {
+                            "name": "slf4j-api",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.17\\slf4j-api-2.0.17-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.micrometer",
+                    "name": "micrometer-commons",
+                    "version": "1.16.2",
+                    "artifacts": [
+                        {
+                            "name": "micrometer-commons",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-commons\\1.16.2\\micrometer-commons-1.16.2.jar"
+                        },
+                        {
+                            "name": "micrometer-commons",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\io\\micrometer\\micrometer-commons\\1.16.2\\micrometer-commons-1.16.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.awaitility",
+                    "name": "awaitility",
+                    "version": "4.3.0",
+                    "artifacts": [
+                        {
+                            "name": "awaitility",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\awaitility\\awaitility\\4.3.0\\awaitility-4.3.0.jar"
+                        },
+                        {
+                            "name": "awaitility",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\awaitility\\awaitility\\4.3.0\\awaitility-4.3.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-webmvc-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-webmvc-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-webmvc-test\\4.0.2\\spring-boot-webmvc-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-webmvc-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-webmvc-test\\4.0.2\\spring-boot-webmvc-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-starter-webmvc-test",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-starter-webmvc-test",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-webmvc-test\\4.0.2\\spring-boot-starter-webmvc-test-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-starter-webmvc-test",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-starter-webmvc-test\\4.0.2\\spring-boot-starter-webmvc-test-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hibernate.validator",
+                    "name": "hibernate-validator",
+                    "version": "9.0.1.Final",
+                    "artifacts": [
+                        {
+                            "name": "hibernate-validator",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\validator\\hibernate-validator\\9.0.1.Final\\hibernate-validator-9.0.1.Final.jar"
+                        },
+                        {
+                            "name": "hibernate-validator",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\hibernate\\validator\\hibernate-validator\\9.0.1.Final\\hibernate-validator-9.0.1.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot\\4.0.2\\spring-boot-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot\\4.0.2\\spring-boot-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.opentest4j",
+                    "name": "opentest4j",
+                    "version": "1.3.0",
+                    "artifacts": [
+                        {
+                            "name": "opentest4j",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar"
+                        },
+                        {
+                            "name": "opentest4j",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-resttestclient",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-resttestclient",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-resttestclient\\4.0.2\\spring-boot-resttestclient-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-resttestclient",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-resttestclient\\4.0.2\\spring-boot-resttestclient-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.springframework.boot",
+                    "name": "spring-boot-validation",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "spring-boot-validation",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-validation\\4.0.2\\spring-boot-validation-4.0.2.jar"
+                        },
+                        {
+                            "name": "spring-boot-validation",
+                            "classifier": "sources",
+                            "path": "C:\\Users\\jvpre\\.m2\\repository\\org\\springframework\\boot\\spring-boot-validation\\4.0.2\\spring-boot-validation-4.0.2-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}
