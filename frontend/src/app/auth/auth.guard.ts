@@ -1,16 +1,23 @@
 import { inject } from '@angular/core';
-import { Router, CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
+
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isAuthenticated()) {
-    return true;
+  if (!authService.isAuthenticated()) {
+    console.warn('Usuário não autenticado. Redirecionando para /login');
+    return router.createUrlTree(['/login']);
   }
 
-  // Se não estiver autenticado, redireciona para login
-  router.navigate(['/login']);
-  return false;
+  const requiredRole = route.data?.['role'] as 'ADMIN' | 'USER' | undefined;
+
+  if (requiredRole && !authService.hasRole(requiredRole)) {
+    console.warn('Usuário não possui permissão suficiente.');
+    return router.createUrlTree(['/unauthorized']);
+  }
+
+  return true;
 };

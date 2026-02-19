@@ -40,10 +40,19 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
-  }
+  const token = this.getToken();
+  if (!token) return false;
 
-  hasRole(role: 'ADMIN' | 'USER'): boolean {
+  try {
+    const decoded: any = jwtDecode(token);
+    const isExpired = decoded.exp * 1000 < Date.now();
+    return !isExpired;
+  } catch {
+    return false;
+  }
+}
+
+  hasRole(role: string): boolean {
     const user = this.currentUserSubject.value;
     return user?.role === role;
   }

@@ -7,19 +7,12 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,12 +29,22 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(name = "especialidade")
+    private String especialidade;
+
+    @Column(name = "area_interesse")
+    private String areaInteresse;
+
+    @Column(name = "tipo_mentoria")
+    private String tipoMentoria;
+
+    private boolean ativo = true; 
+
     @OneToOne(mappedBy = "user")
     private PerfilMentor perfilMentor;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Construtor padrão
     public User() {}
 
     public User(String name, String email, String password){
@@ -49,19 +52,28 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
     }
-    
+
+    public User(String name, String email, String password, Role role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    // --- LÓGICA DE AUTHORITIES (Unificada: Admin e Mentor) ---
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
-    	if (this.role == Role.ADMIN) {
-    		return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-    	}
-    	return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == Role.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        if (this.role == Role.MENTOR) {
+            return List.of(new SimpleGrantedAuthority("ROLE_MENTOR"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
+    public String getUsername() { return email; }
 
     @Override
     public boolean isAccountNonExpired() { return true; }
@@ -70,63 +82,39 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() { return true; }
     @Override
-    public boolean isEnabled() { return true; }
-    
-    // Getters and Setters
+    public boolean isEnabled() { return ativo; }
 
-    public Long getId() {
-        return id;
-    }
+    // --- GETTERS E SETTERS (Mantendo os seus e os dele) ---
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public String getEmail() {
-        return email;
-    }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getEspecialidade() { return especialidade; }
+    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getAreaInteresse() { return areaInteresse; }
+    public void setAreaInteresse(String areaInteresse) { this.areaInteresse = areaInteresse; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getTipoMentoria() { return tipoMentoria; }
+    public void setTipoMentoria(String tipoMentoria) { this.tipoMentoria = tipoMentoria; }
 
-    public Role getRole() {
-        return role;
-    }
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public PerfilMentor getPerfilMentor(){
-        return perfilMentor;
-    }
-
-    public void setPerfilMentor(PerfilMentor perfilMentor){
-        this.perfilMentor = perfilMentor;
-    }
+    public PerfilMentor getPerfilMentor(){ return perfilMentor; }
+    public void setPerfilMentor(PerfilMentor perfilMentor){ this.perfilMentor = perfilMentor; }
 }
