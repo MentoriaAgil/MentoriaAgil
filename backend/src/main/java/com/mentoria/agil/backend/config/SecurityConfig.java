@@ -41,23 +41,23 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                // Mantido: Configuração de CORS do colega
+                //  Configuração de CORS d
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        // Endpoints públicos (Seus e do Colega)
+                        // Endpoints públicos 
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/users/mentores").permitAll() // Sua Rota Liberada
+                        .requestMatchers(HttpMethod.GET, "/api/users/mentores").authenticated()
                         
-                        // Endpoints de mentor (Mantidos do colega)
+                        // Endpoints de mentor 
                         .requestMatchers(HttpMethod.POST, "/api/mentors").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/mentors").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/mentors/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/mentors/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/mentors/**").authenticated()
                         
-                        // Endpoints de admin (Mantidos do colega)
+                        // Endpoints de admin 
                         .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/admin/**").hasRole("ADMIN")
@@ -72,7 +72,6 @@ public class SecurityConfig {
                 .build();
     }
 
-    // Mantido: Método de CORS que o colega adicionou
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
