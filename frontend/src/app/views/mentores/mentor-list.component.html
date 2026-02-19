@@ -1,0 +1,40 @@
+<h2>Mentores Disponíveis</h2>
+
+<div class="filtros">
+
+  <select [(ngModel)]="filtros.areaPrincipal" (change)="onFiltroChange()">
+    <option value="">Área</option>
+    <option value="TI">TI</option>
+    <option value="SAUDE">Saúde</option>
+  </select>
+
+  <select [(ngModel)]="filtros.tipoMentoria" (change)="onFiltroChange()">
+    <option value="">Tipo</option>
+    <option value="ACADEMICA">Acadêmica</option>
+    <option value="PROFISSIONAL">Profissional</option>
+    <option value="AMBAS">Ambas</option>
+  </select>
+
+  <select [(ngModel)]="filtros.disponibilidade" (change)="onFiltroChange()">
+    <option value="">Disponibilidade</option>
+    <option value="DISPONIVEL">Disponível</option>
+    <option value="OCUPADO">Ocupado</option>
+  </select>
+
+  <select [(ngModel)]="filtros.ordenacao" (change)="onFiltroChange()">
+    <option value="">Ordenar</option>
+    <option value="nome">Ordem Alfabética</option>
+  </select>
+
+</div>
+
+<div *ngFor="let mentor of mentores" class="mentor-card">
+
+  <h3>{{ mentor.name }}</h3>
+  <p><strong>Especialização:</strong> {{ mentor.especializacao }}</p>
+  <p><strong>Resumo:</strong> {{ mentor.experiencias }}</p>
+  <p><strong>Área Principal:</strong> {{ mentor.areaPrincipal }}</p>
+  <p><strong>Tipo:</strong> {{ mentor.tipoMentoria }}</p>
+  <p><strong>Disponibilidade:</strong> {{ mentor.disponibilidade }}</p>
+
+</div>
