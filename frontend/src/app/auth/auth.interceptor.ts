@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -9,8 +9,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authService = inject(AuthService);
-    const token = authService.getToken();
+
+    const token = this.authService.getToken(); // ✅ mesma instância do login
 
     if (token) {
       const authReq = req.clone({
@@ -25,4 +25,3 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req);
   }
 }
-
