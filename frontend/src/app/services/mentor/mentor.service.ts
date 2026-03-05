@@ -8,7 +8,7 @@ import { MentorDTO } from '../../models/Mentor';
 })
 export class MentorService {
   private http = inject(HttpClient);
-  private readonly API_URL = 'http://localhost:8080/mentores';
+  private readonly API_URL = 'http://localhost:8080/api/mentors';
 
   createProfile(data: MentorDTO): Observable<any> {
     return this.http.post(this.API_URL, data);
