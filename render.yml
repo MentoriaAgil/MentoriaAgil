@@ -1,0 +1,55 @@
+services:
+  # --- BACKEND (Spring Boot) ---
+  - type: web
+    name: mentoria-agil-backend
+    runtime: docker
+    rootDir: backend
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SERVER_PORT
+        value: "8080"
+      # Montamos a URL JDBC separada das credenciais para evitar erro de Driver
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://${DB_HOST}/${DB_NAME}
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: mentoria-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: mentoria-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: mentoria-db
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: mentoria-db
+          property: database
+      - key: JWT_SECRET
+        generateValue: true # O Render gera uma chave segura automaticamente
+
+  # --- FRONTEND (Angular + Tailwind v4) ---
+  - type: web
+    name: mentoria-agil-frontend
+    runtime: docker
+    rootDir: frontend
+    plan: free
+    envVars:
+      - key: PORT
+        value: "8081"
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: mentoria-agil-backend
+          property: host
+
+# --- BANCO DE DADOS (PostgreSQL) ---
+databases:
+  - name: mentoria-db
+    plan: free
+    databaseName: mentoria_agil
+    user: mentoria_user
