@@ -2,7 +2,6 @@ package com.mentoria.agil.backend.service;
 
 import com.mentoria.agil.backend.dto.MentoriaRequestDTO;
 import com.mentoria.agil.backend.exception.BusinessException;
-import com.mentoria.agil.backend.interfaces.service.MentoriaRequestServiceInterface;
 import com.mentoria.agil.backend.model.MentoriaRequest;
 import com.mentoria.agil.backend.model.MentoriaStatus;
 import com.mentoria.agil.backend.model.Role;
@@ -33,7 +32,7 @@ class MentoriaRequestServiceTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private MentoriaRequestServiceInterface requestService;
+    private MentoriaRequestService requestService;
 
     private User mentorado;
     private User mentor;

@@ -2,7 +2,6 @@ package com.mentoria.agil.backend.service;
 
 import com.mentoria.agil.backend.dto.FeedbackRequestDTO;
 import com.mentoria.agil.backend.exception.BusinessException;
-import com.mentoria.agil.backend.interfaces.service.FeedbackServiceInterface;
 import com.mentoria.agil.backend.model.Feedback;
 import com.mentoria.agil.backend.model.Sessao;
 import com.mentoria.agil.backend.model.User;
@@ -33,7 +32,7 @@ class FeedbackServiceTest {
     private FeedbackRepository feedbackRepository;
 
     @InjectMocks
-    private FeedbackServiceInterface feedbackService;
+    private FeedbackService feedbackService;
 
     private User mentorado;
     private User mentor;
