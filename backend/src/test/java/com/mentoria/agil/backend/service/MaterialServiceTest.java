@@ -143,7 +143,7 @@ class MaterialServiceTest {
         when(userRepository.findById(2L)).thenReturn(Optional.of(mentorado1));
         when(userRepository.findById(3L)).thenReturn(Optional.empty()); // mentorado2 não encontrado
 
-        // Act e Assert
+        
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
                 () -> materialService.criarMaterial(mentor, dtoComMentorados));
 
@@ -171,7 +171,7 @@ class MaterialServiceTest {
         when(userRepository.findById(2L)).thenReturn(Optional.of(mentorado1));
         when(userRepository.findById(3L)).thenReturn(Optional.of(usuarioInvalido)); // Este tem role errada
 
-        // Act e Assert
+
         BusinessException exception = assertThrows(BusinessException.class,
                 () -> materialService.criarMaterial(mentor, dtoComMentorados));
 

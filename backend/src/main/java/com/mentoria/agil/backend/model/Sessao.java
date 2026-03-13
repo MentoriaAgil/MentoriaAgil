@@ -25,6 +25,9 @@ public class Sessao {
     @Column(name = "data_hora_fim", nullable = false)
     private LocalDateTime dataHoraFim;
 
+    @Column(length = 1000)
+    private String observacoes; 
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SessaoStatus status;
@@ -35,12 +38,13 @@ public class Sessao {
 
     public Sessao() {}
 
-    public Sessao(User mentor, User mentorado, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, SessaoStatus status) {
+    public Sessao(User mentor, User mentorado, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, SessaoStatus status, String observacoes) {
         this.mentor = mentor;
         this.mentorado = mentorado;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.status = status;
+        this.observacoes = observacoes;
     }
 
     public Long getId() {
@@ -97,5 +101,13 @@ public class Sessao {
 
     public void setRequest(MentoriaRequest request) {
         this.request = request;
+    }
+
+    public String getObservacoes(){
+        return this.observacoes;
+    }
+
+    public void setObservacoes(String observacoes){
+        this.observacoes = observacoes;
     }
 }

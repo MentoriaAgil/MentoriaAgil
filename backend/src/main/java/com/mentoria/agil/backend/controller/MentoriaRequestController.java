@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/mentorships")
+@RequestMapping("/api/mentorias")
 public class MentoriaRequestController {
     private final MentoriaRequestServiceInterface requestService;
 

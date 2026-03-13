@@ -9,5 +9,6 @@ import java.util.List;
 public interface MaterialMentoradoRepository extends JpaRepository<MaterialMentorado, Long> {
     List<MaterialMentorado> findByMentorado(User mentorado);
     List<MaterialMentorado> findByMaterial(Material material);
+    List<MaterialMentorado> findByMentoradoAndMaterial_Mentor(User mentorado, User mentor);
     boolean existsByMaterialAndMentorado(Material material, User mentorado);
 }
