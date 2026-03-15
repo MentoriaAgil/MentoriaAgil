@@ -32,6 +32,16 @@ public class Sessao {
     @Column(nullable = false)
     private SessaoStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "formato")
+    private FormatoSessao formato;
+
+    @Column(name = "link_reuniao")
+    private String linkReuniao; // ONLINE
+
+    @Column(name = "endereco")
+    private String endereco; // PRESENCIAL
+
     @OneToOne
     @JoinColumn(name = "mentoria_request_id")
     private MentoriaRequest request; // opcional
@@ -109,5 +119,29 @@ public class Sessao {
 
     public void setObservacoes(String observacoes){
         this.observacoes = observacoes;
+    }
+
+    public FormatoSessao getFormato() { 
+        return formato; 
+    }
+
+    public void setFormato(FormatoSessao formato) { 
+        this.formato = formato; 
+    }
+
+    public String getLinkReuniao() { 
+        return linkReuniao; 
+    }
+
+    public void setLinkReuniao(String linkReuniao) { 
+        this.linkReuniao = linkReuniao; 
+    }
+
+    public String getEndereco() { 
+        return endereco; 
+    }
+
+    public void setEndereco(String endereco) { 
+        this.endereco = endereco; 
     }
 }
