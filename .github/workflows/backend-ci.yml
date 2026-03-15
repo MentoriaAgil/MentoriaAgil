@@ -8,6 +8,10 @@ on:
     branches: [ main, desenvolvimento, correcao-bugs ]
 
 jobs:
+  defaults:
+      run:
+        working-directory: backend
+        
   build:
     runs-on: ubuntu-latest
 
