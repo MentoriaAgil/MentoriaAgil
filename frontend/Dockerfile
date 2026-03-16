@@ -8,7 +8,6 @@ COPY tsconfig*.json .
 COPY src/environments ./src/environments
 COPY src ./src
 
-RUN find src/environments -maxdepth 2
 RUN npx ng build --configuration=production
 
 FROM nginx:alpine
