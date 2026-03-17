@@ -15,10 +15,6 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-
-  "emitDecoratorMetadata": true,
-  "experimentalDecorators": true,
-  "moduleResolution": "node"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -4,7 +4,7 @@ import { PerfilMentor } from '../../models/PerfilMentor';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { SolicitacaoMentoriaModalComponent } from './mentoria/solicitacao-mentoria-modal.component';
+import { SolicitacaoMentoriaModalComponent } from '../mentoria/solicitacao-mentoria-modal.component';
 
 @Component({
   selector: 'app-mentor-list',
