@@ -26,13 +26,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class AuthControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @MockitoBean private AuthFacadeInterface authFacade;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private AuthFacadeInterface authFacade;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @Test
     void deveFazerLogin() throws Exception {

@@ -28,13 +28,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class SessaoMaterialControllerTest {
 
-    @Autowired private MockMvc mockMvc;
-    @MockitoBean private SessaoRepository sessaoRepository;
-    @MockitoBean private MaterialRepository materialRepository;
-    @MockitoBean private SessaoMaterialRepository sessaoMaterialRepository;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @Autowired
+    private MockMvc mockMvc;
+    @MockitoBean
+    private SessaoRepository sessaoRepository;
+    @MockitoBean
+    private MaterialRepository materialRepository;
+    @MockitoBean
+    private SessaoMaterialRepository sessaoMaterialRepository;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     private User mentor;
 
@@ -44,8 +51,7 @@ class SessaoMaterialControllerTest {
         mentor.setId(1L);
         // Garante que o controlador consiga fazer o cast para User
         SecurityContextHolder.getContext().setAuthentication(
-            new UsernamePasswordAuthenticationToken(mentor, null)
-        );
+                new UsernamePasswordAuthenticationToken(mentor, null));
     }
 
     @Test
@@ -68,8 +74,10 @@ class SessaoMaterialControllerTest {
     @Test
     @DisplayName("Deve falhar quando o usuário não é o mentor da sessão")
     void deveFalharUsuarioNaoMentor() throws Exception {
-        User outroMentor = new User(); outroMentor.setId(99L);
-        Sessao sessao = new Sessao(); sessao.setMentor(outroMentor);
+        User outroMentor = new User();
+        outroMentor.setId(99L);
+        Sessao sessao = new Sessao();
+        sessao.setMentor(outroMentor);
 
         when(sessaoRepository.findById(1L)).thenReturn(Optional.of(sessao));
         when(materialRepository.findById(1L)).thenReturn(Optional.of(new Material()));
@@ -81,8 +89,10 @@ class SessaoMaterialControllerTest {
     @Test
     @DisplayName("Não deve criar novo vínculo se o material já estiver associado")
     void naoDeveDuplicarVinculo() throws Exception {
-        Sessao sessao = new Sessao(); sessao.setMentor(mentor);
-        Material material = new Material(); material.setId(10L);
+        Sessao sessao = new Sessao();
+        sessao.setMentor(mentor);
+        Material material = new Material();
+        material.setId(10L);
         SessaoMaterial vinculo = new SessaoMaterial(sessao, material);
 
         when(sessaoRepository.findById(1L)).thenReturn(Optional.of(sessao));
@@ -98,7 +108,8 @@ class SessaoMaterialControllerTest {
     @Test
     @DisplayName("Deve vincular material com sucesso quando não existe vínculo")
     void deveVincularComSucesso() throws Exception {
-        Sessao sessao = new Sessao(); sessao.setMentor(mentor);
+        Sessao sessao = new Sessao();
+        sessao.setMentor(mentor);
         when(sessaoRepository.findById(1L)).thenReturn(Optional.of(sessao));
         when(materialRepository.findById(1L)).thenReturn(Optional.of(new Material()));
         when(sessaoMaterialRepository.findBySessaoId(1L)).thenReturn(List.of());

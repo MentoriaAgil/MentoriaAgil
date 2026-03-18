@@ -38,13 +38,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class PerfilMentorControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @MockitoBean private PerfilMentorServiceInterface perfilService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private PerfilMentorServiceInterface perfilService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     private User mentorMock;
     private PerfilMentor perfilMock;
@@ -63,8 +68,8 @@ class PerfilMentorControllerTest {
 
         // Configura o contexto de segurança padrão com autoridades
         SecurityContextHolder.getContext().setAuthentication(
-            new UsernamePasswordAuthenticationToken(mentorMock, null, List.of(new SimpleGrantedAuthority("ROLE_MENTOR")))
-        );
+                new UsernamePasswordAuthenticationToken(mentorMock, null,
+                        List.of(new SimpleGrantedAuthority("ROLE_MENTOR"))));
     }
 
     @Test
@@ -132,14 +137,14 @@ class PerfilMentorControllerTest {
 
         // FIX: Usa as autoridades reais do objeto User configurado
         SecurityContextHolder.getContext().setAuthentication(
-            new UsernamePasswordAuthenticationToken(admin, null, List.of(new SimpleGrantedAuthority("ROLE_ADMIN")))
-        );
+                new UsernamePasswordAuthenticationToken(admin, null,
+                        List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
 
         when(perfilService.buscarPorId(10L)).thenReturn(perfilMock);
 
         mockMvc.perform(delete("/api/mentors/10"))
                 .andExpect(status().isNoContent());
-        
+
         verify(perfilService).deletar(10L);
     }
 
@@ -149,7 +154,8 @@ class PerfilMentorControllerTest {
         when(perfilService.buscarPorId(10L)).thenReturn(perfilMock);
         when(perfilService.atualizar(any(), any())).thenReturn(perfilMock);
 
-        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Nome", "mentor@teste.com", "senha123", "Java", "5 anos", "Eng");
+        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Nome", "mentor@teste.com", "senha123", "Java",
+                "5 anos", "Eng");
 
         mockMvc.perform(put("/api/mentors/10")
                 .contentType(MediaType.APPLICATION_JSON)

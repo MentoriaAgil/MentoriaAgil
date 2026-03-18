@@ -330,14 +330,14 @@ class MaterialServiceTest {
         verify(userRepository, never()).findById(anyLong());
     }
 
-@Test
-@DisplayName("Deve criar material quando lista de mentoradosIds está vazia")
-void criarMaterialListaVazia() {
-    dtoComMentorados.setMentoradosIds(java.util.Collections.emptyList()); // Garante que é uma lista vazia, não null
-    when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+    @Test
+    @DisplayName("Deve criar material quando lista de mentoradosIds está vazia")
+    void criarMaterialListaVazia() {
+        dtoComMentorados.setMentoradosIds(java.util.Collections.emptyList()); // Garante que é uma lista vazia, não null
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
 
-    Material result = materialService.criarMaterial(mentor, dtoComMentorados);
-    assertNotNull(result);
-    verify(userRepository, never()).findById(anyLong());
-}
+        Material result = materialService.criarMaterial(mentor, dtoComMentorados);
+        assertNotNull(result);
+        verify(userRepository, never()).findById(anyLong());
+    }
 }

@@ -30,13 +30,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class AgendamentoControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-    @MockitoBean private AgendamentoServiceInterface agendamentoService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private AgendamentoServiceInterface agendamentoService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @BeforeEach
     void setUp() {

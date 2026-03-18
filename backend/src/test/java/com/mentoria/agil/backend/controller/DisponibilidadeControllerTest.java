@@ -37,13 +37,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class DisponibilidadeControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-    @MockitoBean private DisponibilidadeServiceInterface disponibilidadeService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private DisponibilidadeServiceInterface disponibilidadeService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @BeforeEach
     void setUp() {
@@ -79,11 +84,14 @@ class DisponibilidadeControllerTest {
     @Test
     @DisplayName("Deve listar disponibilidades convertendo para DTO com sucesso")
     void deveListarDisponibilidadesComSucesso() throws Exception {
-        User mentor = new User(); mentor.setId(1L);
-        Disponibilidade disp = new Disponibilidade(mentor, LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusHours(1));
-        
+        User mentor = new User();
+        mentor.setId(1L);
+        Disponibilidade disp = new Disponibilidade(mentor, LocalDateTime.now().plusDays(1),
+                LocalDateTime.now().plusDays(1).plusHours(1));
+
         when(userRepository.findById(1L)).thenReturn(Optional.of(mentor));
-        // Garantir que a lista não seja vazia para cobrir a linha do .map(DisponibilidadeResponseDTO::new)
+        // Garantir que a lista não seja vazia para cobrir a linha do
+        // .map(DisponibilidadeResponseDTO::new)
         when(disponibilidadeService.listarDisponibilidadesFuturas(any())).thenReturn(List.of(disp));
 
         mockMvc.perform(get("/api/disponibilidades/mentor/1"))

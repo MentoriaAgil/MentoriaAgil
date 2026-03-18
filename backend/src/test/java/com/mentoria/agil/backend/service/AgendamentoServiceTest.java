@@ -255,17 +255,17 @@ class AgendamentoServiceTest {
         }
 
         @Test
-@DisplayName("Deve falhar quando link online for apenas espaços")
-void agendarOnlineLinkInvalido() {
-    when(userRepository.findById(any())).thenReturn(Optional.of(mentor));
-    when(disponibilidadeRepository.findDisponiveisNoIntervalo(any(), any(), any()))
-            .thenReturn(List.of(disponibilidade));
-    
-    dto.setFormato(FormatoSessao.ONLINE);
-    dto.setLinkReuniao("   ");
+        @DisplayName("Deve falhar quando link online for apenas espaços")
+        void agendarOnlineLinkInvalido() {
+                when(userRepository.findById(any())).thenReturn(Optional.of(mentor));
+                when(disponibilidadeRepository.findDisponiveisNoIntervalo(any(), any(), any()))
+                                .thenReturn(List.of(disponibilidade));
 
-    assertThrows(BusinessException.class, () -> agendamentoService.agendar(mentorado, dto));
-}
+                dto.setFormato(FormatoSessao.ONLINE);
+                dto.setLinkReuniao("   ");
+
+                assertThrows(BusinessException.class, () -> agendamentoService.agendar(mentorado, dto));
+        }
 
         @Test
         void deveCriarAgendamentoComSucesso() {

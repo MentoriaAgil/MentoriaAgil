@@ -26,19 +26,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest { // Removido public
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @MockitoBean private UserServiceInterface userService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private UserServiceInterface userService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @Test
     @DisplayName("Deve listar mentores ordenados")
     void listarMentoresOrdenados() throws Exception {
         MentorResponseDTO m1 = new MentorResponseDTO("Zico", "Esp", "Exp", "Area", "Tipo", "Disp");
         MentorResponseDTO m2 = new MentorResponseDTO("Abel", "Esp", "Exp", "Area", "Tipo", "Disp");
-        
+
         when(userService.listarMentores(any(), any(), any())).thenReturn(new ArrayList<>(List.of(m1, m2)));
 
         mockMvc.perform(get("/api/users/mentores").param("ordem", "alfabetica"))

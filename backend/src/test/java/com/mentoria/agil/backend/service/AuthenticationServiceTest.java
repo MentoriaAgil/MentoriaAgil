@@ -46,9 +46,9 @@ public class AuthenticationServiceTest {
 
     @BeforeEach
     void setUp() {
-    	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        
+
         userMock = new User();
         userMock.setId(1L);
         userMock.setEmail("usuario@email.com");
@@ -68,7 +68,7 @@ public class AuthenticationServiceTest {
 
         assertNotNull(tokenGerado, "O token retornado não deveria ser nulo");
         assertEquals("eyJh...mocked_token", tokenGerado);
-        
+
         verify(userService, times(1)).buscarPorEmail(loginDTO.email());
         verify(passwordEncoder, times(1)).matches(loginDTO.password(), userMock.getPassword());
         verify(jwtService, times(1)).generateToken(userMock);
@@ -106,13 +106,13 @@ public class AuthenticationServiceTest {
         verify(passwordEncoder, times(1)).matches(loginDTO.password(), userMock.getPassword());
         verify(jwtService, never()).generateToken(any(User.class));
     }
-    
+
     @Test
     @DisplayName("Deve falhar na validação se o e-mail estiver em branco ou nulo")
     void validacaoEmailEmBranco() {
         LoginDTO dtoSemEmail = new LoginDTO("", "senha123");
         Set<ConstraintViolation<LoginDTO>> violacoes = validator.validate(dtoSemEmail);
-        
+
         assertFalse(violacoes.isEmpty(), "Deveria haver erro de validação para e-mail vazio");
     }
 
@@ -121,7 +121,7 @@ public class AuthenticationServiceTest {
     void validacaoSenhaEmBranco() {
         LoginDTO dtoSemSenha = new LoginDTO("usuario@email.com", "   ");
         Set<ConstraintViolation<LoginDTO>> violacoes = validator.validate(dtoSemSenha);
-        
+
         assertFalse(violacoes.isEmpty(), "Deveria haver erro de validação para senha vazia");
     }
 }

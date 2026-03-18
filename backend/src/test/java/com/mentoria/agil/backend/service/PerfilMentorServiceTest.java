@@ -60,8 +60,7 @@ public class PerfilMentorServiceTest {
 
         perfilMentorRequestDTO = new PerfilMentorRequestDTO(
                 "Hagamenon Silva", "hagamenon@email.com", "senha123",
-                "Desenvolvimento Backend", "5 anos no mercado", "Ciência da Computação"
-        );
+                "Desenvolvimento Backend", "5 anos no mercado", "Ciência da Computação");
 
         usuarioVisitante = new User();
         usuarioVisitante.setId(1L);
@@ -77,6 +76,7 @@ public class PerfilMentorServiceTest {
 
         usuarioMentor.setPerfilMentor(perfilMentor);
     }
+
     @Test
     @DisplayName("Deve salvar perfil de mentor com sucesso e alterar a role do usuário")
     void criarPerfilMentorSucesso() {
@@ -197,7 +197,8 @@ public class PerfilMentorServiceTest {
 
         perfilMentorRequestDTO.setName("A");
         Set<ConstraintViolation<PerfilMentorRequestDTO>> violationsCurto = validator.validate(perfilMentorRequestDTO);
-        assertTrue(violationsCurto.stream().anyMatch(v -> v.getMessage().equals("Nome deve ter entre 3 e 100 caracteres")));
+        assertTrue(violationsCurto.stream()
+                .anyMatch(v -> v.getMessage().equals("Nome deve ter entre 3 e 100 caracteres")));
     }
 
     @Test
@@ -223,7 +224,8 @@ public class PerfilMentorServiceTest {
 
         perfilMentorRequestDTO.setPassword("12345");
         Set<ConstraintViolation<PerfilMentorRequestDTO>> violationsCurta = validator.validate(perfilMentorRequestDTO);
-        assertTrue(violationsCurta.stream().anyMatch(v -> v.getMessage().equals("Senha deve ter no mínimo 6 caracteres")));
+        assertTrue(
+                violationsCurta.stream().anyMatch(v -> v.getMessage().equals("Senha deve ter no mínimo 6 caracteres")));
     }
 
     @Test
@@ -231,7 +233,7 @@ public class PerfilMentorServiceTest {
     void validacaoEspecializacaoEmBranco() {
         perfilMentorRequestDTO.setEspecializacao("");
         Set<ConstraintViolation<PerfilMentorRequestDTO>> violations = validator.validate(perfilMentorRequestDTO);
-        
+
         assertFalse(violations.isEmpty());
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("Especialização é obrigatória")));
     }
@@ -241,7 +243,7 @@ public class PerfilMentorServiceTest {
     void validacaoExperienciaEmBranco() {
         perfilMentorRequestDTO.setExperiencias("");
         Set<ConstraintViolation<PerfilMentorRequestDTO>> violations = validator.validate(perfilMentorRequestDTO);
-        
+
         assertFalse(violations.isEmpty());
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("Experiência é obrigatória")));
     }

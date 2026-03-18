@@ -33,13 +33,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class MaterialControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @MockitoBean private MaterialServiceInterface materialService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private MaterialServiceInterface materialService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @BeforeEach
     void setUp() {
@@ -50,24 +55,24 @@ class MaterialControllerTest {
     }
 
     @Test
-void deveCriarMaterial() throws Exception {
-    MaterialRequestDTO dto = new MaterialRequestDTO();
-    dto.setTitulo("Aula 1");
-    dto.setDescricao("Descrição");
-    dto.setConteudo("http://link.com");
-    dto.setTipo(TipoMaterial.LINK);
+    void deveCriarMaterial() throws Exception {
+        MaterialRequestDTO dto = new MaterialRequestDTO();
+        dto.setTitulo("Aula 1");
+        dto.setDescricao("Descrição");
+        dto.setConteudo("http://link.com");
+        dto.setTipo(TipoMaterial.LINK);
 
-    Material material = new Material();
-    material.setMentor(new User());
-    material.setTipo(TipoMaterial.LINK);
+        Material material = new Material();
+        material.setMentor(new User());
+        material.setTipo(TipoMaterial.LINK);
 
-    when(materialService.criarMaterial(any(), any())).thenReturn(material);
+        when(materialService.criarMaterial(any(), any())).thenReturn(material);
 
-    mockMvc.perform(post("/api/materiais")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
-            .andExpect(status().isCreated());
-}
+        mockMvc.perform(post("/api/materiais")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isCreated());
+    }
 
     @Test
     void deveListarMateriaisDoMentorado() throws Exception {

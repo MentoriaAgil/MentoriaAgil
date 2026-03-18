@@ -28,13 +28,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 class MentoriaRequestControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @MockitoBean private MentoriaRequestServiceInterface requestService;
-    @MockitoBean private UserRepository userRepository;
-    @MockitoBean private TokenServiceInterface tokenService;
-    @MockitoBean private TokenBlacklistService tokenBlacklistService;
+    @MockitoBean
+    private MentoriaRequestServiceInterface requestService;
+    @MockitoBean
+    private UserRepository userRepository;
+    @MockitoBean
+    private TokenServiceInterface tokenService;
+    @MockitoBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @Test
     void deveListarSolicitacoesPendentes() throws Exception {
@@ -49,7 +54,7 @@ class MentoriaRequestControllerTest {
     void deveAtualizarStatusDaSolicitacao() throws Exception {
         User mentor = new User();
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(mentor, null));
-        
+
         MentoriaRequestUpdateDTO dto = new MentoriaRequestUpdateDTO();
         dto.setStatus(MentoriaStatus.ACCEPTED);
 
@@ -67,24 +72,25 @@ class MentoriaRequestControllerTest {
     }
 
     @Test
-void deveCriarSolicitacao() throws Exception {
-    User mentorado = new User(); mentorado.setId(1L);
-    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(mentorado, null));
+    void deveCriarSolicitacao() throws Exception {
+        User mentorado = new User();
+        mentorado.setId(1L);
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(mentorado, null));
 
-    MentoriaRequestDTO dto = new MentoriaRequestDTO();
-    dto.setMentorId(2L);
-    dto.setMessage("Quero mentoria");
+        MentoriaRequestDTO dto = new MentoriaRequestDTO();
+        dto.setMentorId(2L);
+        dto.setMessage("Quero mentoria");
 
-    MentoriaRequest request = new MentoriaRequest();
-    request.setMentor(new User());
-    request.setMentorado(mentorado);
-    request.setStatus(MentoriaStatus.PENDING);
+        MentoriaRequest request = new MentoriaRequest();
+        request.setMentor(new User());
+        request.setMentorado(mentorado);
+        request.setStatus(MentoriaStatus.PENDING);
 
-    when(requestService.createRequest(any(), any())).thenReturn(request);
+        when(requestService.createRequest(any(), any())).thenReturn(request);
 
-    mockMvc.perform(post("/api/mentorias/request")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(dto)))
-            .andExpect(status().isCreated());
-}
+        mockMvc.perform(post("/api/mentorias/request")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isCreated());
+    }
 }

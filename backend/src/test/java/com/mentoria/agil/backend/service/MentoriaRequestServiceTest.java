@@ -257,17 +257,17 @@ class MentoriaRequestServiceTest {
         verify(requestRepository, never()).save(any());
     }
 
-@Test
-void deveAceitarSolicitacaoComSucesso() {
-    MentoriaRequestUpdateDTO updateDto = new MentoriaRequestUpdateDTO();
-    updateDto.setStatus(MentoriaStatus.ACCEPTED);
+    @Test
+    void deveAceitarSolicitacaoComSucesso() {
+        MentoriaRequestUpdateDTO updateDto = new MentoriaRequestUpdateDTO();
+        updateDto.setStatus(MentoriaStatus.ACCEPTED);
 
-    when(requestRepository.findById(10L)).thenReturn(Optional.of(requestPendente));
-    when(requestRepository.save(any(MentoriaRequest.class))).thenAnswer(inv -> inv.getArgument(0));
+        when(requestRepository.findById(10L)).thenReturn(Optional.of(requestPendente));
+        when(requestRepository.save(any(MentoriaRequest.class))).thenAnswer(inv -> inv.getArgument(0));
 
-    MentoriaRequest resultado = requestService.atualizarStatus(10L, mentor, updateDto);
+        MentoriaRequest resultado = requestService.atualizarStatus(10L, mentor, updateDto);
 
-    assertNotNull(resultado);
-    assertEquals(MentoriaStatus.ACCEPTED, resultado.getStatus());
-}
+        assertNotNull(resultado);
+        assertEquals(MentoriaStatus.ACCEPTED, resultado.getStatus());
+    }
 }
