@@ -154,4 +154,6 @@ O sistema encontra-se implantado na plataforma Render:
 
 ### Actions Status Badge
 [![CI Backend - Mentoria Ágil](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/backend-ci.yml/badge.svg?branch=main)](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/backend-ci.yml)
+
+[![Frontend CI - Mentoria Ágil](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/frontend-ci.yml)
 ---
