@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ import com.mentoria.agil.backend.dto.UserRequestDTO;
 import com.mentoria.agil.backend.exception.EmailJaCadastradoException;
 import com.mentoria.agil.backend.model.Role;
 import com.mentoria.agil.backend.model.User;
+import com.mentoria.agil.backend.repository.PerfilMentorRepository;
 import com.mentoria.agil.backend.repository.UserRepository;
 
 import jakarta.validation.ConstraintViolation;
@@ -38,6 +40,9 @@ public class UserServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private PerfilMentorRepository perfilMentorRepository;
 
     @InjectMocks
     private UserService userService;
@@ -61,7 +66,9 @@ public class UserServiceTest {
         userMock.setName("João Silva");
         userMock.setEmail("joao@email.com");
         userMock.setPassword("senhaCriptografada");
-        userMock.setRole(Role.VISITANTE);
+        userMock.setAtivo(true);
+        userMock.setAreaInteresse("TI");
+        userMock.setTipoMentoria("Individual");
     }
 
     @Test
@@ -193,5 +200,49 @@ public class UserServiceTest {
 
         assertFalse(violations.isEmpty());
         assertTrue(violations.stream().anyMatch(v -> v.getMessage().equals("A senha é obrigatória")));
+    }
+
+    @Test
+    @DisplayName("Deve listar mentores aplicando todos os filtros de busca")
+    void listarMentoresComSucesso() {
+        User user = new User();
+        user.setName("Mentor ABC");
+        user.setAtivo(true);
+        user.setAreaInteresse("Tecnologia");
+        user.setTipoMentoria("Individual");
+
+        com.mentoria.agil.backend.model.PerfilMentor perfil = new com.mentoria.agil.backend.model.PerfilMentor();
+        perfil.setUser(user);
+        perfil.setEspecializacao("Java");
+
+        when(perfilMentorRepository.findAll()).thenReturn(List.of(perfil));
+
+        var resultado = userService.listarMentores("Java", "Tecnologia", "Individual");
+
+        assertFalse(resultado.isEmpty());
+        assertEquals("Mentor ABC", resultado.get(0).nome());
+    }
+
+    @Test
+    @DisplayName("Deve testar todas as combinações de filtros nulos na listagem")
+    void listarMentoresFiltrosVariados() {
+        User user = new User();
+        user.setAtivo(true);
+        user.setName("Mentor Teste");
+        user.setAreaInteresse("TI");
+        user.setTipoMentoria("Carreira");
+
+        com.mentoria.agil.backend.model.PerfilMentor perfil = new com.mentoria.agil.backend.model.PerfilMentor();
+        perfil.setUser(user);
+        perfil.setEspecializacao("Java");
+
+        when(perfilMentorRepository.findAll()).thenReturn(List.of(perfil));
+
+        assertFalse(userService.listarMentores(null, "TI", "Carreira").isEmpty());
+        assertFalse(userService.listarMentores("Java", null, "Carreira").isEmpty());
+        assertFalse(userService.listarMentores("Java", "TI", null).isEmpty());
+
+        user.setAtivo(false);
+        assertTrue(userService.listarMentores(null, null, null).isEmpty());
     }
 }

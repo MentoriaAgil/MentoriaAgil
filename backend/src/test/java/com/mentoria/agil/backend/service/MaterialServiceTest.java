@@ -11,6 +11,7 @@ import com.mentoria.agil.backend.repository.MaterialRepository;
 import com.mentoria.agil.backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -135,7 +136,6 @@ class MaterialServiceTest {
 
     @Test
     void deveLancarExcecaoQuandoMentoradoNaoEncontrado() {
-        // Ajuste o DTO para conter apenas o ID que não será encontrado
         dtoComMentorados.setMentoradosIds(java.util.List.of(3L));
 
         when(materialRepository.save(any(Material.class))).thenAnswer(invocation -> {
@@ -144,7 +144,6 @@ class MaterialServiceTest {
             return material;
         });
 
-        // Mock apenas para o ID 3L, que retornará vazio
         when(userRepository.findById(3L)).thenReturn(Optional.empty());
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class,
@@ -152,10 +151,8 @@ class MaterialServiceTest {
 
         assertTrue(exception.getMessage().contains("Mentorado não encontrado com ID: 3"));
 
-        // Verificações
         verify(materialRepository, times(1)).save(any(Material.class));
         verify(userRepository, times(1)).findById(3L);
-        // Agora o never() passará, pois o loop falha antes de chegar aqui
         verify(materialMentoradoRepository, never()).existsByMaterialAndMentorado(any(), any());
         verify(materialMentoradoRepository, never()).save(any());
     }
@@ -166,8 +163,6 @@ class MaterialServiceTest {
         usuarioInvalido.setId(4L);
         usuarioInvalido.setRole(Role.USER);
 
-        // Ajuste: use apenas o ID que causará o erro para evitar chamadas parciais ao
-        // repositório
         dtoComMentorados.setMentoradosIds(List.of(4L));
 
         when(materialRepository.save(any(Material.class))).thenAnswer(invocation -> {
@@ -251,4 +246,98 @@ class MaterialServiceTest {
         assertTrue(materiais.isEmpty());
         verify(materialMentoradoRepository, times(1)).findByMentorado(mentorado1);
     }
+
+    @Test
+    @DisplayName("Deve processar lista de mentorados misturando associações novas e existentes")
+    void deveProcessarMentoradosMistos() {
+        // forca o loop a rodar para dois mentorados, um que ja existe e outro nao
+        dtoComMentorados.setMentoradosIds(Arrays.asList(2L, 3L));
+
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(mentorado1));
+        when(userRepository.findById(3L)).thenReturn(Optional.of(mentorado2));
+
+        // mentorado 1 ja tem vinculo, branch false, Mentorado 2 nao tem, branch true
+        when(materialMentoradoRepository.existsByMaterialAndMentorado(any(), eq(mentorado1))).thenReturn(true);
+        when(materialMentoradoRepository.existsByMaterialAndMentorado(any(), eq(mentorado2))).thenReturn(false);
+
+        materialService.criarMaterial(mentor, dtoComMentorados);
+
+        // verifica que o save foi chamado apenas para o mentorado que nao tinha vinculo
+        verify(materialMentoradoRepository, times(1)).save(argThat(m -> m.getMentorado().equals(mentorado2)));
+    }
+
+    @Test
+    @DisplayName("Deve criar material quando a lista de mentoradosIds é null")
+    void criarMaterialListaNull() {
+        // configura dto com lista null para testar o curto-circuito do if
+        dtoComMentorados.setMentoradosIds(null);
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+
+        Material result = materialService.criarMaterial(mentor, dtoComMentorados);
+
+        assertNotNull(result);
+        // verifica que o cod nao tentou iterar sobre a lista null
+        verify(userRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    @DisplayName("Deve ignorar associação quando o mentorado já possui o material")
+    void deveIgnorarAssociacaoExistente() {
+        dtoComMentorados.setMentoradosIds(List.of(2L));
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(mentorado1));
+
+        // simula que o vinculo ja existe, branch !exists como false
+        when(materialMentoradoRepository.existsByMaterialAndMentorado(any(), eq(mentorado1))).thenReturn(true);
+
+        materialService.criarMaterial(mentor, dtoComMentorados);
+
+        verify(materialMentoradoRepository, never()).save(any(MaterialMentorado.class));
+    }
+
+    @Test
+    @DisplayName("Deve ignorar associação quando o mentorado já possui o material (Branch coverage)")
+    void deveIgnorarAssociacaoQuandoJaExiste() {
+        // Configura um DTO com um mentorado
+        dtoComMentorados.setMentoradosIds(List.of(2L));
+
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(mentorado1));
+
+        // Simula que a associação JÁ EXISTE (fazendo o !exists ser false)
+        when(materialMentoradoRepository.existsByMaterialAndMentorado(any(), eq(mentorado1))).thenReturn(true);
+
+        Material resultado = materialService.criarMaterial(mentor, dtoComMentorados);
+
+        assertNotNull(resultado);
+        // Verifica que o save da associação NUNCA foi chamado
+        verify(materialMentoradoRepository, never()).save(any(MaterialMentorado.class));
+    }
+
+    @Test
+    @DisplayName("Deve criar material quando a lista de IDs é nula (Curto-circuito do if)")
+    void deveCriarMaterialComListaIdsNula() {
+        // Testa especificamente a primeira parte da condição: dto.getMentoradosIds() !=
+        // null como false
+        dtoComMentorados.setMentoradosIds(null);
+        when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+
+        Material result = materialService.criarMaterial(mentor, dtoComMentorados);
+
+        assertNotNull(result);
+        // Garante que o loop nem sequer começou
+        verify(userRepository, never()).findById(anyLong());
+    }
+
+@Test
+@DisplayName("Deve criar material quando lista de mentoradosIds está vazia")
+void criarMaterialListaVazia() {
+    dtoComMentorados.setMentoradosIds(java.util.Collections.emptyList()); // Garante que é uma lista vazia, não null
+    when(materialRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+
+    Material result = materialService.criarMaterial(mentor, dtoComMentorados);
+    assertNotNull(result);
+    verify(userRepository, never()).findById(anyLong());
+}
 }

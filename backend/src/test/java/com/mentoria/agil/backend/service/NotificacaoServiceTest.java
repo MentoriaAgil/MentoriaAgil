@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.time.LocalDateTime;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,12 +49,11 @@ class NotificacaoServiceTest {
 
     @Test
     void deveLogarNotificacaoParaSessaoOnline() {
-        notificacaoService.notificarAgendamento(mentor, mentorado, sessaoOnline);
-        // Se chegou aqui, não houve exceção
+        assertDoesNotThrow(() -> notificacaoService.notificarAgendamento(mentor, mentorado, sessaoOnline));
     }
 
     @Test
     void deveLogarNotificacaoParaSessaoPresencial() {
-        notificacaoService.notificarAgendamento(mentor, mentorado, sessaoPresencial);
+        assertDoesNotThrow(() -> notificacaoService.notificarAgendamento(mentor, mentorado, sessaoPresencial));
     }
 }

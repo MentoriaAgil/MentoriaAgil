@@ -98,7 +98,7 @@ class FeedbackServiceTest {
 
     @Test
     void deveLancarExcecaoQuandoSessaoNaoTerminou() {
-        sessao.setDataHoraFim(LocalDateTime.now().plusHours(1)); 
+        sessao.setDataHoraFim(LocalDateTime.now().plusHours(1));
         when(sessaoRepository.findById(sessaoId)).thenReturn(Optional.of(sessao));
 
         BusinessException ex = assertThrows(BusinessException.class,
@@ -120,21 +120,21 @@ class FeedbackServiceTest {
 
     @Test
     void deveCalcularMediaDoMentor() {
-        User mentor = new User();
-        mentor.setId(20L);
-        when(feedbackRepository.calcularMediaNotasPorMentor(mentor)).thenReturn(4.5);
+        User mentorLocal = new User();
+        mentorLocal.setId(20L);
+        when(feedbackRepository.calcularMediaNotasPorMentor(mentorLocal)).thenReturn(4.5);
 
-        Double media = feedbackService.calcularMediaMentor(mentor);
+        Double media = feedbackService.calcularMediaMentor(mentorLocal);
         assertEquals(4.5, media);
     }
 
     @Test
     void deveRetornarZeroQuandoNaoHaFeedbacks() {
-        User mentor = new User();
-        mentor.setId(20L);
-        when(feedbackRepository.calcularMediaNotasPorMentor(mentor)).thenReturn(null);
+        User mentorLocal = new User();
+        mentorLocal.setId(20L);
+        when(feedbackRepository.calcularMediaNotasPorMentor(mentorLocal)).thenReturn(null);
 
-        Double media = feedbackService.calcularMediaMentor(mentor);
+        Double media = feedbackService.calcularMediaMentor(mentorLocal);
         assertEquals(0.0, media);
     }
 }
