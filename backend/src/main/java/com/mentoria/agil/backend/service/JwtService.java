@@ -1,15 +1,11 @@
 package com.mentoria.agil.backend.service;
 
 import java.util.Date;
-
 import javax.crypto.SecretKey;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.mentoria.agil.backend.interfaces.service.TokenServiceInterface;
 import com.mentoria.agil.backend.model.User;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -43,8 +39,8 @@ public class JwtService implements TokenServiceInterface {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
-        } catch (JwtException e) {
-            return null;
+        } catch (JwtException _) {
+            return null; 
         }
     }
 
@@ -57,6 +53,6 @@ public class JwtService implements TokenServiceInterface {
     @Override
     public Date getExpirationFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
-        return claims != null ? claims.getExpiration() : new Date(0);
+        return (claims != null) ? claims.getExpiration() : new Date(0);
     }
 }

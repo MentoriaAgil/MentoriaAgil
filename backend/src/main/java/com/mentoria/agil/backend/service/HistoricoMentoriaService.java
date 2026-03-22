@@ -14,10 +14,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class HistoricoMentoriaService implements HistoricoMentoriaServiceInterface{
+public class HistoricoMentoriaService implements HistoricoMentoriaServiceInterface {
 
     private final SessaoRepository sessaoRepository;
     private final UserRepository userRepository;
@@ -46,13 +45,12 @@ public class HistoricoMentoriaService implements HistoricoMentoriaServiceInterfa
 
         return sessoes.stream()
                 .map(sessao -> {
-                    // Busca os materiais de apoio associados a uma sessão específica
                     List<Material> materiais = sessaoMaterialRepository.findBySessaoId(sessao.getId())
                             .stream()
                             .map(SessaoMaterial::getMaterial)
-                            .collect(Collectors.toList());
+                            .toList();
                     return new HistoricoSessaoDTO(sessao, materiais);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 }

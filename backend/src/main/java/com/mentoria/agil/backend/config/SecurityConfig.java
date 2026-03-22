@@ -46,11 +46,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                        
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/health").permitAll()
                         
-                        .requestMatchers(HttpMethod.POST, "/api/mentors/**").hasRole("MENTOR")
+                        .requestMatchers(HttpMethod.POST, "/api/mentors/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/mentors/**").hasRole("MENTOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/mentors/**").hasAnyRole("MENTOR", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/mentors/**").authenticated()

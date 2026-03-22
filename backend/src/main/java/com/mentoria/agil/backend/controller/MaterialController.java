@@ -7,7 +7,6 @@ import com.mentoria.agil.backend.model.Material;
 import com.mentoria.agil.backend.model.User;
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,12 +44,11 @@ public class MaterialController {
 
         User mentorado = (User) userDetails;
 
-        List<Material> materiais = materialService.listarMateriaisPorMentorado(mentorado);
-        List<MaterialResponseDTO> response = materiais.stream()
+        List<MaterialResponseDTO> response = materialService.listarMateriaisPorMentorado(mentorado)
+                .stream()
                 .map(MaterialResponseDTO::new)
-                .collect(Collectors.toList());
+                .toList();
+
         return ResponseEntity.ok(response);
-
     }
-
 }

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MentoriaService } from './mentoria.service';
-import { SolicitacaoMentoriaRequest } from '../models/SolicitacaoMentoriaRequest';
-import { SolicitacaoMentoriaResponse } from '../models/SolicitacaoMentoriaResponse';
+import { SolicitacaoMentoriaRequest } from '@app/models/SolicitacaoMentoriaRequest';
+import { SolicitacaoMentoriaResponse } from '@app/models/SolicitacaoMentoriaResponse';
 
 describe('MentoriaService', () => {
   let service: MentoriaService;
@@ -61,7 +61,7 @@ describe('MentoriaService', () => {
     };
 
     service.solicitarMentoria(mockRequest).subscribe({
-      next: () => fail('Esperava um erro, mas obteve sucesso'),
+      next: () => expect.fail('Esperava um erro, mas obteve sucesso'),
       error: (error) => {
         expect(error.status).toBe(500);
       }

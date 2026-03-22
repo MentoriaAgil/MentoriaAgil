@@ -5,6 +5,7 @@ import com.mentoria.agil.backend.model.User;
 
 public class PerfilMentorListResponseDTO {
     private Long id;
+    private Long userId;
     private String name;
     private String email;
     private String especializacao;
@@ -15,6 +16,7 @@ public class PerfilMentorListResponseDTO {
     public PerfilMentorListResponseDTO(PerfilMentor perfil) {
         User user = perfil.getUser();
         this.id = perfil.getId();
+        this.userId = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.especializacao = perfil.getEspecializacao();
@@ -37,6 +39,14 @@ public class PerfilMentorListResponseDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {

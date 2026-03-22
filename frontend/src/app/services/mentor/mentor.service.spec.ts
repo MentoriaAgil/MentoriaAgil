@@ -34,7 +34,7 @@ describe('MentorService', () => {
 
     service.createProfile(mockMentor).subscribe();
 
-    const req = httpMock.expectOne('http://localhost:8080/mentores');
+    const req = httpMock.expectOne(req => req.url.endsWith('/api/mentors'));
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockMentor);
 

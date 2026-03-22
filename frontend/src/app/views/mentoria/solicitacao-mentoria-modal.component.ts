@@ -1,13 +1,13 @@
 import { Component, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MentoriaService } from '../../services/mentoria.service';
 import { PerfilMentor } from '../../models/PerfilMentor';
+import { MentoriaService } from '../../services/mentoria/mentoria.service';
 
 @Component({
   selector: 'app-solicitacao-mentoria-modal',
@@ -22,13 +22,13 @@ import { PerfilMentor } from '../../models/PerfilMentor';
     MatSnackBarModule
   ],
   templateUrl: './solicitacao-mentoria-modal.component.html',
-  styleUrls: ['./solicitacao-mentoria-modal.css']
+  styleUrls: ['./solicitacao-mentoria-modal.component.css']
 })
 export class SolicitacaoMentoriaModalComponent {
-  private readonly fb = inject(FormBuilder);
-  private readonly mentoriaService = inject(MentoriaService);
-  private readonly snackBar = inject(MatSnackBar);
-  private readonly dialogRef = inject(MatDialogRef<SolicitacaoMentoriaModalComponent>);
+  private readonly fb: FormBuilder = inject(FormBuilder);
+  private readonly mentoriaService: MentoriaService = inject(MentoriaService);
+  private readonly snackBar: MatSnackBar = inject(MatSnackBar);
+  private readonly dialogRef: MatDialogRef<SolicitacaoMentoriaModalComponent> = inject(MatDialogRef<SolicitacaoMentoriaModalComponent>);
 
   loading = false;
 
@@ -47,7 +47,7 @@ export class SolicitacaoMentoriaModalComponent {
 
     this.loading = true;
     const request = {
-      mentorId: this.data.mentor.id,
+      mentorId: (this.data.mentor as any).userId || this.data.mentor.id, 
       message: this.form.value.message!
     };
 
@@ -56,7 +56,7 @@ export class SolicitacaoMentoriaModalComponent {
         this.snackBar.open('Solicitação enviada com sucesso!', 'Fechar', { duration: 3000 });
         this.dialogRef.close(true);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.loading = false;
         const mensagem = err.error?.error || 'Erro ao enviar solicitação. Tente novamente.';
         this.snackBar.open(mensagem, 'Fechar', { duration: 5000 });

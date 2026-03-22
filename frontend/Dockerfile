@@ -1,15 +1,18 @@
 FROM node:20-alpine AS build
 WORKDIR /app
+
 COPY package*.json ./
+
 RUN npm ci
-COPY angular.json .
-COPY tsconfig*.json .
-COPY src ./src
-RUN npm run build -- --configuration=production
+
+COPY . .
+
+RUN npx ng build --configuration=production
 
 FROM nginx:alpine
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 COPY --from=build /app/dist/mentoria-agil/browser /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 

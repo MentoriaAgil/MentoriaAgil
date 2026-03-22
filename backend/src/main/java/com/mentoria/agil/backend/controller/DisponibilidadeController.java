@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/disponibilidades")
@@ -35,8 +34,7 @@ public class DisponibilidadeController {
         User mentor = (User) userDetails;
 
         Disponibilidade disp = disponibilidadeService.cadastrar(mentor, dto);
-        DisponibilidadeResponseDTO response = new DisponibilidadeResponseDTO(disp);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(new DisponibilidadeResponseDTO(disp), HttpStatus.CREATED);
     }
 
     @GetMapping("/mentor/{mentorId}")
@@ -44,10 +42,11 @@ public class DisponibilidadeController {
         User mentor = userRepository.findById(mentorId)
                 .orElseThrow(() -> new EntityNotFoundException("Mentor não encontrado"));
 
-        List<Disponibilidade> disponibilidades = disponibilidadeService.listarDisponibilidadesFuturas(mentor);
-        List<DisponibilidadeResponseDTO> dtos = disponibilidades.stream()
+        List<DisponibilidadeResponseDTO> response = disponibilidadeService.listarDisponibilidadesFuturas(mentor)
+                .stream()
                 .map(DisponibilidadeResponseDTO::new)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(dtos);
+                .toList();
+
+        return ResponseEntity.ok(response);
     }
 }

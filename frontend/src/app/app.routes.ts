@@ -48,8 +48,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./views/dashboard/Dashboard')
-        .then(m => m.Dashboard)
+        loadComponent: () => import('./views/dashboard/mentor/DashboardMentor')
+        .then(m => m.DashboardMentor),
+        canActivate: [AuthGuard],
+        data: { role: 'MENTOR' } // Restringe ao Mentor
       },
       {
         path: 'mentores',
@@ -57,7 +59,7 @@ export const routes: Routes = [
           import('./views/mentores/mentor-list.component')
             .then(m => m.MentorListComponent),
         canActivate: [AuthGuard],
-        data: { role: 'MENTOR' }
+        data: { role: 'MENTOR' } // Conforme solicitado, restrito ao Mentor
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]

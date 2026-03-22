@@ -14,4 +14,14 @@ export class MentoriaService {
   solicitarMentoria(dados: SolicitacaoMentoriaRequest): Observable<SolicitacaoMentoriaResponse> {
     return this.http.post<SolicitacaoMentoriaResponse>(`${this.apiUrl}/request`, dados);
   }
+
+  // Busca solicitações pendentes para o mentor logado
+  getSolicitacoesRecebidas(): Observable<SolicitacaoMentoriaResponse[]> {
+    return this.http.get<SolicitacaoMentoriaResponse[]>(`${this.apiUrl}/pendentes`);
+  }
+
+  // Envia a decisão (ACCEPTED ou REJECTED)
+  atualizarStatus(id: number, status: 'ACCEPTED' | 'REJECTED', justificativa?: string): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${id}`, { status, justificativa });
+  }
 }

@@ -34,7 +34,8 @@ public class TokenBlacklistServiceTest {
 
         tokenBlacklistService.invalidateToken(bearerToken);
 
-        assertTrue(tokenBlacklistService.isTokenBlacklisted(rawToken), "O token limpo (sem Bearer) deve estar na blacklist");
+        assertTrue(tokenBlacklistService.isTokenBlacklisted(rawToken),
+                "O token limpo (sem Bearer) deve estar na blacklist");
         verify(jwtService, times(1)).getExpirationFromToken(rawToken);
     }
 
@@ -49,25 +50,27 @@ public class TokenBlacklistServiceTest {
     @Test
     @DisplayName("Deve limpar tokens expirados do mapa ao tentar invalidar um novo token")
     void cleanExpiredTokensSuccess() {
-        long pastTime = System.currentTimeMillis() - 3600000; 
+        long pastTime = System.currentTimeMillis() - 3600000;
         Date pastExpiration = new Date(pastTime);
 
         when(jwtService.getExpirationFromToken(rawToken)).thenReturn(pastExpiration);
 
         tokenBlacklistService.invalidateToken(bearerToken);
 
-        assertFalse(tokenBlacklistService.isTokenBlacklisted(rawToken), "O token recém-adicionado mas já expirado deve ser limpo imediatamente");
+        assertFalse(tokenBlacklistService.isTokenBlacklisted(rawToken),
+                "O token recém-adicionado mas já expirado deve ser limpo imediatamente");
     }
-    
+
     @Test
     @DisplayName("Deve checar corretamente se o token está na blacklist mesmo com espaços em branco")
     void isTokenBlacklistedWithSpaces() {
         long futureTime = System.currentTimeMillis() + 3600000;
         Date expirationDate = new Date(futureTime);
         when(jwtService.getExpirationFromToken(rawToken)).thenReturn(expirationDate);
-        
+
         tokenBlacklistService.invalidateToken(bearerToken);
 
-        assertTrue(tokenBlacklistService.isTokenBlacklisted("   " + rawToken + "   "), "O método isTokenBlacklisted deve usar o trim() no token");
+        assertTrue(tokenBlacklistService.isTokenBlacklisted("   " + rawToken + "   "),
+                "O método isTokenBlacklisted deve usar o trim() no token");
     }
 }

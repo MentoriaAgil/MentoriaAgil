@@ -16,13 +16,13 @@ import com.mentoria.agil.backend.model.Role;
 import com.mentoria.agil.backend.model.User;
 
 @ExtendWith(MockitoExtension.class)
-public class JwtServiceTest {
+class JwtServiceTest {
 
     @InjectMocks
     private JwtService jwtService;
 
     private User usuarioTeste;
-    
+
     private final String SECRET_KEY = "uma-chave-secreta-bem-grande-para-testes-do-jwt-service";
 
     @BeforeEach
@@ -48,7 +48,7 @@ public class JwtServiceTest {
     @DisplayName("Deve extrair o assunto (email) correto de um token válido")
     void getSubjectFromTokenSucesso() {
         String token = jwtService.generateToken(usuarioTeste);
-        
+
         String subject = jwtService.getSubjectFromToken(token);
 
         assertNotNull(subject);
@@ -59,7 +59,7 @@ public class JwtServiceTest {
     @DisplayName("Deve retornar null ao tentar extrair o assunto de um token com formato ou assinatura inválida")
     void getSubjectFromTokenInvalido() {
         String tokenInvalido = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.invalido.assinatura";
-        
+
         String subject = jwtService.getSubjectFromToken(tokenInvalido);
 
         assertNull(subject, "Deve retornar null caso ocorra uma JwtException");
@@ -69,7 +69,7 @@ public class JwtServiceTest {
     @DisplayName("Deve extrair a data de expiração corretamente de um token válido")
     void getExpirationFromTokenSucesso() {
         String token = jwtService.generateToken(usuarioTeste);
-        
+
         Date expiration = jwtService.getExpirationFromToken(token);
 
         assertNotNull(expiration);
@@ -77,13 +77,10 @@ public class JwtServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar a data inicial (Date 0) ao tentar extrair a expiração de um token inválido")
+    @DisplayName("Deve retornar Date(0) para expiração de token inválido")
     void getExpirationFromTokenInvalido() {
-        String tokenInvalido = "token.totalmente.invalido";
-        
+        String tokenInvalido = "token.invalido";
         Date expiration = jwtService.getExpirationFromToken(tokenInvalido);
-
-        assertNotNull(expiration);
-        assertEquals(new Date(0), expiration, "Deve retornar Date(0) caso ocorra uma JwtException");
+        assertEquals(new Date(0), expiration);
     }
 }

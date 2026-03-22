@@ -8,7 +8,8 @@ public class MentoriaRequestListResponseDTO {
     private Long id;
     private Long mentoradoId;
     private String mentoradoNome;
-    private String mensagem;
+    private String mentoradoEmail;
+    private String message;
     private MentoriaStatus status;
     private LocalDateTime dataSolicitacao;
 
@@ -16,56 +17,65 @@ public class MentoriaRequestListResponseDTO {
         this.id = request.getId();
         this.mentoradoId = request.getMentorado().getId();
         this.mentoradoNome = request.getMentorado().getName();
-        this.mensagem = request.getMessage();
+        this.mentoradoEmail = request.getMentorado().getEmail();
+        this.message = request.getMessage();
         this.status = request.getStatus();
         this.dataSolicitacao = request.getCreatedAt();
     }
 
-    public Long getId() { 
-        return id; 
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Long id) { 
-        this.id = id; 
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getMentoradoId() { 
-        return mentoradoId; 
+    public Long getMentoradoId() {
+        return mentoradoId;
     }
 
-    public void setMentoradoId(Long mentoradoId) { 
-        this.mentoradoId = mentoradoId; 
+    public void setMentoradoId(Long mentoradoId) {
+        this.mentoradoId = mentoradoId;
     }
 
-    public String getMentoradoNome() { 
-        return mentoradoNome; 
+    public String getMentoradoNome() {
+        return mentoradoNome;
     }
 
-    public void setMentoradoNome(String mentoradoNome) { 
-        this.mentoradoNome = mentoradoNome; 
+    public void setMentoradoNome(String mentoradoNome) {
+        this.mentoradoNome = mentoradoNome;
     }
 
-    public String getMensagem() { 
-        return mensagem; 
+    public String getMentoradoEmail() {
+        return mentoradoEmail;
     }
 
-    public void setMensagem(String mensagem) { 
-        this.mensagem = mensagem; 
+    public void setMentoradoEmail(String mentoradoEmail) {
+        this.mentoradoEmail = mentoradoEmail;
     }
 
-    public MentoriaStatus getStatus() { 
-        return status; 
+    public String getMensagem() {
+        return message;
     }
 
-    public void setStatus(MentoriaStatus status) { 
-        this.status = status; 
+    public void setMensagem(String mensagem) {
+        this.message = mensagem;
     }
 
-    public LocalDateTime getDataSolicitacao() { 
-        return dataSolicitacao; 
+    public MentoriaStatus getStatus() {
+        return status;
     }
 
-    public void setDataSolicitacao(LocalDateTime dataSolicitacao) { 
-        this.dataSolicitacao = dataSolicitacao; 
+    public void setStatus(MentoriaStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDataSolicitacao() {
+        return dataSolicitacao;
+    }
+
+    public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
     }
 }

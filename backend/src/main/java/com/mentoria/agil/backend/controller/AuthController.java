@@ -16,7 +16,7 @@ import com.mentoria.agil.backend.interfaces.facade.AuthFacadeInterface;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     
     private final AuthFacadeInterface authFacade;

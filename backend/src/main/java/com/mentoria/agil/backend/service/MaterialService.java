@@ -13,14 +13,12 @@ import com.mentoria.agil.backend.repository.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-
-import java.util.stream.Collectors;
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MaterialService implements MaterialServiceInterface{
+public class MaterialService implements MaterialServiceInterface {
     
     private final MaterialRepository materialRepository;
     private final UserRepository userRepository;
@@ -34,7 +32,6 @@ public class MaterialService implements MaterialServiceInterface{
 
     @Transactional
     public Material criarMaterial(User mentor, MaterialRequestDTO dto){
-
         Material material = new Material();
         material.setTitulo(dto.getTitulo());
         material.setDescricao(dto.getDescricao());
@@ -44,11 +41,8 @@ public class MaterialService implements MaterialServiceInterface{
 
         materialRepository.save(material);
 
-        // Associa, quando possível, o material aos mentorados passados no dto
-        if (dto.getMentoradosIds() != null && !dto.getMentoradosIds().isEmpty()) {
-
-            for (Long mentoradoId : dto.getMentoradosIds()) {
-
+        Optional.ofNullable(dto.getMentoradosIds()).ifPresent(ids -> {
+            for (Long mentoradoId : ids) {
                 User mentorado = userRepository.findById(mentoradoId)
                         .orElseThrow(() -> new EntityNotFoundException("Mentorado não encontrado com ID: " + mentoradoId));
 
@@ -60,20 +54,16 @@ public class MaterialService implements MaterialServiceInterface{
                     MaterialMentorado assoc = new MaterialMentorado(material, mentorado);
                     materialMentoradoRepository.save(assoc);
                 }
-
             }
-
-        }
+        });
         
         return material;
-
     }
 
     public List<Material> listarMateriaisPorMentorado(User mentorado){
         return materialMentoradoRepository.findByMentorado(mentorado)
                 .stream()
                 .map(MaterialMentorado::getMaterial)
-                .collect(Collectors.toList());
+                .toList();
     }
-
 }

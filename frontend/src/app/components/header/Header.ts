@@ -1,7 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop'; // Importante para transformar Observable em Signal
 
 @Component({
   selector: 'app-header',
@@ -10,21 +11,16 @@ import { AuthService } from '../../auth/auth.service';
   templateUrl: './header.html',
 })
 export class Header {
+  private readonly router = inject(Router);
+  public readonly authService = inject(AuthService);
+
   isMenuOpen = signal(false);
 
-  user = computed(() => {
-    let currentUser;
-    this.authService.currentUser$.subscribe(u => currentUser = u);
-    return currentUser;
-  });
-
-  constructor(
-    private router: Router,
-    public authService: AuthService,
-  ) {}
+  // TRANSFORMAÇÃO CORRETA: O Signal 'user' será atualizado automaticamente
+  user = toSignal(this.authService.currentUser$);
 
   toggleMenu() {
-    this.isMenuOpen.set(!this.isMenuOpen());
+    this.isMenuOpen.update(v => !v);
   }
 
   logout() {

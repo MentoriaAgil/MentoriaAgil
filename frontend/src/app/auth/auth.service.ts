@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, map, tap, catchError, of } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { User } from '../models/User';
-import { environment } from '../../enviroments/enviroment';
+import { environment } from '../../environments/environment';
 
 export type UserRole = 'ADMIN' | 'MENTOR' | 'USER' | 'VISITANTE';
 

@@ -142,9 +142,18 @@ backend/src/main/resources/application-prod.properties
 O sistema encontra-se implantado na plataforma Render:
 
 ### 🔗 Backend
-https://mentoria-agil-backend.onrender.com
+[https://mentoria-agil-backend-1f3r.onrender.com](https://mentoria-agil-backend-1f3r.onrender.com)
 
 ### 🎨 Frontend
-https://URL-DO-FRONTEND.onrender.com
+[![STATUS](https://img.shields.io/badge/STATUS-ONLINE-green)](https://stats.uptimerobot.com/u5ZyVIiXk0)
+<br>
+[https://mentoria-agil-frontend.onrender.com](https://mentoria-agil-frontend.onrender.com)
 
+### Service Status Page
+#### https://stats.uptimerobot.com/u5ZyVIiXk0
+
+### Actions Status Badge
+[![CI Backend - Mentoria Ágil](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/backend-ci.yml/badge.svg?branch=main)](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/backend-ci.yml)
+
+[![Frontend CI - Mentoria Ágil](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/ThaysonScript/MentoriaAgil/actions/workflows/frontend-ci.yml)
 ---

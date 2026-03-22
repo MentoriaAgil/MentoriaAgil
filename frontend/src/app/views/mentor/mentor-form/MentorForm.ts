@@ -32,19 +32,18 @@ export class MentorFormComponent {
   }
 
   enviar() {
-    if (this.mentorForm.valid) {
-      const formValue = this.mentorForm.value;
-      const payload = {
-        ...formValue,
-        skills: typeof formValue.skills === 'string'
-          ? formValue.skills.split(',').map(s => s.trim()).filter(s => s !== "")
-          : []
-      };
+  if (this.mentorForm.valid) {
+    const formValue = this.mentorForm.value;
+    const payload = {
+      especializacao: formValue.specialty,
+      experiencias: formValue.experienceYears + " anos. Bio: " + formValue.bio,
+      formacao: formValue.skills,
+    };
 
-      this.mentorService.createProfile(payload as any).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
-        error: (err) => this.errorMessage = "Erro ao salvar perfil: " + (err.error?.message || "Servidor offline")
-      });
-    }
+    this.mentorService.createProfile(payload as any).subscribe({
+      next: () => this.router.navigate(['/dashboard']),
+      error: (err) => this.errorMessage = "Erro ao salvar perfil: " + (err.error?.message || "Erro no servidor")
+    });
   }
+}
 }

@@ -1,7 +1,6 @@
 package com.mentoria.agil.backend.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,16 +52,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<MentorResponseDTO> listarMentores(String especialidade, String areaAtuacao, String tipoMentoria) {
-    
-        return perfilMentorRepository.findAll().stream()
-                .filter(perfil -> perfil.getUser().isAtivo())
-
-                .filter(perfil -> especialidade == null || perfil.getEspecializacao().equalsIgnoreCase(especialidade))
-                .filter(perfil -> areaAtuacao == null || perfil.getUser().getAreaInteresse().equalsIgnoreCase(areaAtuacao))
-                .filter(perfil -> tipoMentoria == null || perfil.getUser().getTipoMentoria().equalsIgnoreCase(tipoMentoria))
-
-                .map(MentorResponseDTO::new)
-                .collect(Collectors.toList());
-    }
+public List<MentorResponseDTO> listarMentores(String especialidade, String areaAtuacao, String tipoMentoria) {
+    return perfilMentorRepository.findAll().stream()
+            .filter(perfil -> perfil.getUser().isAtivo())
+            .filter(perfil -> especialidade == null || perfil.getEspecializacao().equalsIgnoreCase(especialidade))
+            .filter(perfil -> areaAtuacao == null || perfil.getUser().getAreaInteresse().equalsIgnoreCase(areaAtuacao))
+            .filter(perfil -> tipoMentoria == null || perfil.getUser().getTipoMentoria().equalsIgnoreCase(tipoMentoria))
+            .map(MentorResponseDTO::new)
+            .toList();
+}
 }

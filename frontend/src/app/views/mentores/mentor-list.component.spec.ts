@@ -4,6 +4,7 @@ import { PerfilMentorService } from '../../services/perfil-mentor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { SolicitacaoMentoriaModalComponent } from '../mentoria/solicitacao-mentoria-modal.component';
 
 describe('MentorListComponent', () => {
   let component: MentorListComponent;

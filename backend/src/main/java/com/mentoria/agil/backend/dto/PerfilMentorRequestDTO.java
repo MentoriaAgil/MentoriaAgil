@@ -1,22 +1,8 @@
 package com.mentoria.agil.backend.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public class PerfilMentorRequestDTO {
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(min = 3, max = 100, message = "Nome deve ter entre 3 e 100 caracteres")
-    private String name;
-    
-    @NotBlank(message = "Email é obrigatório")
-    @Email(message = "Email inválido")
-    private String email;
-    
-    @NotBlank(message = "Senha é obrigatória")
-    @Size(min = 6, message = "Senha deve ter no mínimo 6 caracteres")
-    private String password;
-    
     @NotBlank(message = "Especialização é obrigatória")
     private String especializacao;
     
@@ -27,39 +13,10 @@ public class PerfilMentorRequestDTO {
 
     public PerfilMentorRequestDTO() {}
 
-    public PerfilMentorRequestDTO(String name, String email, String password, 
-                           String especializacao, String experiencias, String formacao) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public PerfilMentorRequestDTO(String especializacao, String experiencias, String formacao) { 
         this.especializacao = especializacao;
         this.experiencias = experiencias;
         this.formacao = formacao;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEspecializacao() {

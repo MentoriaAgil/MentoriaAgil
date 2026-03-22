@@ -32,6 +32,14 @@
 		<sonar.organization>mentoria-agil</sonar.organization>
 		<sonar.projectKey>MentoriaAgil_MentoriaAgil</sonar.projectKey>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.exclusions>
+			src/main/java/com/mentoria/agil/backend/model/**,
+			src/main/java/com/mentoria/agil/backend/config/**,
+			src/main/java/com/mentoria/agil/backend/dto/**,
+			src/main/java/com/mentoria/agil/backend/exception/**,
+			src/main/java/com/mentoria/agil/backend/interfaces/**,
+			src/main/java/com/mentoria/agil/backend/BackendApplication.java
+		</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -120,6 +128,16 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.datafaker</groupId>
+			<artifactId>datafaker</artifactId>
+			<version>2.4.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -128,12 +146,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+
 			<plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>5.0.0.4389</version>
-        </plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.0.0.4389</version>
+			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -141,9 +159,7 @@
 				<configuration>
 					<excludes>
 						<exclude>com/mentoria/agil/backend/model/**</exclude>
-						<exclude>com/mentoria/agil/backend/controller/**</exclude>
 						<exclude>com/mentoria/agil/backend/config/**</exclude>
-						<exclude>com/mentoria/agil/backend/facade/**</exclude>
 						<exclude>com/mentoria/agil/backend/BackendApplication.class</exclude>
 						<exclude>**/interfaces/**</exclude>
 						<exclude>**/dto/**</exclude>
@@ -178,6 +194,11 @@
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
 											<minimum>0.70</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
 										</limit>
 									</limits>
 								</rule>
