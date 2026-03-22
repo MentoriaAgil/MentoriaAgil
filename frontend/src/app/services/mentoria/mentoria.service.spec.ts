@@ -35,13 +35,11 @@ describe('MentoriaService', () => {
     const mockResponse: SolicitacaoMentoriaResponse = {
       id: 10,
       mentoradoId: 5,
-      mentoradoName: 'João',
-      mentorId: 1,
-      mentorName: 'Maria',
-      message: 'Quero aprender Java',
+      mentoradoNome: 'João',
+      mensagem: 'Quero aprender Java',
       status: 'PENDING',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      mentoradoEmail: '',
+      dataSolicitacao: ''
     };
 
     service.solicitarMentoria(mockRequest).subscribe(response => {
