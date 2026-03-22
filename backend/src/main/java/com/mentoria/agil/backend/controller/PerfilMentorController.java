@@ -13,7 +13,9 @@ import com.mentoria.agil.backend.dto.response.PerfilMentorResponseDTO;
 import com.mentoria.agil.backend.interfaces.service.PerfilMentorServiceInterface;
 import com.mentoria.agil.backend.model.PerfilMentor;
 import com.mentoria.agil.backend.model.User;
+import com.mentoria.agil.backend.repository.UserRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -21,26 +23,30 @@ import jakarta.validation.Valid;
 public class PerfilMentorController {
     
     private final PerfilMentorServiceInterface mentorService;
+    private final UserRepository userRepository;
 
-    public PerfilMentorController(PerfilMentorServiceInterface mentorService) {
+    public PerfilMentorController(PerfilMentorServiceInterface mentorService, UserRepository userRepository) {
         this.mentorService = mentorService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
-    public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(@Valid @RequestBody PerfilMentorRequestDTO request) {
-        UserDetails userDetails = getUsuarioAutenticado();
-        User userAutenticado = (User) userDetails;
+public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(@Valid @RequestBody PerfilMentorRequestDTO request) {
+    UserDetails userDetails = getUsuarioAutenticado();
+    
+    // Procura o utilizador gerido pelo JPA no repositório em vez de fazer cast direto
+    User userAutenticado = userRepository.findByEmail(userDetails.getUsername())
+            .orElseThrow(() -> new EntityNotFoundException("Utilizador não encontrado"));
 
-        PerfilMentor perfilSalvo = mentorService.criarPerfilMentor(
-            userAutenticado,
-            request.getEspecializacao(),
-            request.getExperiencias(),
-            request.getFormacao()
-        );
+    PerfilMentor perfilSalvo = mentorService.criarPerfilMentor(
+        userAutenticado,
+        request.getEspecializacao(),
+        request.getExperiencias(),
+        request.getFormacao()
+    );
 
-        PerfilMentorResponseDTO response = new PerfilMentorResponseDTO(perfilSalvo);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
+    return new ResponseEntity<>(new PerfilMentorResponseDTO(perfilSalvo), HttpStatus.CREATED);
+}
 
     @GetMapping
     public ResponseEntity<List<PerfilMentorListResponseDTO>> listarMentores() {
@@ -73,9 +79,6 @@ public class PerfilMentorController {
         if (!user.getEmail().equals(userDetails.getUsername())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
         
         perfil.setEspecializacao(request.getEspecializacao());
         perfil.setExperiencias(request.getExperiencias());
