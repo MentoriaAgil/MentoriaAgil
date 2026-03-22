@@ -25,22 +25,24 @@ public class PerfilMentorService implements PerfilMentorServiceInterface {
     }
 
     @Transactional
-    public PerfilMentor criarPerfilMentor(User user, String especializacao, String experiencias, String formacao) {
-        if (user.getPerfilMentor() != null) {
-            throw new IllegalStateException("Usuário já possui perfil de mentor");
-        }
-
-        user.setRole(com.mentoria.agil.backend.model.Role.MENTOR);
-
-        PerfilMentor perfil = new PerfilMentor(especializacao, experiencias, user);
-        perfil.setFormacao(formacao);
-
-        user.setPerfilMentor(perfil);
-
-        userRepository.save(user);
-        
-        return perfil;
+public PerfilMentor criarPerfilMentor(User user, String especializacao, String experiencias, String formacao) {
+    if (user.getPerfilMentor() != null) {
+        throw new IllegalStateException("Usuário já possui perfil de mentor");
     }
+
+    user.setRole(com.mentoria.agil.backend.model.Role.MENTOR);
+    
+    PerfilMentor perfil = new PerfilMentor(especializacao, experiencias, user);
+    perfil.setFormacao(formacao);
+    
+    // Primeiro salva o perfil para ele ter um ID e não ser mais transiente
+    PerfilMentor perfilSalvo = perfilMentorRepository.save(perfil);
+
+    user.setPerfilMentor(perfilSalvo);
+    userRepository.save(user);
+    
+    return perfilSalvo;
+}
 
     public PerfilMentor buscarPorId(Long id) {
         return perfilMentorRepository.findById(id)
