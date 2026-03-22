@@ -75,7 +75,7 @@ class PerfilMentorControllerTest {
     @Test
     @DisplayName("Deve criar perfil de mentor com sucesso")
     void deveCriarPerfil() throws Exception {
-        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Nome", "e@m.com", "senha123", "Java", "5 anos", "Eng");
+        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Java", "5 anos", "Eng");
         when(perfilService.criarPerfilMentor(any(), anyString(), anyString(), anyString())).thenReturn(perfilMock);
 
         mockMvc.perform(post("/api/mentors")
@@ -107,7 +107,7 @@ class PerfilMentorControllerTest {
 
         when(perfilService.buscarPorId(10L)).thenReturn(perfilMock);
 
-        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Novo", "novo@email.com", "123456", "J", "5", "E");
+        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("J", "5", "E");
 
         mockMvc.perform(put("/api/mentors/10")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -154,7 +154,7 @@ class PerfilMentorControllerTest {
         when(perfilService.buscarPorId(10L)).thenReturn(perfilMock);
         when(perfilService.atualizar(any(), any())).thenReturn(perfilMock);
 
-        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Nome", "mentor@teste.com", "senha123", "Java",
+        PerfilMentorRequestDTO dto = new PerfilMentorRequestDTO("Java",
                 "5 anos", "Eng");
 
         mockMvc.perform(put("/api/mentors/10")
