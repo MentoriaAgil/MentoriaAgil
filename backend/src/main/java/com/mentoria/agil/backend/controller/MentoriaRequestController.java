@@ -33,17 +33,19 @@ public class MentoriaRequestController {
     @PostMapping("/request")
     public ResponseEntity<MentoriaResponseDTO> createRequest(@Valid @RequestBody MentoriaRequestDTO dto) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User mentorado = (User) userDetails;
+
+        User mentorado = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new EntityNotFoundException("Usuário logado não encontrado"));
 
         MentoriaRequest request = requestService.createRequest(mentorado, dto);
         return new ResponseEntity<>(new MentoriaResponseDTO(request), HttpStatus.CREATED);
     }
 
-@GetMapping("/pendentes")
+    @GetMapping("/pendentes")
     public ResponseEntity<List<MentoriaRequestListResponseDTO>> listarPendentes() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        
-        // CORREÇÃO: Busca o utilizador no banco pelo email da sessão
+
+        // Busca o utilizador no banco pelo email da sessão
         User mentor = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new EntityNotFoundException("Mentor não encontrado"));
 
