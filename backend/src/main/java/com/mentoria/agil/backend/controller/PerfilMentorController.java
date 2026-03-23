@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/mentors")
 public class PerfilMentorController {
-    
+
     private final PerfilMentorServiceInterface mentorService;
     private final UserRepository userRepository;
 
@@ -31,31 +31,32 @@ public class PerfilMentorController {
     }
 
     @PostMapping
-public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(@Valid @RequestBody PerfilMentorRequestDTO request) {
-    UserDetails userDetails = getUsuarioAutenticado();
-    
-    // Procura o utilizador gerido pelo JPA no repositório em vez de fazer cast direto
-    User userAutenticado = userRepository.findByEmail(userDetails.getUsername())
-            .orElseThrow(() -> new EntityNotFoundException("Utilizador não encontrado"));
+    public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(
+            @Valid @RequestBody PerfilMentorRequestDTO request) {
+        UserDetails userDetails = getUsuarioAutenticado();
 
-    PerfilMentor perfilSalvo = mentorService.criarPerfilMentor(
-        userAutenticado,
-        request.getEspecializacao(),
-        request.getExperiencias(),
-        request.getFormacao()
-    );
+        // Procura o utilizador gerido pelo JPA no repositório em vez de fazer cast
+        // direto
+        User userAutenticado = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new EntityNotFoundException("Utilizador não encontrado"));
 
-    return new ResponseEntity<>(new PerfilMentorResponseDTO(perfilSalvo), HttpStatus.CREATED);
-}
+        PerfilMentor perfilSalvo = mentorService.criarPerfilMentor(
+                userAutenticado,
+                request.getEspecializacao(),
+                request.getExperiencias(),
+                request.getFormacao());
+
+        return new ResponseEntity<>(new PerfilMentorResponseDTO(perfilSalvo), HttpStatus.CREATED);
+    }
 
     @GetMapping
     public ResponseEntity<List<PerfilMentorListResponseDTO>> listarMentores() {
         List<PerfilMentor> mentores = mentorService.listarTodos();
-        
+
         List<PerfilMentorListResponseDTO> response = mentores.stream()
-            .map(PerfilMentorListResponseDTO::new)
-            .toList();
-            
+                .map(PerfilMentorListResponseDTO::new)
+                .toList();
+
         return ResponseEntity.ok(response);
     }
 
@@ -68,22 +69,22 @@ public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(@Valid @Request
 
     @PutMapping("/{id}")
     public ResponseEntity<PerfilMentorResponseDTO> atualizarMentor(
-            @PathVariable Long id, 
+            @PathVariable Long id,
             @Valid @RequestBody PerfilMentorRequestDTO request) {
-        
+
         PerfilMentor perfil = mentorService.buscarPorId(id);
         User user = perfil.getUser();
 
         UserDetails userDetails = getUsuarioAutenticado();
-        
+
         if (!user.getEmail().equals(userDetails.getUsername())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        
+
         perfil.setEspecializacao(request.getEspecializacao());
         perfil.setExperiencias(request.getExperiencias());
         perfil.setFormacao(request.getFormacao());
-        
+
         PerfilMentor perfilAtualizado = mentorService.atualizar(user, perfil);
         PerfilMentorResponseDTO response = new PerfilMentorResponseDTO(perfilAtualizado);
         return ResponseEntity.ok(response);
@@ -93,18 +94,19 @@ public ResponseEntity<PerfilMentorResponseDTO> criarPerfilMentor(@Valid @Request
     public ResponseEntity<Void> deletarMentor(@PathVariable Long id) {
         UserDetails userDetails = getUsuarioAutenticado();
         PerfilMentor perfil = mentorService.buscarPorId(id);
-        
+
+        // Ajuste: Removido prefixo "ROLE_" para alinhar com User.getAuthorities()
         boolean isAdmin = userDetails.getAuthorities().stream()
-            .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
         if (!isAdmin && !perfil.getUser().getEmail().equals(userDetails.getUsername())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        
+
         mentorService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-    
+
     private UserDetails getUsuarioAutenticado() {
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
