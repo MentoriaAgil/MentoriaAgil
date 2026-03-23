@@ -1,8 +1,9 @@
 package com.mentoria.agil.backend.dto.response;
 
+import com.mentoria.agil.backend.enums.FormatoSessao;
+import com.mentoria.agil.backend.enums.SessaoStatus;
 import com.mentoria.agil.backend.model.Sessao;
-import com.mentoria.agil.backend.model.SessaoStatus;
-import com.mentoria.agil.backend.model.FormatoSessao;
+
 import java.time.LocalDateTime;
 
 public class SessaoResponseDTO {
@@ -35,99 +36,99 @@ public class SessaoResponseDTO {
         this.observacoes = sessao.getObservacoes();
     }
 
-    public Long getId() { 
-        return id; 
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Long id) { 
-        this.id = id; 
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getMentorId() { 
-        return mentorId; 
+    public Long getMentorId() {
+        return mentorId;
     }
 
-    public void setMentorId(Long mentorId) { 
-        this.mentorId = mentorId; 
+    public void setMentorId(Long mentorId) {
+        this.mentorId = mentorId;
     }
 
-    public String getMentorNome() { 
-        return mentorNome; 
+    public String getMentorNome() {
+        return mentorNome;
     }
 
-    public void setMentorNome(String mentorNome) { 
-        this.mentorNome = mentorNome; 
+    public void setMentorNome(String mentorNome) {
+        this.mentorNome = mentorNome;
     }
 
-    public Long getMentoradoId() { 
-        return mentoradoId; 
+    public Long getMentoradoId() {
+        return mentoradoId;
     }
 
-    public void setMentoradoId(Long mentoradoId) { 
-        this.mentoradoId = mentoradoId; 
+    public void setMentoradoId(Long mentoradoId) {
+        this.mentoradoId = mentoradoId;
     }
 
-    public String getMentoradoNome() { 
-        return mentoradoNome; 
+    public String getMentoradoNome() {
+        return mentoradoNome;
     }
 
-    public void setMentoradoNome(String mentoradoNome) { 
-        this.mentoradoNome = mentoradoNome; 
+    public void setMentoradoNome(String mentoradoNome) {
+        this.mentoradoNome = mentoradoNome;
     }
 
-    public LocalDateTime getDataHoraInicio() { 
-        return dataHoraInicio; 
+    public LocalDateTime getDataHoraInicio() {
+        return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) { 
-        this.dataHoraInicio = dataHoraInicio; 
+    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+        this.dataHoraInicio = dataHoraInicio;
     }
 
-    public LocalDateTime getDataHoraFim() { 
-        return dataHoraFim; 
+    public LocalDateTime getDataHoraFim() {
+        return dataHoraFim;
     }
 
-    public void setDataHoraFim(LocalDateTime dataHoraFim) { 
-        this.dataHoraFim = dataHoraFim; 
+    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+        this.dataHoraFim = dataHoraFim;
     }
 
-    public SessaoStatus getStatus() { 
-        return status; 
+    public SessaoStatus getStatus() {
+        return status;
     }
 
-    public void setStatus(SessaoStatus status) { 
-        this.status = status; 
+    public void setStatus(SessaoStatus status) {
+        this.status = status;
     }
 
-    public FormatoSessao getFormato() { 
-        return formato; 
+    public FormatoSessao getFormato() {
+        return formato;
     }
 
-    public void setFormato(FormatoSessao formato) { 
-        this.formato = formato; 
+    public void setFormato(FormatoSessao formato) {
+        this.formato = formato;
     }
 
-    public String getLinkReuniao() { 
-        return linkReuniao; 
+    public String getLinkReuniao() {
+        return linkReuniao;
     }
 
-    public void setLinkReuniao(String linkReuniao) { 
-        this.linkReuniao = linkReuniao; 
+    public void setLinkReuniao(String linkReuniao) {
+        this.linkReuniao = linkReuniao;
     }
 
-    public String getEndereco() { 
-        return endereco; 
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereco(String endereco) { 
-        this.endereco = endereco; 
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public String getObservacoes() { 
-        return observacoes; 
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public void setObservacoes(String observacoes) { 
-        this.observacoes = observacoes; 
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 }

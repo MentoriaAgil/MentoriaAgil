@@ -10,8 +10,14 @@ public class PerfilMentorListResponseDTO {
     private String email;
     private String especializacao;
     private String formacao;
+    private String experiencias;
+    private String areaPrincipal;
+    private String tipoMentoria;
+    private String disponibilidade;
+    private boolean ativo;
 
-    public PerfilMentorListResponseDTO() {}
+    public PerfilMentorListResponseDTO() {
+    }
 
     public PerfilMentorListResponseDTO(PerfilMentor perfil) {
         User user = perfil.getUser();
@@ -21,17 +27,20 @@ public class PerfilMentorListResponseDTO {
         this.email = user.getEmail();
         this.especializacao = perfil.getEspecializacao();
         this.formacao = perfil.getFormacao();
+        this.areaPrincipal = "TI";
+        this.tipoMentoria = "PROFISSIONAL";
+        this.disponibilidade = "DISPONIVEL";
+        this.ativo = true;
     }
 
-    public PerfilMentorListResponseDTO(Long id, String name, String email, 
-                                String especializacao, String formacao) {
+    public PerfilMentorListResponseDTO(Long id, String name, String email,
+            String especializacao, String formacao) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.especializacao = especializacao;
         this.formacao = formacao;
     }
-
 
     public Long getId() {
         return id;
@@ -44,7 +53,7 @@ public class PerfilMentorListResponseDTO {
     public Long getUserId() {
         return userId;
     }
-    
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
@@ -79,5 +88,45 @@ public class PerfilMentorListResponseDTO {
 
     public void setFormacao(String formacao) {
         this.formacao = formacao;
+    }
+
+    public String getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(String experiencias) {
+        this.experiencias = experiencias;
+    }
+
+    public String getAreaPrincipal() {
+        return areaPrincipal;
+    }
+
+    public void setAreaPrincipal(String areaPrincipal) {
+        this.areaPrincipal = areaPrincipal;
+    }
+
+    public String getTipoMentoria() {
+        return tipoMentoria;
+    }
+
+    public void setTipoMentoria(String tipoMentoria) {
+        this.tipoMentoria = tipoMentoria;
+    }
+
+    public String getDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(String disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

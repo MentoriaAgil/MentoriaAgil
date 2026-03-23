@@ -6,7 +6,7 @@ import com.mentoria.agil.backend.model.PerfilMentor;
 import com.mentoria.agil.backend.model.User;
 
 public class PerfilMentorResponseDTO {
-    
+
     private Long id;
     private Long userId;
     private String name;
@@ -15,9 +15,14 @@ public class PerfilMentorResponseDTO {
     private String especializacao;
     private String experiencias;
     private String formacao;
+    private String areaPrincipal;
+    private String tipoMentoria;
+    private String disponibilidade;
+    private boolean ativo;
     private LocalDateTime createdAt;
 
-    public PerfilMentorResponseDTO() {}
+    public PerfilMentorResponseDTO() {
+    }
 
     public PerfilMentorResponseDTO(PerfilMentor perfil) {
         User user = perfil.getUser();
@@ -29,12 +34,16 @@ public class PerfilMentorResponseDTO {
         this.especializacao = perfil.getEspecializacao();
         this.experiencias = perfil.getExperiencias();
         this.formacao = perfil.getFormacao();
+        this.areaPrincipal = perfil.getAreaPrincipal();
+        this.tipoMentoria = perfil.getTipoMentoria() != null ? perfil.getTipoMentoria().name() : null;
+        this.disponibilidade = perfil.getDisponibilidade() != null ? perfil.getDisponibilidade().name() : "DISPONIVEL";
+        this.ativo = user.isAtivo();
         this.createdAt = user.getCreatedAt();
     }
 
-    public PerfilMentorResponseDTO(Long id, Long userId, String name, String email, 
-                            String role, String especializacao, String experiencias, 
-                            String formacao, LocalDateTime createdAt) {
+    public PerfilMentorResponseDTO(Long id, Long userId, String name, String email,
+            String role, String especializacao, String experiencias,
+            String formacao, LocalDateTime createdAt) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -108,6 +117,38 @@ public class PerfilMentorResponseDTO {
 
     public void setFormacao(String formacao) {
         this.formacao = formacao;
+    }
+
+    public String getAreaPrincipal() {
+        return areaPrincipal;
+    }
+
+    public void setAreaPrincipal(String areaPrincipal) {
+        this.areaPrincipal = areaPrincipal;
+    }
+
+    public String getTipoMentoria() {
+        return tipoMentoria;
+    }
+
+    public void setTipoMentoria(String tipoMentoria) {
+        this.tipoMentoria = tipoMentoria;
+    }
+
+    public String getDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(String disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public LocalDateTime getCreatedAt() {
