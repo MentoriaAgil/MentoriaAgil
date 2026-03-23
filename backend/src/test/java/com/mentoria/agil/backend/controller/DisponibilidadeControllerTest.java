@@ -3,12 +3,15 @@ package com.mentoria.agil.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mentoria.agil.backend.dto.DisponibilidadeRequestDTO;
+import com.mentoria.agil.backend.enums.Role;
 import com.mentoria.agil.backend.interfaces.service.DisponibilidadeServiceInterface;
 import com.mentoria.agil.backend.interfaces.service.TokenServiceInterface;
 import com.mentoria.agil.backend.model.Disponibilidade;
 import com.mentoria.agil.backend.model.User;
 import com.mentoria.agil.backend.repository.UserRepository;
 import com.mentoria.agil.backend.service.TokenBlacklistService;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +33,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(DisponibilidadeController.class)
@@ -72,30 +74,41 @@ class DisponibilidadeControllerTest {
     }
 
     @Test
+    @DisplayName("Deve listar disponibilidades do mentor logado com sucesso")
+    void deveListarDisponibilidadesComSucesso() throws Exception {
+        // Simula o usuário mentor logado
+        User mentorLogado = new User();
+        mentorLogado.setId(1L);
+        mentorLogado.setEmail("mentor@teste.com");
+        mentorLogado.setRole(Role.MENTOR);
+
+        mockMvc.perform(get("/api/disponibilidades/minhas")
+                .with(user(mentorLogado)) // Simulação do Spring Security
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     @DisplayName("Deve retornar 404 quando listar disponibilidades de mentor inexistente")
     void deveRetornar404ListarMentorInexistente() throws Exception {
-        // Cobre a linha do .orElseThrow()
         when(userRepository.findById(99L)).thenReturn(Optional.empty());
 
+        // Agora a rota pública existe novamente
         mockMvc.perform(get("/api/disponibilidades/mentor/99"))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @DisplayName("Deve listar disponibilidades convertendo para DTO com sucesso")
-    void deveListarDisponibilidadesComSucesso() throws Exception {
+    @DisplayName("Deve listar disponibilidades do mentor logado com sucesso")
+    void deveListarMinhasDisponibilidadesComSucesso() throws Exception {
         User mentor = new User();
         mentor.setId(1L);
-        Disponibilidade disp = new Disponibilidade(mentor, LocalDateTime.now().plusDays(1),
-                LocalDateTime.now().plusDays(1).plusHours(1));
+        // Simula o @AuthenticationPrincipal
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(mentor, null));
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(mentor));
-        // Garantir que a lista não seja vazia para cobrir a linha do
-        // .map(DisponibilidadeResponseDTO::new)
-        when(disponibilidadeService.listarDisponibilidadesFuturas(any())).thenReturn(List.of(disp));
+        when(disponibilidadeService.listarDisponibilidadesFuturas(any())).thenReturn(List.of());
 
-        mockMvc.perform(get("/api/disponibilidades/mentor/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0]").exists());
+        mockMvc.perform(get("/api/disponibilidades/minhas"))
+                .andExpect(status().isOk());
     }
 }

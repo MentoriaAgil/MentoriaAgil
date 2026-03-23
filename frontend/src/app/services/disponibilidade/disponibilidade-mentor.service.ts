@@ -17,4 +17,8 @@ export class DisponibilidadeService {
   listarPorMentor(mentorId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/mentor/${mentorId}`);
   }
+
+  listarMinhas(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/minhas`);
+  }
 }

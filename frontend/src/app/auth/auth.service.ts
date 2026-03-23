@@ -21,6 +21,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  getUserRole(): string | null {
+    const user = this.currentUserSubject.value;
+    return user ? user.role : null;
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
       tap((response) => {
@@ -94,7 +99,7 @@ export class AuthService {
     }
   }
 
-  private loadUser(): User | null {
+  public loadUser(): User | null {
     const storedUser = localStorage.getItem(this.USER_KEY);
     return storedUser ? JSON.parse(storedUser) : null;
   }

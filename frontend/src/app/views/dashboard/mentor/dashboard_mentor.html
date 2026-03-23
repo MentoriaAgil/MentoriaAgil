@@ -1,10 +1,18 @@
 <div class="p-8 max-w-7xl mx-auto min-h-screen bg-slate-50">
   <header class="mb-10">
-    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Painel de Mentoria</h1>
-    <p class="text-slate-500 text-lg mt-1">Gerencie as solicitações e acompanhe suas sessões.</p>
+    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+      {{ isMentor() ? 'Painel de Mentoria' : 'Meu Progresso' }}
+    </h1>
+    <p class="text-slate-500 text-lg mt-1">
+      {{
+        isMentor()
+          ? 'Gerencie as solicitações e acompanhe seus mentorados.'
+          : 'Acompanhe suas sessões e evolução com seu mentor.'
+      }}
+    </p>
   </header>
 
-  <section class="mb-12">
+  <section class="mb-12" *ngIf="isMentor()">
     <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
       <mat-icon color="primary">pending_actions</mat-icon> Novos Pedidos
     </h2>
@@ -32,43 +40,6 @@
           >
             "{{ solicitacao.mensagem || 'Sem mensagem adicional.' }}"
           </div>
-
-          <div class="space-y-2 text-sm border-t pt-3">
-            <div class="flex items-center gap-2 text-slate-700">
-              <mat-icon class="!text-sm !w-4 !h-4 text-primary">calendar_today</mat-icon>
-              <strong>Sugestão:</strong>
-              {{ solicitacao.dataHoraProposta | date: 'dd/MM/yyyy HH:mm' }}
-            </div>
-
-            <div class="flex items-center gap-2 text-slate-700">
-              <mat-icon class="!text-sm !w-4 !h-4 text-primary">
-                {{ solicitacao.formato === 'ONLINE' ? 'videocam' : 'location_on' }}
-              </mat-icon>
-              <strong>Tipo:</strong> {{ solicitacao.formato }}
-            </div>
-
-            <div
-              *ngIf="solicitacao.formato === 'ONLINE' && solicitacao.linkReuniao"
-              class="flex items-center gap-2"
-            >
-              <mat-icon class="!text-sm !w-4 !h-4 text-blue-500">link</mat-icon>
-              <a
-                [href]="solicitacao.linkReuniao"
-                target="_blank"
-                class="text-blue-600 hover:underline truncate"
-              >
-                Link da Reunião
-              </a>
-            </div>
-
-            <div
-              *ngIf="solicitacao.formato === 'PRESENCIAL' && solicitacao.endereco"
-              class="flex items-center gap-2 text-slate-600"
-            >
-              <mat-icon class="!text-sm !w-4 !h-4 text-red-500">place</mat-icon>
-              <span class="truncate">{{ solicitacao.endereco }}</span>
-            </div>
-          </div>
         </mat-card-content>
 
         <mat-card-actions align="end" class="gap-2">
@@ -81,7 +52,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="mb-12">
     <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
       <mat-icon color="accent">event_available</mat-icon> Sessões Confirmadas
     </h2>
@@ -90,7 +61,7 @@
       *ngIf="sessoesAgendadas().length === 0"
       class="p-10 bg-white rounded-2xl border-2 border-dashed border-slate-200 text-center"
     >
-      <p class="text-slate-500">Nenhuma sessão agendada para os próximos dias.</p>
+      <p class="text-slate-500">Nenhuma sessão agendada.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -99,12 +70,15 @@
         class="!rounded-2xl !shadow-sm border-l-4 border-l-green-500"
       >
         <mat-card-header class="!p-4">
-          <mat-card-title class="!text-base">{{ sessao.mentoradoNome }}</mat-card-title>
+          <mat-card-title class="!text-base">{{
+            isMentor() ? sessao.mentoradoNome : sessao.mentorNome
+          }}</mat-card-title>
           <mat-card-subtitle class="flex items-center gap-1">
             <mat-icon class="!text-sm !w-4 !h-4">calendar_today</mat-icon>
             {{ sessao.dataHoraInicio | date: 'dd/MM/yyyy HH:mm' }}
           </mat-card-subtitle>
         </mat-card-header>
+
         <mat-card-content class="!p-4 text-sm">
           <div class="flex items-center gap-2 text-slate-700">
             <mat-icon class="!text-sm !w-4 !h-4">{{
@@ -112,12 +86,65 @@
             }}</mat-icon>
             <strong>{{ sessao.formato }}</strong>
           </div>
-          <p class="mt-2 text-primary hover:underline" *ngIf="sessao.linkReuniao">
-            <a [href]="sessao.linkReuniao" target="_blank">Entrar na reunião</a>
-          </p>
-          <p class="mt-2 text-slate-500" *ngIf="sessao.endereco">{{ sessao.endereco }}</p>
         </mat-card-content>
+
+        <mat-card-actions align="end" class="!p-4" *ngIf="isMentor()">
+          <button mat-button color="primary" (click)="abrirRegistroProgresso(sessao)">
+            <mat-icon>edit_note</mat-icon> REGISTRAR EVOLUÇÃO
+          </button>
+        </mat-card-actions>
       </mat-card>
+    </div>
+  </section>
+
+  <section *ngIf="historicoProgresso().length > 0">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+        <mat-icon color="primary">history_edu</mat-icon>
+        {{ isMentor() ? 'Histórico de Evolução Recente' : 'Minhas Evoluções Registradas' }}
+      </h2>
+      <button
+        *ngIf="isMentor()"
+        mat-button
+        color="warn"
+        (click)="historicoProgresso.set([])"
+        class="text-xs"
+      >
+        LIMPAR VISTA
+      </button>
+    </div>
+
+    <div class="space-y-4">
+      <div
+        *ngFor="let p of historicoProgresso()"
+        class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row justify-between gap-4"
+      >
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <span
+              class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded"
+            >
+              Anotação do Mentor: {{ p.mentorNome }}
+            </span>
+            <span class="text-slate-400 text-xs flex items-center gap-1">
+              <mat-icon class="!text-xs !w-3 !h-3">schedule</mat-icon>
+              {{ p.dataRegistro | date: 'dd/MM/yyyy HH:mm' }}
+            </span>
+          </div>
+          <p class="text-slate-700 leading-relaxed italic">"{{ p.descricao }}"</p>
+        </div>
+
+        <div class="flex items-center gap-2 border-t md:border-t-0 pt-3 md:pt-0" *ngIf="isMentor()">
+          <button mat-icon-button (click)="editarProgresso(p)" matTooltip="Editar">
+            <mat-icon class="text-slate-400 hover:text-primary transition-colors">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="excluirProgresso(p)" matTooltip="Excluir">
+            <mat-icon class="text-slate-400 hover:text-red-500 transition-colors"
+              >delete_outline</mat-icon
+            >
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 </div>

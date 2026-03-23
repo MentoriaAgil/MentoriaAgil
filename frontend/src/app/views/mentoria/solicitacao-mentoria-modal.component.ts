@@ -52,16 +52,18 @@ export class SolicitacaoMentoriaModalComponent implements OnInit {
   }
 
   carregarHorarios(): void {
-    this.mentoriaService.getDisponibilidadeByMentor(this.data.mentor.id).subscribe({
+    const mentorId = this.data.mentor.userId || this.data.mentor.id;
+
+    this.mentoriaService.getDisponibilidadeByMentor(mentorId).subscribe({
       next: (disponibilidades) => {
         const formatados = disponibilidades.map((d) => ({
           valor: d.dataHoraInicio,
           fim: d.dataHoraFim,
-          label: `${new Date(d.dataHoraInicio).toLocaleDateString('pt-BR')} às ${new Date(d.dataHoraInicio).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`,
+          label: `${new Date(d.dataHoraInicio).toLocaleDateString('pt-BR')} das ${new Date(d.dataHoraInicio).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })} às ${new Date(d.dataHoraFim).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`,
         }));
         this.slotsDisponiveis.set(formatados);
       },
-      error: () => this.snackBar.open('Erro ao carregar agenda.', 'Fechar'),
+      error: () => this.snackBar.open('Erro ao carregar agenda do mentor.', 'Fechar'),
     });
   }
 
@@ -78,12 +80,12 @@ export class SolicitacaoMentoriaModalComponent implements OnInit {
     );
 
     const request = {
-      mentorId: this.data.mentor.id,
+      mentorId: this.data.mentor.userId,
       dataHoraInicio: this.form.value.horarioSelecionado,
       dataHoraFim: slot?.fim,
       formato: this.form.value.formato,
-      linkReuniao: this.form.value.linkReuniao,
-      endereco: this.form.value.endereco,
+      linkReuniao: this.form.value.linkReuniao || null,
+      endereco: this.form.value.endereco || null,
     };
 
     this.mentoriaService.agendarSessao(request).subscribe({

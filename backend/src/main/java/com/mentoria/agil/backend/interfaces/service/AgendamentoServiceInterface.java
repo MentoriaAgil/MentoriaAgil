@@ -12,5 +12,5 @@ public interface AgendamentoServiceInterface {
 
     List<SessaoResponseDTO> buscarSessoesPorMentor(User mentor);
 
-    List<Sessao> listarSessoesPorUsuario(User user, SessaoStatus status);
+    List<SessaoResponseDTO> listarSessoesPorUsuario(User user, SessaoStatus status);
 }

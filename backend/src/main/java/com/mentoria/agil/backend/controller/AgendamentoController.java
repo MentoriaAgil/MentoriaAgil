@@ -12,10 +12,11 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -45,30 +46,26 @@ public class AgendamentoController {
     }
 
     @GetMapping("/mentor/pendentes")
-    public ResponseEntity<List<SessaoResponseDTO>> listarSessoesPendentes() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User mentor = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new EntityNotFoundException("Mentor não encontrado"));
-
-
+    public ResponseEntity<List<SessaoResponseDTO>> listarSessoesPendentes(@AuthenticationPrincipal User mentor) {
+        // O Spring Security injeta o mentor autenticado diretamente
         List<SessaoResponseDTO> sessoes = agendamentoService.buscarSessoesPorMentor(mentor);
         return ResponseEntity.ok(sessoes);
     }
 
     @GetMapping("/minhas-sessoes")
     public ResponseEntity<List<SessaoResponseDTO>> listarMinhasSessoes(
+            @AuthenticationPrincipal User user,
             @RequestParam(required = false, defaultValue = "AGENDADA") SessaoStatus status) {
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new EntityNotFoundException("Usuário logado não encontrado"));
-
-        List<Sessao> sessoes = agendamentoService.listarSessoesPorUsuario(user, status);
-
-        List<SessaoResponseDTO> response = sessoes.stream()
-                .map(SessaoResponseDTO::new)
-                .collect(Collectors.toList());
-
+        // O service já retorna DTOs, não precisa de novo mapeamento
+        List<SessaoResponseDTO> response = agendamentoService.listarSessoesPorUsuario(user, status);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/mentor/minhas-sessoes")
+    @PreAuthorize("hasAuthority('MENTOR')")
+    public ResponseEntity<List<SessaoResponseDTO>> listarSessoesMentor(@AuthenticationPrincipal User mentor) {
+        // Busca apenas as sessões do mentor logado (Isolamento)
+        return ResponseEntity.ok(agendamentoService.buscarSessoesPorMentor(mentor));
     }
 }

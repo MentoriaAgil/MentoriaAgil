@@ -1,3 +1,4 @@
+// src/main/java/com/mentoria/agil/backend/service/DisponibilidadeService.java
 package com.mentoria.agil.backend.service;
 
 import com.mentoria.agil.backend.dto.DisponibilidadeRequestDTO;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class DisponibilidadeService implements DisponibilidadeServiceInterface{
+public class DisponibilidadeService implements DisponibilidadeServiceInterface {
 
     private final DisponibilidadeRepository disponibilidadeRepository;
 
@@ -23,18 +24,21 @@ public class DisponibilidadeService implements DisponibilidadeServiceInterface{
 
     @Transactional
     public Disponibilidade cadastrar(User mentor, DisponibilidadeRequestDTO dto) {
-
-        if (dto.getDataHoraInicio().isBefore(LocalDateTime.now())) {
-            throw new BusinessException("A data de início não pode ser no passado");
+        // Tolerância de 1 minuto para evitar erro 400 por atraso de milissegundos na
+        // rede
+        if (dto.getDataHoraInicio().isBefore(LocalDateTime.now().minusMinutes(1))) {
+            throw new BusinessException("A data de início não pode ser no passado.");
         }
+
         if (dto.getDataHoraFim().isBefore(dto.getDataHoraInicio())) {
-            throw new BusinessException("A data de fim deve ser posterior ao início");
+            throw new BusinessException("A data de fim deve ser posterior ao início.");
         }
 
         List<Disponibilidade> conflitos = disponibilidadeRepository.findDisponiveisNoIntervalo(
                 mentor, dto.getDataHoraInicio(), dto.getDataHoraFim());
+
         if (!conflitos.isEmpty()) {
-            throw new BusinessException("Já existe disponibilidade cadastrada neste intervalo");
+            throw new BusinessException("Já existe uma disponibilidade cadastrada que sobrepõe este intervalo.");
         }
 
         Disponibilidade disp = new Disponibilidade(mentor, dto.getDataHoraInicio(), dto.getDataHoraFim());
@@ -42,6 +46,8 @@ public class DisponibilidadeService implements DisponibilidadeServiceInterface{
     }
 
     public List<Disponibilidade> listarDisponibilidadesFuturas(User mentor) {
+        if (mentor == null)
+            return List.of();
         return disponibilidadeRepository.findByMentorAndDataHoraInicioAfterAndDisponivelTrueOrderByDataHoraInicio(
                 mentor, LocalDateTime.now());
     }

@@ -26,4 +26,7 @@ public interface SessaoRepository extends JpaRepository<Sessao, Long> {
 
         List<Sessao> findByMentoradoAndStatusOrderByDataHoraInicioDesc(User mentorado,
                         com.mentoria.agil.backend.enums.SessaoStatus status);
+
+        boolean existsByMentorAndMentorado(User mentor, User mentorado);
+
 }

@@ -12,9 +12,14 @@ export class MentoriaService {
   private readonly apiUrl = `http://localhost:8080/api/mentorias`;
   private readonly sessaoUrl = `http://localhost:8080/api/sessoes`;
 
+  getSessoes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.sessaoUrl}/minhas-sessoes`);
+  }
+
   // Busca sessões agendadas onde o usuário logado é o mentor
   getSessoesMentor(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.sessaoUrl}/mentor/pendentes`);
+    // O endpoint agora é /minhas-sessoes e não precisa de ID na URL
+    return this.http.get<any[]>(`${this.sessaoUrl}/mentor/minhas-sessoes`);
   }
 
   getDisponibilidadeByMentor(mentorId: number): Observable<any[]> {
