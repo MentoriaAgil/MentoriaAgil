@@ -3,7 +3,6 @@ import { CanActivateFn, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from './auth.service';
 
 export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
-
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -14,7 +13,12 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 
   const requiredRole = route.data['role'];
   if (requiredRole && !authService.hasRole(requiredRole)) {
-    router.navigate(['/dashboard']);
+    const user = JSON.parse(localStorage.getItem('auth_user') || '{}');
+    if (user.role === 'ESTUDANTE') {
+      router.navigate(['/mentores']);
+    } else {
+      router.navigate(['/']);
+    }
     return false;
   }
 

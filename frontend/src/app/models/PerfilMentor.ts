@@ -1,6 +1,8 @@
 export interface PerfilMentor {
   id: number;
   name: string;
+  email: string;
+  formacao: string;
   especializacao: string;
   experiencias: string;
   areaPrincipal: string;

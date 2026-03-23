@@ -1,33 +1,60 @@
-<h2 mat-dialog-title>Solicitar mentoria com {{ data.mentor.name }}</h2>
-    <mat-dialog-content>
-      <form [formGroup]="form">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Mensagem de introdução</mat-label>
-          <textarea
-            matInput
-            formControlName="message"
-            rows="4"
-            placeholder="Conte ao mentor seus objetivos e expectativas..."
-            maxlength="500"
-          ></textarea>
-          <mat-hint align="end">{{ form.get('message')?.value?.length || 0 }}/500</mat-hint>
-          <mat-error *ngIf="form.get('message')?.hasError('required')">
-            A mensagem é obrigatória
-          </mat-error>
-          <mat-error *ngIf="form.get('message')?.hasError('maxlength')">
-            Máximo de 500 caracteres
-          </mat-error>
-        </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="cancelar()" [disabled]="loading">Cancelar</button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="enviar()"
-        [disabled]="form.invalid || loading"
-      >
-        {{ loading ? 'Enviando...' : 'Enviar solicitação' }}
-      </button>
-    </mat-dialog-actions>
+<h2 mat-dialog-title class="!text-2xl font-bold">Agendar com {{ data.mentor.name }}</h2>
+<mat-dialog-content class="!pt-4">
+  <form [formGroup]="form" class="flex flex-col gap-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Escolha uma data e horário disponível</mat-label>
+      <mat-select formControlName="horarioSelecionado">
+        <mat-option *ngFor="let slot of slotsDisponiveis()" [value]="slot.valor">
+          {{ slot.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-xs font-bold text-slate-400 uppercase">Formato do Encontro</label>
+      <mat-select formControlName="formato" class="p-3 border rounded-lg bg-slate-50">
+        <mat-option value="ONLINE">💻 Online</mat-option>
+        <mat-option value="PRESENCIAL">📍 Presencial</mat-option>
+      </mat-select>
+    </div>
+
+    <mat-form-field
+      *ngIf="form.get('formato')?.value === 'ONLINE'"
+      appearance="outline"
+      class="w-full"
+    >
+      <mat-label>Link da Reunião</mat-label>
+      <input matInput formControlName="linkReuniao" placeholder="ex: meet.google.com/xyz" />
+    </mat-form-field>
+
+    <mat-form-field
+      *ngIf="form.get('formato')?.value === 'PRESENCIAL'"
+      appearance="outline"
+      class="w-full"
+    >
+      <mat-label>Endereço do Local</mat-label>
+      <textarea
+        matInput
+        formControlName="endereco"
+        placeholder="Informe o local do encontro"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Mensagem adicional</mat-label>
+      <textarea matInput formControlName="message" rows="2"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="!pb-6 !px-6">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="enviar()"
+    [disabled]="form.invalid || loading()"
+  >
+    {{ loading() ? 'Agendando...' : 'Confirmar Agendamento' }}
+  </button>
+</mat-dialog-actions>

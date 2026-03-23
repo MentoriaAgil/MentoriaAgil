@@ -6,4 +6,8 @@ export interface SolicitacaoMentoriaResponse {
   mensagem: string;
   status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED';
   dataSolicitacao: string;
+  dataHoraProposta: string;
+  formato: 'ONLINE' | 'PRESENCIAL';
+  linkReuniao?: string;
+  endereco?: string;
 }

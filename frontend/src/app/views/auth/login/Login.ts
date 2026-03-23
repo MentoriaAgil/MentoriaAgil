@@ -28,24 +28,24 @@ export class Login {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      console.log('Enviando para o Java...');
 
       this.authService.login(email, password).subscribe({
         next: (sucesso) => {
           if (sucesso) {
-            console.log('Login realizado com sucesso!');
-            this.router.navigate(['/dashboard']);
+            // Verifica a role do usuário logado para decidir a rota
+            if (this.authService.hasRole('MENTOR')) {
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.router.navigate(['/mentores']); // Estudantes vão para a lista de mentores
+            }
           } else {
             this.errorMessage = 'Falha no login. Verifique e-mail/senha.';
           }
         },
-        error: (erro) => {
-          console.error('Erro:', erro);
+        error: () => {
           this.errorMessage = 'Ocorreu um erro ao tentar fazer login.';
         },
       });
-    } else {
-      this.errorMessage = 'Preencha todos os campos.';
     }
   }
 }

@@ -1,0 +1,101 @@
+<div class="p-8 max-w-5xl mx-auto bg-slate-50 min-h-screen">
+  <header class="mb-10">
+    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Configurações de Mentoria</h1>
+    <p class="text-slate-500 text-lg">Gerencie seu perfil e sua agenda de atendimentos.</p>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <section class="lg:col-span-1">
+      @if (perfil()) {
+        <mat-card class="!rounded-2xl !p-6 !shadow-sm border border-slate-100">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              [src]="'https://ui-avatars.com/api/?name=' + perfil().user?.name"
+              class="w-16 h-16 rounded-full border-2 border-white shadow-sm"
+            />
+            <div>
+              <h2 class="font-bold text-slate-800">{{ perfil().user?.name }}</h2>
+              <p class="text-xs text-primary font-bold uppercase">
+                {{ perfil().especialidade || 'Mentor' }}
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Sua Especialidade</mat-label>
+              <input matInput [(ngModel)]="perfil().especialidade" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Sobre você (Bio)</mat-label>
+              <textarea matInput rows="4" [(ngModel)]="perfil().bio"></textarea>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" class="w-full !h-10" (click)="salvarPerfil()">
+              SALVAR ALTERAÇÕES
+            </button>
+          </div>
+        </mat-card>
+      } @else {
+        <div class="p-10 text-center text-slate-400 italic">Carregando dados do perfil...</div>
+      }
+    </section>
+
+    <section class="lg:col-span-2 space-y-6">
+      <mat-card class="!rounded-2xl !p-6 !shadow-sm">
+        <h2 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+          <mat-icon color="primary">add_alarm</mat-icon> Abrir Novo Horário
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Data do Atendimento</mat-label>
+            <input matInput type="date" [(ngModel)]="dataSelecionada" />
+          </mat-form-field>
+
+          <div class="grid grid-cols-2 gap-2">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Início</mat-label>
+              <input matInput type="time" [(ngModel)]="horaInicio" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Fim</mat-label>
+              <input matInput type="time" [(ngModel)]="horaFim" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="w-full !h-12 !mt-2"
+          (click)="salvarHorario()"
+        >
+          CONFIRMAR DISPONIBILIDADE
+        </button>
+      </mat-card>
+
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <h3 class="font-bold text-slate-700 mb-4 flex items-center gap-2">
+          <mat-icon class="!text-sm text-green-500">event_available</mat-icon> Horários Ativos
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          @for (item of disponibilidades(); track item.id) {
+            <div
+              class="px-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm font-medium text-slate-600 flex items-center gap-2"
+            >
+              <span class="text-primary font-bold">{{ item.dataHoraInicio | date: 'dd/MM' }}</span>
+              <span
+                >{{ item.dataHoraInicio | date: 'HH:mm' }} -
+                {{ item.dataHoraFim | date: 'HH:mm' }}</span
+              >
+            </div>
+          } @empty {
+            <p class="text-slate-400 italic py-4">Nenhum horário cadastrado.</p>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

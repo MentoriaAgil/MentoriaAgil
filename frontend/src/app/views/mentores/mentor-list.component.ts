@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { PerfilMentorService } from '../../services/perfil-mentor.service';
 import { PerfilMentor } from '../../models/PerfilMentor';
 import { CommonModule } from '@angular/common';
@@ -11,37 +11,40 @@ import { SolicitacaoMentoriaModalComponent } from '../mentoria/solicitacao-mento
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './mentor-list.component.html',
-  styleUrls: ['./mentor-list.component.css']
+  styleUrls: ['./mentor-list.component.css'],
 })
 export class MentorListComponent implements OnInit {
+  private readonly mentorService = inject(PerfilMentorService);
+  private readonly dialog = inject(MatDialog);
 
-  mentores: PerfilMentor[] = [];
+  // Signal garante que a lista apareça imediatamente ao carregar
+  mentores = signal<PerfilMentor[]>([]);
 
   filtros = {
     areaPrincipal: '',
     tipoMentoria: '',
     disponibilidade: '',
-    ordenacao: ''
+    ordenacao: 'name',
   };
-
-  constructor(private mentorService: PerfilMentorService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.buscar();
   }
 
   buscar() {
-    this.mentorService.buscarMentores(this.filtros)
-      .subscribe(data => {
+    this.mentorService.buscarMentores(this.filtros).subscribe({
+      next: (data) => {
+        // Filtra ativos e aplica ordenação alfabética padrão
+        let lista = (data || []).filter((m) => m.ativo !== false);
 
-        let lista = data.filter(m => m.ativo);
-
-        if (this.filtros.ordenacao === 'nome') {
-          lista = lista.sort((a, b) => a.name.localeCompare(b.name));
+        if (this.filtros.ordenacao === 'name') {
+          lista.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
         }
 
-        this.mentores = lista;
-      });
+        this.mentores.set(lista);
+      },
+      error: (err) => console.error('Erro ao carregar mentores', err),
+    });
   }
 
   onFiltroChange() {
@@ -49,15 +52,9 @@ export class MentorListComponent implements OnInit {
   }
 
   solicitarMentoria(mentor: PerfilMentor): void {
-    const dialogRef = this.dialog.open(SolicitacaoMentoriaModalComponent, {
+    this.dialog.open(SolicitacaoMentoriaModalComponent, {
       width: '500px',
-      data: { mentor }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Solicitação enviada com sucesso');
-      }
+      data: { mentor },
     });
   }
 }

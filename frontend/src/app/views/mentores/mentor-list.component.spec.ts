@@ -45,7 +45,7 @@ describe('MentorListComponent', () => {
       imports: [MentorListComponent],
       providers: [
         { provide: PerfilMentorService, useValue: mockService },
-        { provide: MatDialog, useValue: mockDialog } // <-- Adiciona o mock
+        { provide: MatDialog, useValue: mockDialog }
       ]
     }).compileComponents();
 
@@ -61,7 +61,7 @@ describe('MentorListComponent', () => {
   });
 
   it('deve abrir o modal ao chamar solicitarMentoria', () => {
-    const mentor = component.mentores[0];
+    const mentor = component.mentores()[0];
     component.solicitarMentoria(mentor);
     expect(mockDialog.open).toHaveBeenCalled();
     expect(mockDialog.open.mock.calls[0][0]).toBe(SolicitacaoMentoriaModalComponent);

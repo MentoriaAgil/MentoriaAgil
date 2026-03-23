@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="agendar()">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Escolha a data</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="data" [min]="today" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Horários Disponíveis</mat-label>
+    <mat-select formControlName="slotId">
+      <mat-option *ngFor="let slot of slotsDisponiveis" [value]="slot.id">
+        {{ slot.inicio | date: 'HH:mm' }} - {{ slot.fim | date: 'HH:mm' }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-radio-group formControlName="formato" class="flex gap-4 my-4">
+    <mat-radio-button value="ONLINE">Online</mat-radio-button>
+    <mat-radio-button value="PRESENCIAL">Presencial</mat-radio-button>
+  </mat-radio-group>
+
+  <div *ngIf="form.get('formato')?.value === 'ONLINE'">
+    <mat-form-field class="w-full">
+      <mat-label>Link do Google Meet / Zoom</mat-label>
+      <input matInput formControlName="linkReuniao" placeholder="https://meet.google.com/..." />
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="form.get('formato')?.value === 'PRESENCIAL'">
+    <mat-form-field class="w-full">
+      <mat-label>Endereço do Encontro</mat-label>
+      <textarea matInput formControlName="endereco"></textarea>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" [disabled]="form.invalid">Confirmar Agendamento</button>
+</form>

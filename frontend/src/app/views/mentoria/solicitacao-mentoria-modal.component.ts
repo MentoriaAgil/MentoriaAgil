@@ -1,10 +1,11 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, signal, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PerfilMentor } from '../../models/PerfilMentor';
 import { MentoriaService } from '../../services/mentoria/mentoria.service';
@@ -16,27 +17,53 @@ import { MentoriaService } from '../../services/mentoria/mentoria.service';
     CommonModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './solicitacao-mentoria-modal.component.html',
-  styleUrls: ['./solicitacao-mentoria-modal.component.css']
+  styleUrls: ['./solicitacao-mentoria-modal.component.css'],
 })
-export class SolicitacaoMentoriaModalComponent {
-  private readonly fb: FormBuilder = inject(FormBuilder);
-  private readonly mentoriaService: MentoriaService = inject(MentoriaService);
-  private readonly snackBar: MatSnackBar = inject(MatSnackBar);
-  private readonly dialogRef: MatDialogRef<SolicitacaoMentoriaModalComponent> = inject(MatDialogRef<SolicitacaoMentoriaModalComponent>);
+export class SolicitacaoMentoriaModalComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly mentoriaService = inject(MentoriaService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly dialogRef = inject(MatDialogRef<SolicitacaoMentoriaModalComponent>);
+  private readonly cdr = inject(ChangeDetectorRef);
 
-  loading = false;
+  loading = signal(false);
+  // Lista de slots combinados vindos do backend
+  slotsDisponiveis = signal<{ valor: string; label: string; fim: string }[]>([]);
 
   form = this.fb.group({
-    message: ['', [Validators.required, Validators.maxLength(500)]]
+    horarioSelecionado: ['', [Validators.required]],
+    formato: ['ONLINE', [Validators.required]],
+    linkReuniao: [''],
+    endereco: [''],
+    message: ['', [Validators.maxLength(500)]],
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { mentor: PerfilMentor }) {}
+
+  ngOnInit(): void {
+    this.carregarHorarios();
+  }
+
+  carregarHorarios(): void {
+    this.mentoriaService.getDisponibilidadeByMentor(this.data.mentor.id).subscribe({
+      next: (disponibilidades) => {
+        const formatados = disponibilidades.map((d) => ({
+          valor: d.dataHoraInicio,
+          fim: d.dataHoraFim,
+          label: `${new Date(d.dataHoraInicio).toLocaleDateString('pt-BR')} às ${new Date(d.dataHoraInicio).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`,
+        }));
+        this.slotsDisponiveis.set(formatados);
+      },
+      error: () => this.snackBar.open('Erro ao carregar agenda.', 'Fechar'),
+    });
+  }
 
   cancelar(): void {
     this.dialogRef.close(false);
@@ -44,23 +71,30 @@ export class SolicitacaoMentoriaModalComponent {
 
   enviar(): void {
     if (this.form.invalid) return;
+    this.loading.set(true);
 
-    this.loading = true;
+    const slot = this.slotsDisponiveis().find(
+      (s) => s.valor === this.form.value.horarioSelecionado,
+    );
+
     const request = {
-      mentorId: (this.data.mentor as any).userId || this.data.mentor.id, 
-      message: this.form.value.message!
+      mentorId: this.data.mentor.id,
+      dataHoraInicio: this.form.value.horarioSelecionado,
+      dataHoraFim: slot?.fim,
+      formato: this.form.value.formato,
+      linkReuniao: this.form.value.linkReuniao,
+      endereco: this.form.value.endereco,
     };
 
-    this.mentoriaService.solicitarMentoria(request).subscribe({
+    this.mentoriaService.agendarSessao(request).subscribe({
       next: () => {
-        this.snackBar.open('Solicitação enviada com sucesso!', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Sessão agendada com sucesso!', 'Fechar', { duration: 3000 });
         this.dialogRef.close(true);
       },
-      error: (err: any) => {
-        this.loading = false;
-        const mensagem = err.error?.error || 'Erro ao enviar solicitação. Tente novamente.';
-        this.snackBar.open(mensagem, 'Fechar', { duration: 5000 });
-      }
+      error: (err) => {
+        this.loading.set(false);
+        this.snackBar.open(err.error?.message || 'Falha ao agendar.', 'Fechar');
+      },
     });
   }
 }

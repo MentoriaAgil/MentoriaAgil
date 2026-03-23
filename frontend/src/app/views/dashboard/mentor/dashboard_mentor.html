@@ -1,45 +1,123 @@
 <div class="p-8 max-w-7xl mx-auto min-h-screen bg-slate-50">
   <header class="mb-10">
     <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Painel de Mentoria</h1>
-    <p class="text-slate-500 text-lg mt-1">Gerencie as solicitações de novos estudantes.</p>
+    <p class="text-slate-500 text-lg mt-1">Gerencie as solicitações e acompanhe suas sessões.</p>
   </header>
 
-  <div *ngIf="solicitacoesPendentes().length === 0"
-       class="flex flex-col items-center justify-center p-20 bg-white rounded-3xl border-2 border-dashed border-slate-200 shadow-sm">
-    <mat-icon class="text-slate-200 !text-7xl !w-20 !h-20 mb-4">fact_check</mat-icon>
-    <h3 class="text-xl font-semibold text-slate-800">Tudo em dia!</h3>
-    <p class="text-slate-500">Não há solicitações de mentoria aguardando resposta.</p>
-  </div>
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <mat-icon color="primary">pending_actions</mat-icon> Novos Pedidos
+    </h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <mat-card *ngFor="let solicitacao of solicitacoesPendentes()"
-              class="!rounded-2xl !shadow-sm hover:!shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden">
-      
-      <mat-card-header class="bg-slate-50/50 !p-6 border-b border-slate-100">
-        <div mat-card-avatar class="bg-primary/10 text-primary flex items-center justify-center rounded-full border border-primary/20">
-          <mat-icon>person</mat-icon>
-        </div>
-        <mat-card-title class="!text-lg !font-bold text-slate-800">{{ solicitacao.mentoradoNome }}</mat-card-title>
-        <mat-card-subtitle class="!text-xs text-slate-400">{{ solicitacao.mentoradoEmail }}</mat-card-subtitle>
-      </mat-card-header>
+    <div
+      *ngIf="solicitacoesPendentes().length === 0"
+      class="p-10 bg-white rounded-2xl border-2 border-dashed border-slate-200 text-center"
+    >
+      <p class="text-slate-500">Sem solicitações pendentes.</p>
+    </div>
 
-      <mat-card-content class="!p-6">
-        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Mensagem:</span>
-        <div class="bg-white p-4 rounded-xl border border-slate-100 italic text-slate-700 text-sm leading-relaxed">
-          "{{ solicitacao.mensagem || 'O estudante não incluiu uma mensagem.' }}"
-        </div>
-      </mat-card-content>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <mat-card
+        *ngFor="let solicitacao of solicitacoesPendentes()"
+        class="!rounded-2xl !shadow-sm border border-slate-100"
+      >
+        <mat-card-header class="!p-4">
+          <mat-card-title class="!text-base">{{ solicitacao.mentoradoNome }}</mat-card-title>
+          <mat-card-subtitle>{{ solicitacao.mentoradoEmail }}</mat-card-subtitle>
+        </mat-card-header>
 
-      <mat-divider></mat-divider>
+        <mat-card-content class="!p-4 space-y-4">
+          <div
+            class="text-sm italic text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100"
+          >
+            "{{ solicitacao.mensagem || 'Sem mensagem adicional.' }}"
+          </div>
 
-      <mat-card-actions align="end" class="!p-4 bg-slate-50/30 gap-3">
-        <button mat-button color="warn" class="!font-bold !rounded-lg" (click)="decidir(solicitacao.id, false)">
-          RECUSAR
-        </button>
-        <button mat-raised-button color="primary" class="!font-bold !rounded-lg !px-6" (click)="decidir(solicitacao.id, true)">
-          ACEITAR
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+          <div class="space-y-2 text-sm border-t pt-3">
+            <div class="flex items-center gap-2 text-slate-700">
+              <mat-icon class="!text-sm !w-4 !h-4 text-primary">calendar_today</mat-icon>
+              <strong>Sugestão:</strong>
+              {{ solicitacao.dataHoraProposta | date: 'dd/MM/yyyy HH:mm' }}
+            </div>
+
+            <div class="flex items-center gap-2 text-slate-700">
+              <mat-icon class="!text-sm !w-4 !h-4 text-primary">
+                {{ solicitacao.formato === 'ONLINE' ? 'videocam' : 'location_on' }}
+              </mat-icon>
+              <strong>Tipo:</strong> {{ solicitacao.formato }}
+            </div>
+
+            <div
+              *ngIf="solicitacao.formato === 'ONLINE' && solicitacao.linkReuniao"
+              class="flex items-center gap-2"
+            >
+              <mat-icon class="!text-sm !w-4 !h-4 text-blue-500">link</mat-icon>
+              <a
+                [href]="solicitacao.linkReuniao"
+                target="_blank"
+                class="text-blue-600 hover:underline truncate"
+              >
+                Link da Reunião
+              </a>
+            </div>
+
+            <div
+              *ngIf="solicitacao.formato === 'PRESENCIAL' && solicitacao.endereco"
+              class="flex items-center gap-2 text-slate-600"
+            >
+              <mat-icon class="!text-sm !w-4 !h-4 text-red-500">place</mat-icon>
+              <span class="truncate">{{ solicitacao.endereco }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions align="end" class="gap-2">
+          <button mat-button color="warn" (click)="decidir(solicitacao.id, false)">RECUSAR</button>
+          <button mat-raised-button color="primary" (click)="decidir(solicitacao.id, true)">
+            ACEITAR
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <mat-icon color="accent">event_available</mat-icon> Sessões Confirmadas
+    </h2>
+
+    <div
+      *ngIf="sessoesAgendadas().length === 0"
+      class="p-10 bg-white rounded-2xl border-2 border-dashed border-slate-200 text-center"
+    >
+      <p class="text-slate-500">Nenhuma sessão agendada para os próximos dias.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <mat-card
+        *ngFor="let sessao of sessoesAgendadas()"
+        class="!rounded-2xl !shadow-sm border-l-4 border-l-green-500"
+      >
+        <mat-card-header class="!p-4">
+          <mat-card-title class="!text-base">{{ sessao.mentoradoNome }}</mat-card-title>
+          <mat-card-subtitle class="flex items-center gap-1">
+            <mat-icon class="!text-sm !w-4 !h-4">calendar_today</mat-icon>
+            {{ sessao.dataHoraInicio | date: 'dd/MM/yyyy HH:mm' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="!p-4 text-sm">
+          <div class="flex items-center gap-2 text-slate-700">
+            <mat-icon class="!text-sm !w-4 !h-4">{{
+              sessao.formato === 'ONLINE' ? 'videocam' : 'place'
+            }}</mat-icon>
+            <strong>{{ sessao.formato }}</strong>
+          </div>
+          <p class="mt-2 text-primary hover:underline" *ngIf="sessao.linkReuniao">
+            <a [href]="sessao.linkReuniao" target="_blank">Entrar na reunião</a>
+          </p>
+          <p class="mt-2 text-slate-500" *ngIf="sessao.endereco">{{ sessao.endereco }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
 </div>

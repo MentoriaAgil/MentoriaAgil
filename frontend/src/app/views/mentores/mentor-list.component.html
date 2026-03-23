@@ -1,37 +1,129 @@
-<h2>Mentores Disponíveis</h2>
+<div class="p-6 bg-slate-50 min-h-screen">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Mentores Disponíveis</h2>
+      <p class="text-slate-500 mt-2">
+        Encontre o mentor ideal para acelerar sua jornada acadêmica e profissional.
+      </p>
+    </div>
 
-<div class="filtros">
-  <select [(ngModel)]="filtros.areaPrincipal" (change)="onFiltroChange()">
-    <option value="">Área</option>
-    <option value="TI">TI</option>
-    <option value="SAUDE">Saúde</option>
-  </select>
+    <div
+      class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-wrap gap-4 items-center"
+    >
+      <div class="flex flex-col">
+        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1 mb-1"
+          >Área Principal</label
+        >
+        <select
+          [(ngModel)]="filtros.areaPrincipal"
+          (change)="onFiltroChange()"
+          class="rounded-lg border-slate-200 text-sm focus:ring-primary focus:border-primary"
+        >
+          <option value="">Todas as Áreas</option>
+          <option value="TI">Tecnologia (TI)</option>
+          <option value="SAUDE">Saúde</option>
+        </select>
+      </div>
 
-  <select [(ngModel)]="filtros.tipoMentoria" (change)="onFiltroChange()">
-    <option value="">Tipo</option>
-    <option value="ACADEMICA">Acadêmica</option>
-    <option value="PROFISSIONAL">Profissional</option>
-    <option value="AMBAS">Ambas</option>
-  </select>
+      <div class="flex flex-col">
+        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1 mb-1">Tipo</label>
+        <select
+          [(ngModel)]="filtros.tipoMentoria"
+          (change)="onFiltroChange()"
+          class="rounded-lg border-slate-200 text-sm focus:ring-primary focus:border-primary"
+        >
+          <option value="">Todos os Tipos</option>
+          <option value="ACADEMICA">Acadêmica</option>
+          <option value="PROFISSIONAL">Profissional</option>
+          <option value="AMBAS">Ambas</option>
+        </select>
+      </div>
 
-  <select [(ngModel)]="filtros.disponibilidade" (change)="onFiltroChange()">
-    <option value="">Disponibilidade</option>
-    <option value="DISPONIVEL">Disponível</option>
-    <option value="OCUPADO">Ocupado</option>
-  </select>
+      <div class="flex flex-col">
+        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1 mb-1">Ordenar por</label>
+        <select
+          [(ngModel)]="filtros.ordenacao"
+          (change)="onFiltroChange()"
+          class="rounded-lg border-slate-200 text-sm focus:ring-primary focus:border-primary"
+        >
+          <option value="name">Padrão</option>
+        </select>
+      </div>
+    </div>
 
-  <select [(ngModel)]="filtros.ordenacao" (change)="onFiltroChange()">
-    <option value="">Ordenar</option>
-    <option value="nome">Ordem Alfabética</option>
-  </select>
-</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let mentor of mentores()"
+        class="mentor-card bg-white rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow p-6 flex flex-col"
+      >
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-4">
+            <img
+              [src]="'https://ui-avatars.com/api/?name=' + mentor.name + '&background=random'"
+              class="w-14 h-14 rounded-xl"
+              alt="Avatar"
+            />
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 leading-tight">{{ mentor.name }}</h3>
+              <p class="text-primary text-xs font-semibold">{{ mentor.especializacao }}</p>
+            </div>
+          </div>
+          <span
+            [class]="
+              mentor.disponibilidade === 'DISPONIVEL'
+                ? 'bg-emerald-100 text-emerald-700'
+                : 'bg-slate-100 text-slate-600'
+            "
+            class="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider"
+          >
+            {{ mentor.disponibilidade }}
+          </span>
+        </div>
 
-<div *ngFor="let mentor of mentores" class="mentor-card">
-  <h3>{{ mentor.name }}</h3>
-  <p><strong>Especialização:</strong> {{ mentor.especializacao }}</p>
-  <p><strong>Resumo:</strong> {{ mentor.experiencias }}</p>
-  <p><strong>Área Principal:</strong> {{ mentor.areaPrincipal }}</p>
-  <p><strong>Tipo:</strong> {{ mentor.tipoMentoria }}</p>
-  <p><strong>Disponibilidade:</strong> {{ mentor.disponibilidade }}</p>
-  <button class="solicitar-btn" (click)="solicitarMentoria(mentor)">Solicitar Mentoria</button>
+        <div class="space-y-3 mb-6 flex-grow">
+          <div class="flex items-center gap-2 text-slate-600">
+            <span class="material-icons-round text-sm">email</span>
+            <span class="text-sm truncate">{{ mentor.email }}</span>
+          </div>
+
+          <div class="flex items-start gap-2 text-slate-600">
+            <span class="material-icons-round text-sm mt-0.5">history_edu</span>
+            <span class="text-sm line-clamp-1"
+              ><strong>Formação:</strong> {{ mentor.formacao }}</span
+            >
+          </div>
+
+          <p class="text-slate-500 text-sm italic line-clamp-2">"{{ mentor.experiencias }}"</p>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span
+              class="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-1 rounded shadow-sm border border-blue-100"
+            >
+              #{{ mentor.areaPrincipal }}
+            </span>
+            <span
+              class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-1 rounded shadow-sm border border-indigo-100"
+            >
+              #{{ mentor.tipoMentoria }}
+            </span>
+          </div>
+        </div>
+
+        <button
+          (click)="solicitarMentoria(mentor)"
+          class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2"
+        >
+          <span class="material-icons-round text-lg">add_task</span>
+          Solicitar Mentoria
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="mentores().length === 0" class="text-center py-20">
+      <span class="material-icons-round text-6xl text-slate-300">person_search</span>
+      <p class="text-slate-500 mt-4 font-medium">
+        Nenhum mentor encontrado com os filtros selecionados.
+      </p>
+    </div>
+  </div>
 </div>

@@ -31,7 +31,8 @@ export class Registro implements OnInit {
         [
           Validators.required,
           Validators.email,
-          Validators.pattern(/^[a-z0-9._%+-]+@ufape\.edu\.br$/),
+          // Permite subdomínios como @discente.ufape.edu.br ou apenas @ufape.edu.br
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)?ufape\.edu\.br$/i),
         ],
       ],
       senha: ['', [Validators.required, Validators.minLength(8)]],
