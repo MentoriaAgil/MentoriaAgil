@@ -1,7 +1,6 @@
 package com.mentoria.agil.backend.config;
 
 import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,12 +26,13 @@ public class SecurityConfig {
 
     @Autowired
     private SecurityFilter securityFilter;
-    
+
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -45,35 +45,30 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                       
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
-
                         .requestMatchers(HttpMethod.GET, "/api/health").permitAll()
-                        
+
+                        // Configurações de Perfil de Mentores
                         .requestMatchers(HttpMethod.POST, "/api/mentors/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/api/mentors/**").hasRole("MENTOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/mentors/**").hasAnyRole("MENTOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/mentors/**").hasAuthority("MENTOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/mentors/**").hasAnyAuthority("MENTOR", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/mentors/**").authenticated()
 
-                        .requestMatchers(HttpMethod.GET, "/api/users/mentores").authenticated()
-                        
-                        .requestMatchers(HttpMethod.POST, "/api/mentorias/request").hasRole("ESTUDANTE")
-                        .requestMatchers(HttpMethod.GET, "/api/mentorias/historico").hasRole("ESTUDANTE")
-                        .requestMatchers(HttpMethod.GET, "/api/mentorias/pendentes").hasRole("MENTOR")
-                        .requestMatchers(HttpMethod.PATCH, "/api/mentorias/**").hasRole("MENTOR")
+                        // Configurações de Requisições de Mentoria (Correção para permitir ESTUDANTE e USER)
+                        .requestMatchers(HttpMethod.POST, "/api/mentorias/request").hasAnyAuthority("ESTUDANTE", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/mentorias/historico").hasAnyAuthority("ESTUDANTE", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/mentorias/pendentes").hasAuthority("MENTOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/mentorias/**").hasAuthority("MENTOR")
 
-                        .requestMatchers(HttpMethod.POST, "/api/mentorships/request").hasRole("ESTUDANTE")
-                        .requestMatchers(HttpMethod.POST, "/api/sessoes/**").hasRole("ESTUDANTE")
-                        
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        // Configurações de Sessões/Agendamentos (Correção do 401 para agendar)
+                        .requestMatchers("/api/sessoes/**").hasAnyAuthority("ESTUDANTE", "USER", "MENTOR", "ADMIN")
 
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .anyRequest().authenticated())
                 .exceptionHandling(exception -> exception
-                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                )
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
@@ -81,13 +76,14 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8080", "https://mentoria-agil-frontend.onrender.com"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8080",
+                "https://mentoria-agil-frontend.onrender.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
-        configuration.setMaxAge(3600L); 
-    
+        configuration.setMaxAge(3600L);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
