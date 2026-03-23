@@ -1,10 +1,11 @@
 package com.mentoria.agil.backend.dto;
 
-import com.mentoria.agil.backend.model.TipoMaterial;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
+
+import com.mentoria.agil.backend.enums.TipoMaterial;
 
 public class MaterialRequestDTO {
 
@@ -24,9 +25,11 @@ public class MaterialRequestDTO {
 
     private List<Long> mentoradosIds;
 
-    public MaterialRequestDTO() {}
+    public MaterialRequestDTO() {
+    }
 
-    public MaterialRequestDTO(String titulo, String descricao, TipoMaterial tipo, String conteudo, List<Long> mentoradosIds) {
+    public MaterialRequestDTO(String titulo, String descricao, TipoMaterial tipo, String conteudo,
+            List<Long> mentoradosIds) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.tipo = tipo;
